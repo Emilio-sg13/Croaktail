@@ -87,47 +87,65 @@ public class PathManager : MonoBehaviour
         return false;
     }
 
+
     // Encontrar caminos adyacentes disponibles para un cliente de cierto ancho
     public int[] FindAvailableAdjacentPaths(int width)
     {
-        // Si solo necesita un camino, buscar cualquier camino disponible
+        // Lista para almacenar todos los conjuntos de caminos libres
+        List<int[]> validCombinations = new List<int[]>();
+
+        // Si solo necesita un camino
         if (width == 1)
         {
+            // Recorremos todos los caminos
             for (int i = 0; i < paths.Length; i++)
             {
+                // Si el camino i está libre en su punto inicial
                 if (IsPathStartFree(i))
                 {
-                    return new int[] { i };
+                    // Añadimos este camino como opción válida
+                    validCombinations.Add(new int[] { i });
                 }
             }
-            return null; // No hay caminos disponibles
         }
-
-        // Para clientes más anchos, buscar caminos adyacentes
-        for (int i = 0; i <= paths.Length - width; i++)
+        else
         {
-            bool allFree = true;
-            for (int j = 0; j < width; j++)
+            // Para clientes más anchos, buscar todos los bloques de caminos adyacentes
+            for (int i = 0; i <= paths.Length - width; i++)
             {
-                if (!IsPathStartFree(i + j))
-                {
-                    allFree = false;
-                    break;
-                }
-            }
-
-            if (allFree)
-            {
-                int[] result = new int[width];
+                bool allFree = true;
                 for (int j = 0; j < width; j++)
                 {
-                    result[j] = i + j;
+                    // Si cualquiera de los caminos en el bloque no está libre, descartamos
+                    if (!IsPathStartFree(i + j))
+                    {
+                        allFree = false;
+                        break;
+                    }
                 }
-                return result;
+
+                // Si todos los caminos del bloque están libres
+                if (allFree)
+                {
+                    int[] block = new int[width];
+                    for (int j = 0; j < width; j++)
+                    {
+                        block[j] = i + j;
+                    }
+                    validCombinations.Add(block);
+                }
             }
         }
-        return null; // No hay suficientes caminos adyacentes disponibles
+
+        // Si no hay combinaciones libres, retornamos null
+        if (validCombinations.Count == 0)
+            return null;
+
+        // Elegimos una combinación al azar entre todas las disponibles
+        int randomIndex = Random.Range(0, validCombinations.Count);
+        return validCombinations[randomIndex];
     }
+
 
     // Comprobar si un cliente puede ocupar múltiples puntos adyacentes horizontalmente
     public bool CanOccupyMultipleHorizontal(int[] pathIndices, int pointIndex, int width, GameObject client)

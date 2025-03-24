@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &238090003986331070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8584714871449052007}
+  - component: {fileID: 8644479944350369584}
+  m_Layer: 0
+  m_Name: ClientGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8584714871449052007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238090003986331070}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.46, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8644479944350369584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238090003986331070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0a11633428ba0469025fd464f6a727, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clientTypes:
+  - typeName: Mosca
+    clientPrefab: {fileID: 5084268321471389291, guid: 951ef5b4d19402e469a9d50c602e9919, type: 3}
+    width: 1
+    speed: 2
+    spawnWeight: 0.35
+  - typeName: Tortuga
+    clientPrefab: {fileID: 6773783403117849110, guid: 4b4faae2c465ffe43a0b89bd3aab632f, type: 3}
+    width: 1
+    speed: 2
+    spawnWeight: 0.35
+  - typeName: Pez
+    clientPrefab: {fileID: 2381046587610221632, guid: 19bbdebd64a73f94b8347aa360a2c172, type: 3}
+    width: 2
+    speed: 2
+    spawnWeight: 0.2
+  - typeName: Larva
+    clientPrefab: {fileID: 3036929054640326658, guid: 008c6f4a9bae0b94685185c7142e4c8b, type: 3}
+    width: 3
+    speed: 2
+    spawnWeight: 0.1
+  spawnInterval: 3
+  spawnPoint: {fileID: 0}
