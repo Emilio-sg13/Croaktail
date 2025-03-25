@@ -1,9 +1,12 @@
 // Definición de tipos de clientes
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 public class ClientType
 {
+    //public string[] cocteles;
+    public List<item> Cocteles;
     public string typeName;
     public GameObject clientPrefab;
     public int width = 1;

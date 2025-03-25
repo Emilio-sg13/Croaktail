@@ -1583,6 +1583,26 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 1767099214}
+    - target: {fileID: 8644479944350369584, guid: 7ea9d4b3b3602e9498808cd28ea024a6, type: 3}
+      propertyPath: clientTypes.Array.data[3].spawnWeight
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644479944350369584, guid: 7ea9d4b3b3602e9498808cd28ea024a6, type: 3}
+      propertyPath: clientTypes.Array.data[0].cocteles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644479944350369584, guid: 7ea9d4b3b3602e9498808cd28ea024a6, type: 3}
+      propertyPath: clientTypes.Array.data[3].Cocteles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644479944350369584, guid: 7ea9d4b3b3602e9498808cd28ea024a6, type: 3}
+      propertyPath: 'clientTypes.Array.data[0].cocteles.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644479944350369584, guid: 7ea9d4b3b3602e9498808cd28ea024a6, type: 3}
+      propertyPath: 'clientTypes.Array.data[3].Cocteles.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 19da02100f40cd14daaeeef419d70296, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

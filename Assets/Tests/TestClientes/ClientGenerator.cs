@@ -1,4 +1,4 @@
-// Generador de clientes
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ClientGenerator : MonoBehaviour
@@ -53,26 +53,67 @@ public class ClientGenerator : MonoBehaviour
             movement.SetPathIndices(availablePaths);
             movement.SetClientWidth(selectedType.width);
             movement.SetSpeed(selectedType.speed);
+
+            // Aquí pasamos la referencia al tipo de cliente
+            movement.SetClientType(selectedType);
         }
     }
+
+    private bool IsClientOfWidthPresent(int width)
+    {
+        // Esto buscará todos los objetos que tengan MovimientoClientesMultiple
+        // Ten en cuenta que FindObjectsOfType puede ser costoso si se llama muy frecuentemente.
+        MovimientoClientesMultiple[] allClients = FindObjectsByType<MovimientoClientesMultiple>(FindObjectsSortMode.None);
+
+        foreach (var client in allClients)
+        {
+            if (client.GetCurrentWidth() == width) // Método o variable para obtener el width
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private ClientType GetRandomClientType()
     {
         if (clientTypes.Length == 0)
             return null;
 
-        // Calcular el peso total
-        float totalWeight = 0;
+        // 1. Reunimos los tipos de cliente que sí están permitidos
+        //    (es decir, que no estén bloqueados por haber ya uno en escena)
+        var allowedTypes = new List<ClientType>();
         foreach (var type in clientTypes)
+        {
+            // Si el cliente es de width=2 o 3, comprobamos si ya existe uno en escena
+            if ((type.width == 2 || type.width == 3) && IsClientOfWidthPresent(type.width))
+            {
+                // Si ya hay un cliente de ese width, NO lo añadimos a la lista
+                continue;
+            }
+
+            // De lo contrario, lo incluimos en las opciones
+            allowedTypes.Add(type);
+        }
+
+        // 2. Si después de filtrar no hay ningún tipo permitido, retornamos null
+        if (allowedTypes.Count == 0)
+        {
+            return null;
+        }
+
+        // 3. Calculamos el peso total sólo de los tipos permitidos
+        float totalWeight = 0f;
+        foreach (var type in allowedTypes)
         {
             totalWeight += type.spawnWeight;
         }
 
-        // Seleccionar un tipo basado en su peso
+        // 4. Seleccionamos un tipo aleatoriamente con la lógica de pesos
         float randomValue = Random.Range(0, totalWeight);
-        float weightSum = 0;
-
-        foreach (var type in clientTypes)
+        float weightSum = 0f;
+        foreach (var type in allowedTypes)
         {
             weightSum += type.spawnWeight;
             if (randomValue <= weightSum)
@@ -81,6 +122,8 @@ public class ClientGenerator : MonoBehaviour
             }
         }
 
-        return clientTypes[0]; // Fallback
+        // Fallback, por si acaso
+        return allowedTypes[0];
     }
+
 }

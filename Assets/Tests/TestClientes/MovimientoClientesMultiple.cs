@@ -4,15 +4,24 @@ using System.Linq;
 
 public class MovimientoClientesMultiple : MonoBehaviour
 {
-    private int[] pathIndices; // Los índices de los caminos que este cliente puede usar
-    private int clientWidth = 1; // Cuántos caminos ocupa horizontalmente
+    private int[] pathIndices;
+    private int clientWidth = 1;
     private int currentPoint = 0;
     private float speed = 2.0f;
     private float reachDistance = 0.1f;
     private bool hasReachedEnd = false;
     private Transform targetPoint;
+    private ClientType clientType; // Referencia al tipo de cliente para obtener la lista de cócteles
 
-    // Métodos para configurar el cliente externamente (desde el generador)
+    [SerializeField]
+    private SpriteRenderer coctelRenderer; // Asigna este componente desde el Inspector
+
+    public int GetCurrentWidth()
+    {
+        return clientWidth;
+    }
+
+    // Métodos para configurar el cliente externamente
     public void SetPathIndices(int[] indices)
     {
         pathIndices = indices;
@@ -28,9 +37,14 @@ public class MovimientoClientesMultiple : MonoBehaviour
         speed = newSpeed;
     }
 
+    public void SetClientType(ClientType type)
+    {
+        clientType = type;
+    }
+
     void Start()
     {
-        // Verificar que el PathManager existe
+        // Asegurarse de que el PathManager existe
         if (PathManager.Instance == null)
         {
             Debug.LogError("No hay PathManager en la escena");
@@ -54,10 +68,14 @@ public class MovimientoClientesMultiple : MonoBehaviour
             return;
         }
 
-        // Inicializar el punto objetivo
-        UpdateTargetPoint();
+        // Ocultar el sprite del cóctel al inicio
+        if (coctelRenderer != null)
+        {
+            coctelRenderer.enabled = false;
+        }
 
-        // Ocupar el punto inicial
+        // Inicializar el punto objetivo y ocupar el primer punto
+        UpdateTargetPoint();
         PathManager.Instance.OccupyMultipleHorizontal(pathIndices, currentPoint, clientWidth, gameObject);
     }
 
@@ -66,33 +84,27 @@ public class MovimientoClientesMultiple : MonoBehaviour
         if (hasReachedEnd || targetPoint == null)
             return;
 
-        // Comprobar si hemos llegado al punto actual
+        // Verificar si se ha llegado al punto actual
         if (Vector3.Distance(transform.position, targetPoint.position) < reachDistance)
         {
-            // Verificar si hemos llegado al final del camino
+            // Verificar si se llegó al final del camino
             if (currentPoint + 1 >= PathManager.Instance.GetPathLength(pathIndices[0]))
             {
                 hasReachedEnd = true;
+                ShowRandomCoctel(); // Mostrar el cóctel al llegar al final
                 return;
             }
 
-            // Verificar si podemos avanzar al siguiente punto en todos los caminos necesarios
+            // Verificar si se puede avanzar al siguiente punto
             if (!PathManager.Instance.CanOccupyMultipleHorizontal(pathIndices, currentPoint + 1, clientWidth, gameObject))
             {
-                // No podemos avanzar, nos quedamos aquí
                 return;
             }
 
-            // Liberar el punto actual
+            // Liberar el punto actual, avanzar y ocupar el nuevo punto
             PathManager.Instance.ReleaseMultipleHorizontal(pathIndices, currentPoint, clientWidth);
-
-            // Avanzar al siguiente punto
             currentPoint++;
-
-            // Ocupar el nuevo punto
             PathManager.Instance.OccupyMultipleHorizontal(pathIndices, currentPoint, clientWidth, gameObject);
-
-            // Actualizar el punto objetivo
             UpdateTargetPoint();
         }
 
@@ -103,14 +115,27 @@ public class MovimientoClientesMultiple : MonoBehaviour
 
     private void UpdateTargetPoint()
     {
-        // Usamos el punto central como objetivo de movimiento (para clientes anchos)
         int centralPathIndex = pathIndices[clientWidth / 2];
         targetPoint = PathManager.Instance.GetPathPoint(centralPathIndex, currentPoint);
     }
 
+    // Método que se llama al llegar al final del camino para mostrar un cóctel aleatorio
+    private void ShowRandomCoctel()
+    {
+        if (clientType != null && clientType.Cocteles != null && clientType.Cocteles.Count > 0)
+        {
+            int randomIndex = Random.Range(0, clientType.Cocteles.Count);
+            item randomCoctel = clientType.Cocteles[randomIndex];
+            if (coctelRenderer != null)
+            {
+                coctelRenderer.sprite = randomCoctel.sprite;
+                coctelRenderer.enabled = true; // Activar el SpriteRenderer para mostrar el sprite
+            }
+        }
+    }
+
     void OnDestroy()
     {
-        // Liberar todos los puntos ocupados
         if (PathManager.Instance != null && !hasReachedEnd)
         {
             PathManager.Instance.ReleaseMultipleHorizontal(pathIndices, currentPoint, clientWidth);
