@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e1b313bfcf4b3419f55006a4f9ec7c, type: 3}
+  m_Name: Cubanca
+  m_EditorClassIdentifier: 
+  itemName: Cubanca
+  sprite: {fileID: 21300000, guid: 09f0435e0ca861641a95726fd86d239d, type: 3}
+  slotsNeeded: 1
+  precio: 10
+  tipo: 1

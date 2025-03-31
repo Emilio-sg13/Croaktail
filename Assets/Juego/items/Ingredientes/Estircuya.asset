@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e1b313bfcf4b3419f55006a4f9ec7c, type: 3}
+  m_Name: Estircuya
+  m_EditorClassIdentifier: 
+  itemName: Estiercuya
+  sprite: {fileID: 21300000, guid: 0f021905c9eaf474c8c7e07621f6bc49, type: 3}
+  slotsNeeded: 1
+  precio: 0
+  tipo: 0

@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
 
 public class MovimientoClientesMultiple : MonoBehaviour
 {
@@ -14,7 +12,10 @@ public class MovimientoClientesMultiple : MonoBehaviour
     private ClientType clientType; // Referencia al tipo de cliente para obtener la lista de cócteles
 
     [SerializeField]
-    private SpriteRenderer coctelRenderer; // Asigna este componente desde el Inspector
+    public SpriteRenderer coctelRenderer; // Asigna este componente desde el Inspector
+
+    public item requestedCoctel;  // Nuevo campo para guardar el cóctel pedido
+
 
     public int GetCurrentWidth()
     {
@@ -120,12 +121,13 @@ public class MovimientoClientesMultiple : MonoBehaviour
     }
 
     // Método que se llama al llegar al final del camino para mostrar un cóctel aleatorio
-    private void ShowRandomCoctel()
+    public void ShowRandomCoctel()
     {
         if (clientType != null && clientType.Cocteles != null && clientType.Cocteles.Count > 0)
         {
             int randomIndex = Random.Range(0, clientType.Cocteles.Count);
             item randomCoctel = clientType.Cocteles[randomIndex];
+            requestedCoctel = randomCoctel;
             if (coctelRenderer != null)
             {
                 coctelRenderer.sprite = randomCoctel.sprite;

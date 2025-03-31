@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
 
 // Gestor central de caminos
 public class PathManager : MonoBehaviour

@@ -136,7 +136,7 @@ Transform:
   m_GameObject: {fileID: 6136698616188588802}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 8, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -207,9 +207,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1559216459772734018}
   - component: {fileID: 4064233068124968305}
+  - component: {fileID: 2650451492243629943}
   m_Layer: 0
   m_Name: ClienteTortuga
-  m_TagString: Untagged
+  m_TagString: cliente
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -222,7 +223,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6773783403117849110}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -4.33, y: 0, z: 3.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -230,7 +231,7 @@ Transform:
   - {fileID: 5098290566253385334}
   - {fileID: 7844120108297021362}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &4064233068124968305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,3 +245,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coctelRenderer: {fileID: 1688756085773918192}
+--- !u!114 &2650451492243629943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6773783403117849110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a9a90d4dfb2644681d2ae12b03fab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventario: {fileID: 5438673315258822010, guid: 753cb3263c6fe6b4b80d54ae86bf5d66, type: 3}
+  player: {fileID: 7296026342586385407, guid: 682f57f9a7694c74192790f19a4a32a5, type: 3}
+  distanciaMaxima: 2
