@@ -195,6 +195,10 @@ PrefabInstance:
       propertyPath: inventario
       value: 
       objectReference: {fileID: 227930724}
+    - target: {fileID: 7261640234823663543, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
+      propertyPath: distanciaRecogida
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7591848834494039572, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
       propertyPath: m_Name
       value: Especias
@@ -280,6 +284,10 @@ PrefabInstance:
       propertyPath: inventario
       value: 
       objectReference: {fileID: 227930724}
+    - target: {fileID: 7261640234823663543, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
+      propertyPath: distanciaRecogida
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7591848834494039572, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
       propertyPath: m_Name
       value: Ancas de ranacuajo
@@ -345,6 +353,10 @@ PrefabInstance:
       propertyPath: inventario
       value: 
       objectReference: {fileID: 227930724}
+    - target: {fileID: 619377430362122293, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
+      propertyPath: distanciaRecogida
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3198476433392371516, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -466,6 +478,10 @@ PrefabInstance:
       propertyPath: inventario
       value: 
       objectReference: {fileID: 227930724}
+    - target: {fileID: 619377430362122293, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
+      propertyPath: distanciaRecogida
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5839193587125464347, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.2420001
@@ -1006,6 +1022,10 @@ PrefabInstance:
       propertyPath: inventario
       value: 
       objectReference: {fileID: 227930724}
+    - target: {fileID: 619377430362122293, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
+      propertyPath: distanciaRecogida
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3198476433392371516, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1840,6 +1860,10 @@ PrefabInstance:
       propertyPath: inventario
       value: 
       objectReference: {fileID: 227930724}
+    - target: {fileID: 619377430362122293, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
+      propertyPath: distanciaRecogida
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3198476433392371516, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -2372,6 +2396,10 @@ PrefabInstance:
       propertyPath: inventario
       value: 
       objectReference: {fileID: 227930724}
+    - target: {fileID: 619377430362122293, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
+      propertyPath: distanciaRecogida
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3198476433392371516, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -2676,6 +2704,10 @@ PrefabInstance:
       propertyPath: inventario
       value: 
       objectReference: {fileID: 227930724}
+    - target: {fileID: 7261640234823663543, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
+      propertyPath: distanciaRecogida
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7591848834494039572, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
       propertyPath: m_Name
       value: Estiercuya
@@ -2795,6 +2827,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4825295431807532149, guid: da2675c09368e984e979d9f27c4fa1d6, type: 3}
+      propertyPath: m_Height
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6196145179738458752, guid: da2675c09368e984e979d9f27c4fa1d6, type: 3}
       propertyPath: m_Name
       value: Basura
@@ -2807,6 +2843,10 @@ PrefabInstance:
       propertyPath: inventario
       value: 
       objectReference: {fileID: 227930724}
+    - target: {fileID: 7042769229777950071, guid: da2675c09368e984e979d9f27c4fa1d6, type: 3}
+      propertyPath: distanciaMaxima
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3200,6 +3240,10 @@ PrefabInstance:
       propertyPath: inventario
       value: 
       objectReference: {fileID: 227930724}
+    - target: {fileID: 7261640234823663543, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
+      propertyPath: distanciaRecogida
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7591848834494039572, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
       propertyPath: m_Name
       value: Azucar
@@ -3620,6 +3664,10 @@ PrefabInstance:
       propertyPath: inventario
       value: 
       objectReference: {fileID: 227930724}
+    - target: {fileID: 7261640234823663543, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
+      propertyPath: distanciaRecogida
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7591848834494039572, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
       propertyPath: m_Name
       value: Refresco de colas
