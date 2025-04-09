@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coctelRenderer: {fileID: 1688756085773918192}
+  requestedCoctel: {fileID: 0}
 --- !u!114 &2650451492243629943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,4 +260,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventario: {fileID: 5438673315258822010, guid: 753cb3263c6fe6b4b80d54ae86bf5d66, type: 3}
   player: {fileID: 7296026342586385407, guid: 682f57f9a7694c74192790f19a4a32a5, type: 3}
-  distanciaMaxima: 2
+  distanciaMaxima: 3

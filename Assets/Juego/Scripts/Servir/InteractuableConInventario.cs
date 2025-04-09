@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using static UnityEditor.Progress;
 
 public class InteractuableConInventario : MonoBehaviour
 {
@@ -7,13 +8,13 @@ public class InteractuableConInventario : MonoBehaviour
     public Transform player;
     public float distanciaMaxima = 2.0f;
 
-    private SpriteRenderer spriteRenderer; // Solo se usa para "barra"
-    private MovimientoClientesMultiple cliente; // Solo se usa para "cliente"
+    private SpriteRenderer spriteRenderer; // Usado solo para barra
+    private MovimientoClientesMultiple cliente; // Usado para clientes
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        cliente = GetComponent<MovimientoClientesMultiple>(); // cliente tendrá un sprite de pedido y lógica asociada
+        cliente = GetComponent<MovimientoClientesMultiple>();
     }
 
     void OnMouseDown()
@@ -41,38 +42,38 @@ public class InteractuableConInventario : MonoBehaviour
 
         if (selectedSprite == null)
         {
+            Debug.Log(selectedSprite);
             Debug.Log("No hay objeto seleccionado en el inventario.");
             yield break;
         }
 
+        // Lógica según el tag del objeto
         switch (tag)
         {
-            case "barra":
-                if (spriteRenderer != null && spriteRenderer.sprite == null)
-                {
-                    spriteRenderer.sprite = selectedSprite;
-                    inventario.BorrarItem(selectedIndex, selectedSprite);
-                }
-                break;
-
             case "cliente":
                 if (cliente != null)
                 {
-                    // Obtener el Item asociado al sprite seleccionado
-                    item servedItem = inventario.GetItemBySprite(selectedSprite);
-                    // Compara con el cóctel pedido del cliente
-                    if (servedItem != null && cliente.requestedCoctel != null &&
-                        servedItem.sprite == cliente.requestedCoctel.sprite)  // o compara otro identificador único
+                    item coctelSeleccionado = inventario.GetItemBySprite(selectedSprite);
+                    item coctelPedido = cliente.requestedCoctel;
+
+                    if (coctelSeleccionado != null && coctelPedido != null &&
+                        coctelSeleccionado.itemName == coctelPedido.itemName)
                     {
                         Debug.Log("Pedido correcto. Cliente servido.");
+
+                        // Eliminar el cóctel del inventario
                         inventario.BorrarItem(selectedIndex, selectedSprite);
 
-                        // Obtener el precio desde el item y sumarlo
-                        GameObject barraUI = GameObject.Find("BarraCobroUI");
-                        BarraCobroUI barra = barraUI.GetComponent<BarraCobroUI>();
-                        barra.AñadirDinero(servedItem.precio);
+                        // Sumar dinero a la barra de cobro
+                        GameObject barraUIObj = GameObject.Find("BarraCobroUI");
+                        if (barraUIObj != null)
+                        {
+                            BarraCobroUI barra = barraUIObj.GetComponent<BarraCobroUI>();
+                            barra?.AñadirDinero(coctelSeleccionado.precio);
+                        }
 
-                        Destroy(gameObject); // El cliente desaparece
+                        // Destruir al cliente servido
+                        Destroy(cliente.gameObject);
                     }
                     else
                     {
@@ -81,13 +82,20 @@ public class InteractuableConInventario : MonoBehaviour
                 }
                 break;
 
+            case "barra":
+                Debug.Log(selectedSprite);
+                
+                if (spriteRenderer != null && spriteRenderer.sprite == null)
+                {
+                    spriteRenderer.sprite = selectedSprite;
+                    inventario.BorrarItem(selectedIndex, selectedSprite);
+                }
+                break;
 
             case "basura":
                 Debug.Log("Objeto tirado a la basura.");
                 inventario.BorrarItem(selectedIndex, selectedSprite);
-
                 break;
         }
     }
-
 }
