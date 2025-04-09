@@ -388,7 +388,25 @@ MonoBehaviour:
   - {fileID: 651233913695016699}
   - {fileID: 3198941556435425520}
   selectedSlot: 0
-  todosLosItems: []
+  todosLosItems:
+  - {fileID: 11400000, guid: c14c5c173b66da345839d1b93b94bc18, type: 2}
+  - {fileID: 11400000, guid: 8b0352e9699f981468f659597811149e, type: 2}
+  - {fileID: 11400000, guid: c538ff388a545e84fbdb911e894af10a, type: 2}
+  - {fileID: 11400000, guid: d3978b7dee4c564439ccced190d4ad1c, type: 2}
+  - {fileID: 11400000, guid: e2ea387ed1e141045a547fa7f37093fa, type: 2}
+  - {fileID: 11400000, guid: 2305a1e4addafbb458ec589b41d14efa, type: 2}
+  - {fileID: 11400000, guid: 19da02100f40cd14daaeeef419d70296, type: 2}
+  - {fileID: 11400000, guid: 6ceb321b04942094dbeb9851a7d30434, type: 2}
+  - {fileID: 11400000, guid: 2935a00f8731244458afbcc121f04709, type: 2}
+  - {fileID: 11400000, guid: 6f4599cac3de3dc4383f13500a67daed, type: 2}
+  - {fileID: 11400000, guid: d6c9d4e25562ed946bbb3f7f805ab61c, type: 2}
+  - {fileID: 11400000, guid: 13631e8d94b99034185ebc5dad95205f, type: 2}
+  - {fileID: 11400000, guid: 115ba4932551e7744bdd5e8802aed1df, type: 2}
+  - {fileID: 11400000, guid: 473e6734b9d7d3045ad402018bd6dc9f, type: 2}
+  - {fileID: 11400000, guid: d23afbd3cba43204dba163b67988983f, type: 2}
+  - {fileID: 11400000, guid: 96c7150b2387f0f4981ef4262a3faee1, type: 2}
+  - {fileID: 11400000, guid: 2109abd2d423c3c498483ee551aa8949, type: 2}
+  - {fileID: 11400000, guid: 6f9b715cad3c9ec41ab9ec8598a1f65f, type: 2}
 --- !u!1001 &3335720923509644479
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -57,7 +57,19 @@ public class ClientGenerator : MonoBehaviour
             // Aquí pasamos la referencia al tipo de cliente
             movement.SetClientType(selectedType);
         }
+
+        
+        //Asignar referencias al script InteractuableConInventario del cliente
+        InteractuableConInventario interact = client.GetComponent<InteractuableConInventario>();
+        if (interact != null)
+        {
+            // Buscar el inventario y el jugador dentro de la escena
+            interact.inventario = FindFirstObjectByType<InventoryManager2>(); // o InventoryManager2, según tu script real
+            interact.player = GameObject.FindWithTag("Player")?.transform;
+        }
     }
+
+
 
     private bool IsClientOfWidthPresent(int width)
     {
