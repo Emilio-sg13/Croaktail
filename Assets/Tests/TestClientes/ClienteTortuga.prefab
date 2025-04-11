@@ -104,7 +104,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 1559216459772734018}
   - component: {fileID: 4064233068124968305}
   - component: {fileID: 2650451492243629943}
+  - component: {fileID: 5915720845611153435}
   m_Layer: 0
   m_Name: ClienteTortuga
   m_TagString: cliente
@@ -258,6 +259,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65a9a90d4dfb2644681d2ae12b03fab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventario: {fileID: 5438673315258822010, guid: 753cb3263c6fe6b4b80d54ae86bf5d66, type: 3}
-  player: {fileID: 7296026342586385407, guid: 682f57f9a7694c74192790f19a4a32a5, type: 3}
+  inventario: {fileID: 0}
+  player: {fileID: 0}
   distanciaMaxima: 3
+--- !u!136 &5915720845611153435
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6773783403117849110}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
