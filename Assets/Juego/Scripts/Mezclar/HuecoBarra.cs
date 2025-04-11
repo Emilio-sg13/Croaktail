@@ -15,31 +15,57 @@ public class HuecoBarra : MonoBehaviour
 
     void OnMouseDown()
     {
+        // Si el jugador está lejos, no hacer nada.
         if (Vector3.Distance(player.position, transform.position) > distanciaMaxima)
             return;
 
-        int selected = inventario.selectedSlot;
-        Sprite selectedSprite = inventario.slots[selected].sprite;
-        if (selectedSprite == null) return;
-
-        item item = inventario.GetItemBySprite(selectedSprite);
-        if (item == null || item.tipo != TipoItem.Ingrediente)
-        {
-            Debug.Log("Solo puedes colocar ingredientes aquí.");
-            return;
-        }
-
+        // Caso 1: Si el hueco ya tiene un ingrediente depositado, se intenta recogerlo
         if (spriteRenderer.sprite != null)
         {
-            Debug.Log("Este hueco ya tiene un ingrediente.");
-            return;
+            // Se obtiene el item asociado al sprite del hueco
+            item pickedItem = inventario.GetItemBySprite(spriteRenderer.sprite);
+            if (pickedItem != null)
+            {
+                // Se intenta añadir el item al inventario (sin depender del slot seleccionado)
+                bool added = inventario.TryAddItem(pickedItem);
+                if (added)
+                {
+                    Debug.Log("Item recogido desde HuecoBarra y añadido al inventario.");
+                    // Vaciar el hueco para permitir nuevos depósitos
+                    spriteRenderer.sprite = null;
+                }
+                else
+                {
+                    Debug.Log("Inventario lleno, no se puede recoger el item desde HuecoBarra.");
+                }
+            }
+            else
+            {
+                Debug.Log("No se pudo identificar el item en el HuecoBarra.");
+            }
         }
+        else // Caso 2: Hueco vacío intentar depositar el item seleccionado del inventario
+        {
+            int selected = inventario.selectedSlot;
+            Sprite selectedSprite = inventario.slots[selected].sprite;
+            if (selectedSprite == null)
+            {
+                Debug.Log("No hay objeto seleccionado en el inventario para depositar en el HuecoBarra.");
+                return;
+            }
 
-        // Mostrar el sprite en el hueco
-        spriteRenderer.sprite = selectedSprite;
+            item itemToDeposit = inventario.GetItemBySprite(selectedSprite);
+            if (itemToDeposit == null || itemToDeposit.tipo != TipoItem.Ingrediente)
+            {
+                Debug.Log("Solo puedes depositar ingredientes aquí.");
+                return;
+            }
 
-        // Quitar del inventario
-        inventario.BorrarItem(selected, selectedSprite);
+            // Depositar el ingrediente: se muestra el sprite en el hueco...
+            spriteRenderer.sprite = selectedSprite;
+            // ...y se quita del inventario
+            inventario.BorrarItem(selected, selectedSprite);
+        }
     }
 
     public void Vaciar()

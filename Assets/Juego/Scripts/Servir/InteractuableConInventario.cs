@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using static UnityEditor.Progress;
+
 
 public class InteractuableConInventario : MonoBehaviour
 {
@@ -32,27 +32,26 @@ public class InteractuableConInventario : MonoBehaviour
 
     IEnumerator EsperarYActuar()
     {
+        // Espera hasta que el jugador esté lo suficientemente cerca
         while (Vector3.Distance(player.position, transform.position) > distanciaMaxima)
         {
             yield return null;
         }
 
         int selectedIndex = inventario.selectedSlot;
-        Sprite selectedSprite = inventario.slots[selectedIndex].sprite;
 
-        if (selectedSprite == null)
-        {
-            Debug.Log(selectedSprite);
-            Debug.Log("No hay objeto seleccionado en el inventario.");
-            yield break;
-        }
-
-        // Lógica según el tag del objeto
         switch (tag)
         {
             case "cliente":
-                if (cliente != null)
                 {
+                    // Para clientes, se requiere que haya un objeto seleccionado en el inventario.
+                    Sprite selectedSprite = inventario.slots[selectedIndex].sprite;
+                    if (selectedSprite == null)
+                    {
+                        Debug.Log("No hay objeto seleccionado en el inventario.");
+                        yield break;
+                    }
+
                     item coctelSeleccionado = inventario.GetItemBySprite(selectedSprite);
                     item coctelPedido = cliente.requestedCoctel;
 
@@ -61,10 +60,10 @@ public class InteractuableConInventario : MonoBehaviour
                     {
                         Debug.Log("Pedido correcto. Cliente servido.");
 
-                        // Eliminar el cóctel del inventario
+                        // Eliminar el cóctel del inventario.
                         inventario.BorrarItem(selectedIndex, selectedSprite);
 
-                        // Sumar dinero a la barra de cobro
+                        // Sumar dinero a la barra de cobro.
                         GameObject barraUIObj = GameObject.Find("BarraCobroUI");
                         if (barraUIObj != null)
                         {
@@ -72,7 +71,7 @@ public class InteractuableConInventario : MonoBehaviour
                             barra?.AñadirDinero(coctelSeleccionado.precio);
                         }
 
-                        // Destruir al cliente servido
+                        // Destruir al cliente servido.
                         Destroy(cliente.gameObject);
                     }
                     else
@@ -83,19 +82,65 @@ public class InteractuableConInventario : MonoBehaviour
                 break;
 
             case "barra":
-                Debug.Log(selectedSprite);
-                
-                if (spriteRenderer != null && spriteRenderer.sprite == null)
                 {
-                    spriteRenderer.sprite = selectedSprite;
-                    inventario.BorrarItem(selectedIndex, selectedSprite);
+                    // Caso "barra": se puede recoger o depositar, según si hay un item depositado.
+                    // Primero, comprobamos si la barra ya tiene un objeto (pickup).
+                    if (spriteRenderer.sprite != null)
+                    {
+                        // Recoger el item depositado en la barra.
+                        item pickedItem = inventario.GetItemBySprite(spriteRenderer.sprite);
+                        if (pickedItem != null)
+                        {
+                            // Se intenta añadir el item al inventario sin depender del slot seleccionado.
+                            bool added = inventario.TryAddItem(pickedItem);
+                            if (added)
+                            {
+                                Debug.Log("Item recogido desde la barra y añadido al inventario.");
+                                // Vaciar la barra para permitir nuevos depósitos.
+                                spriteRenderer.sprite = null;
+                            }
+                            else
+                            {
+                                Debug.Log("Inventario lleno, no se puede recoger el item desde la barra.");
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log("No se pudo identificar el item en la barra.");
+                        }
+                    }
+                    else
+                    {
+                        // Si la barra está vacía, depositar el item seleccionado, solo si existe.
+                        Sprite selectedSprite = inventario.slots[selectedIndex].sprite;
+                        if (selectedSprite != null)
+                        {
+                            spriteRenderer.sprite = selectedSprite;
+                            inventario.BorrarItem(selectedIndex, selectedSprite);
+                        }
+                        else
+                        {
+                            Debug.Log("No hay objeto en el inventario para depositar en la barra.");
+                        }
+                    }
                 }
                 break;
 
             case "basura":
-                Debug.Log("Objeto tirado a la basura.");
-                inventario.BorrarItem(selectedIndex, selectedSprite);
+                {
+                    // En basura sí se requiere tener un objeto seleccionado en el inventario.
+                    Sprite selectedSprite = inventario.slots[selectedIndex].sprite;
+                    if (selectedSprite == null)
+                    {
+                        Debug.Log("No hay objeto en el inventario para tirar a la basura.");
+                        yield break;
+                    }
+
+                    Debug.Log("Objeto tirado a la basura.");
+                    inventario.BorrarItem(selectedIndex, selectedSprite);
+                }
                 break;
         }
     }
+
 }

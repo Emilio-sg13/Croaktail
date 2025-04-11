@@ -40,7 +40,7 @@ public class InteractableItem : MonoBehaviour
         {
             // Se puede agregar una animación o efecto extra al recoger el objeto
             recogido = true;
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }
