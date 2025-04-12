@@ -12,14 +12,11 @@ public class InteractableItem : MonoBehaviour
     // Referencia al ScriptableObject que define este item (configurable para cada objeto)
     public item itemData;
 
-    private bool recogido = false;
-
 
 
     // Al hacer clic sobre el objeto (asegúrate de que el collider esté configurado y que haya un Physics Raycaster en la cámara)
     void OnMouseDown()
     {
-        if (recogido) return;
 
         // Mover al jugador hacia este objeto
         jugador.MoverHacia(transform.position);
@@ -38,9 +35,8 @@ public class InteractableItem : MonoBehaviour
         bool añadido = inventario.TryAddItem(itemData);
         if (añadido)
         {
-            // Se puede agregar una animación o efecto extra al recoger el objeto
-            recogido = true;
-            //Destroy(gameObject);
+            // Aquí se puede agregar una animación o efecto extra al recoger el objeto.
+            Debug.Log("Ingrediente recogido.");
         }
     }
 }
