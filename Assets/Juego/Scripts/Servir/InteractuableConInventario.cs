@@ -64,12 +64,16 @@ public class InteractuableConInventario : MonoBehaviour
                         inventario.BorrarItem(selectedIndex, selectedSprite);
 
                         // Sumar dinero a la barra de cobro.
-                        GameObject barraUIObj = GameObject.Find("BarraCobroUI");
+                        GameObject barraUIObj = GameObject.Find("UI");
                         if (barraUIObj != null)
                         {
                             BarraCobroUI barra = barraUIObj.GetComponent<BarraCobroUI>();
-                            barra?.AñadirDinero(coctelSeleccionado.precio);
+                            if (barra != null)
+                            {
+                                barra.AñadirDinero(coctelSeleccionado.precio);
+                            }
                         }
+
 
                         // Destruir al cliente servido.
                         Destroy(cliente.gameObject);
