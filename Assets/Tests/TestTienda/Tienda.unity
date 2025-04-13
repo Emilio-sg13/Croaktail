@@ -500,7 +500,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 730482688}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1970665164}
+        m_TargetAssemblyTypeName: TiendaManager, Assembly-CSharp
+        m_MethodName: ComprarMejoraSlot1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &730482688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -630,7 +642,7 @@ GameObject:
   - component: {fileID: 787396594}
   - component: {fileID: 787396593}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Texto1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -989,7 +1001,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 976670189}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1970665164}
+        m_TargetAssemblyTypeName: TiendaManager, Assembly-CSharp
+        m_MethodName: ComprarMejoraSlot2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &976670189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1291,7 +1315,7 @@ GameObject:
   - component: {fileID: 1235216451}
   - component: {fileID: 1235216450}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Texto2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1925,6 +1949,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 391a5d838a6163445941375966ac8de4, type: 3}
   - {fileID: 21300000, guid: fe3cbd16123ee1441b0a5b1ba246a45a, type: 3}
   - {fileID: 21300000, guid: 04c78afee887e6f4caf1d9e7b7762d6c, type: 3}
+  textoBotonSlot1: {fileID: 787396593}
+  textoBotonSlot2: {fileID: 1235216450}
+  dineroJugador: 500
+  precioMejora: 100
 --- !u!4 &1970665165
 Transform:
   m_ObjectHideFlags: 0
