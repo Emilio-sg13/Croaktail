@@ -202,8 +202,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1052547478}
-        m_TargetAssemblyTypeName: TiendaManager, Assembly-CSharp
+      - m_Target: {fileID: 1052547480}
+        m_TargetAssemblyTypeName: TestTiendaManager, Assembly-CSharp
         m_MethodName: ComprarMejoraSlot1
         m_Mode: 1
         m_Arguments:
@@ -1064,6 +1064,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1052547479}
   - component: {fileID: 1052547478}
+  - component: {fileID: 1052547480}
   m_Layer: 0
   m_Name: TiendaManager
   m_TagString: Untagged
@@ -1078,7 +1079,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1052547477}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2727df3fb6059c48b634c0be36f6f5a, type: 3}
   m_Name: 
@@ -1110,6 +1111,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1052547480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052547477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fca8afa61155f3b43b29392d86dc0f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mejoraSlot1: {fileID: 265032898}
+  mejoraSlot2: {fileID: 980578636}
+  mejorasSprites: []
+  textoBotonSlot1: {fileID: 778658387}
+  textoBotonSlot2: {fileID: 620892479}
+  precioMejora: 100
 --- !u!1 &1092794953
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,8 +1444,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1052547478}
-        m_TargetAssemblyTypeName: TiendaManager, Assembly-CSharp
+      - m_Target: {fileID: 1052547480}
+        m_TargetAssemblyTypeName: TestTiendaManager, Assembly-CSharp
         m_MethodName: ComprarMejoraSlot2
         m_Mode: 1
         m_Arguments:

@@ -58,6 +58,8 @@ public class TestBarraCobro : MonoBehaviour
 
     public void OnIrtiendaButtonClick()
     {
+        // Suponiendo que tienes los valores nightMoney (dinero ganado en la noche) y targetMoney (dinero pedido).
+        MoneyManager.Instance.IrTienda(totalActual, cuotaTotal);
         SceneManager.LoadScene("Tienda");
 
     }
