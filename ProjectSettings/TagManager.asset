@@ -10,6 +10,9 @@ TagManager:
   - Item1Hueco
   - basura
   - cliente
+  - inicio
+  - finalizar
+  - siguiente
   layers:
   - Default
   - TransparentFX
