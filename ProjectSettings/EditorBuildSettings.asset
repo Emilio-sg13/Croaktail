@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/Tests/TestPantallaMenuPausa/MenuPrincipal.unity
+    guid: a2196099446bde3439ea86c664bcbaa4
+  - enabled: 1
     path: Assets/Juego/Scene/Noche.unity
     guid: 7b1996a4ee68b9a45ba9e84a19056009
   m_configObjects:
