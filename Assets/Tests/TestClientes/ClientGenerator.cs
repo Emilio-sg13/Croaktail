@@ -6,7 +6,6 @@ public class ClientGenerator : MonoBehaviour
     [SerializeField]
     private ClientType[] clientTypes;
 
-    [SerializeField]
     private float spawnInterval = 3.0f;
 
     [SerializeField]
@@ -136,6 +135,12 @@ public class ClientGenerator : MonoBehaviour
 
         // Fallback, por si acaso
         return allowedTypes[0];
+    }
+
+    // Función pública que duplica el valor de spawnInterval
+    public void DoblarSpawnInterval()
+    {
+        spawnInterval = 1.0f;
     }
 
 }
