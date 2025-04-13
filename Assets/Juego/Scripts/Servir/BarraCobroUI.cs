@@ -53,6 +53,17 @@ public class BarraCobroUI : MonoBehaviour
         ActualizarUI();
     }
 
+    /// <summary>
+    /// Este método se puede llamar desde un botón.
+    /// Al pulsarlo, totalActual se fija a 120 y se actualiza el texto.
+    /// </summary>
+    public void SetTotalActualTo120()
+    {
+        totalActual = 120;
+        texto.text = $"{totalActual}€ / {cuotaTotal}€";
+        Debug.Log("totalActual establecido a 120.");
+    }
+
     public void OnFinalizarButtonClick()
     {
         GameManager.Instance.FinalizeGame();
@@ -62,6 +73,7 @@ public class BarraCobroUI : MonoBehaviour
 
     public void OnIrtiendaButtonClick()
     {
+        MoneyManager.Instance.IrTienda(totalActual, cuotaTotal);
         SceneManager.LoadScene("Tienda");
 
     }

@@ -1488,8 +1488,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 04c78afee887e6f4caf1d9e7b7762d6c, type: 3}
   textoBotonSlot1: {fileID: 1304449263}
   textoBotonSlot2: {fileID: 1565375838}
-  dineroJugador: 500
-  precioMejora: 100
+  precioMejora: 10
 --- !u!4 &1430278151
 Transform:
   m_ObjectHideFlags: 0
@@ -1517,6 +1516,7 @@ GameObject:
   - component: {fileID: 1437412571}
   - component: {fileID: 1437412570}
   - component: {fileID: 1437412569}
+  - component: {fileID: 1437412573}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1610,6 +1610,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1437412573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437412568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d66e29c155fc04989555af582bd0c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moneyText: {fileID: 1904459520}
 --- !u!1 &1565375836
 GameObject:
   m_ObjectHideFlags: 0
@@ -1913,7 +1926,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -335, y: 199}
+  m_AnchoredPosition: {x: -335, y: 180}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1904459520

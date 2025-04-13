@@ -148,4 +148,10 @@ public class TestTiendaManager : MonoBehaviour
             Debug.Log("No tienes suficiente dinero para comprar la mejora del slot 2.");
         }
     }
+
+    public void OnSiguienteButtonClick()
+    {
+        TestGameManager.Instance.LoadNextNight();
+
+    }
 }
