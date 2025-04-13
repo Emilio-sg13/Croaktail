@@ -58,7 +58,7 @@ public class TestBarraCobro : MonoBehaviour
 
     public void OnIrtiendaButtonClick()
     {
-        SceneManager.LoadScene("TestTienda");
+        SceneManager.LoadScene("Tienda");
 
     }
 
