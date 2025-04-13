@@ -14,6 +14,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Juego/Scene/Noche.unity
     guid: 7b1996a4ee68b9a45ba9e84a19056009
+  - enabled: 1
+    path: Assets/Tests/TestManagers/MainMenu.unity
+    guid: c32c138785fe24d449371d4fdbd4e426
+  - enabled: 1
+    path: Assets/Tests/TestManagers/TestNoche.unity
+    guid: f96f5c36838d9244f92df3c270c145e0
+  - enabled: 1
+    path: Assets/Tests/TestManagers/TestTienda.unity
+    guid: a3a377da155a807458e58680d61b71ae
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
