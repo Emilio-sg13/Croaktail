@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using TMPro; // Asegúrate de incluir la librería para TextMeshPro
+using TMPro; 
 
 public class TiendaManager : MonoBehaviour
 {
@@ -19,24 +19,17 @@ public class TiendaManager : MonoBehaviour
     private int mejoraMostradaSlot1 = -1;
     private int mejoraMostradaSlot2 = -1;
 
-    // Simulación del dinero del jugador y el precio de cada mejora
-    public int dineroJugador = 500;      // Ejemplo de cantidad de dinero
-    public int precioMejora = 100;         // Precio de cada mejora
-
-    /*
-    public int precioMejora1 = 0;
-    public int precioMejora2 = 0;  
-    public int precioMejora3 = 0;
-    public int precioMejora4 = 0;
-    public int precioMejora5 = 0;
-    */
+    // Precio de cada mejora; se usa para determinar si el jugador tiene suficiente dinero.
+    public int precioMejora = 100;
 
     void Start()
     {
         MostrarMejorasAleatorias();
     }
 
-    // Método para seleccionar dos mejoras aleatorias entre las que aún no se han comprado
+    /// <summary>
+    /// Selecciona aleatoriamente dos mejoras que aún no han sido compradas y las muestra en los slots.
+    /// </summary>
     public void MostrarMejorasAleatorias()
     {
         // 1. Crear una lista de índices de mejoras que el jugador aún no ha comprado
@@ -54,7 +47,6 @@ public class TiendaManager : MonoBehaviour
             Debug.Log("No hay mejoras disponibles para comprar.");
             mejoraSlot1.enabled = false;
             mejoraSlot2.enabled = false;
-            // Opcionalmente, puedes desactivar o modificar los textos de los botones aquí
             textoBotonSlot1.text = "";
             textoBotonSlot2.text = "";
             return;
@@ -89,16 +81,20 @@ public class TiendaManager : MonoBehaviour
         }
     }
 
-    // Método que se invoca al pulsar el botón de compra de la mejora del slot 1
+    /// <summary>
+    /// Se invoca al pulsar el botón de compra del slot 1.
+    /// Comprueba si hay suficiente dinero en el MoneyManager y, si es así, se descuenta el precio y se marca la mejora como comprada.
+    /// </summary>
     public void ComprarMejoraSlot1()
     {
         if (mejoraMostradaSlot1 == -1)
             return; // No hay mejora asignada en este slot
 
-        // Comprobar si el jugador tiene suficiente dinero
-        if (dineroJugador >= precioMejora)
+        // Usamos el MoneyManager para comprobar el dinero acumulado.
+        if (MoneyManager.Instance != null && MoneyManager.Instance.Ganancias >= precioMejora)
         {
-            dineroJugador -= precioMejora; // se descuenta el precio
+            // Se descuenta el coste de la mejora.
+            MoneyManager.Instance.Comprar(precioMejora);
 
             // Marcar la mejora como comprada en UpgradeData
             switch (mejoraMostradaSlot1)
@@ -110,13 +106,10 @@ public class TiendaManager : MonoBehaviour
                 case 4: UpgradeData.mejora5 = true; break;
             }
 
-            // Ocultar el sprite de la mejora y actualizar el texto del botón a "Comprado"
+            // Se oculta el sprite de la mejora y se actualiza el texto del botón a "Comprado"
             mejoraSlot1.enabled = false;
             textoBotonSlot1.text = "Comprado";
             Debug.Log("Compraste la mejora del slot 1.");
-
-            // Opcionalmente, podrías refrescar la selección de mejoras si lo deseas:
-            // MostrarMejorasAleatorias();
         }
         else
         {
@@ -124,15 +117,18 @@ public class TiendaManager : MonoBehaviour
         }
     }
 
-    // Método que se invoca al pulsar el botón de compra de la mejora del slot 2
+    /// <summary>
+    /// Se invoca al pulsar el botón de compra del slot 2.
+    /// Comprueba si hay suficiente dinero en el MoneyManager y, si es así, se descuenta el precio y se marca la mejora como comprada.
+    /// </summary>
     public void ComprarMejoraSlot2()
     {
         if (mejoraMostradaSlot2 == -1)
             return;
 
-        if (dineroJugador >= precioMejora)
+        if (MoneyManager.Instance != null && MoneyManager.Instance.Ganancias >= precioMejora)
         {
-            dineroJugador -= precioMejora;
+            MoneyManager.Instance.Comprar(precioMejora);
 
             switch (mejoraMostradaSlot2)
             {
