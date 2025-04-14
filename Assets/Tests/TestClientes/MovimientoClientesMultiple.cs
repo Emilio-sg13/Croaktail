@@ -132,8 +132,15 @@ public class MovimientoClientesMultiple : MonoBehaviour
             {
                 coctelRenderer.sprite = randomCoctel.sprite;
                 coctelRenderer.enabled = true; // Activar el SpriteRenderer para mostrar el sprite
+                Invoke("HideCoctelRenderer", 5f); // Invoca el método para desactivar después de 5 segundos
             }
         }
+    }
+
+    // Método que desactiva el SpriteRenderer
+    private void HideCoctelRenderer()
+    {
+        coctelRenderer.enabled = false;
     }
 
     void OnDestroy()

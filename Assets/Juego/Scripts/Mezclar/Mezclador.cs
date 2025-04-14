@@ -92,18 +92,46 @@ public class Mezclador : MonoBehaviour
                 item coctel = ObtenerCoctel(ingredientes);
                 if (coctel != null)
                 {
-                    // Se intenta agregar el cóctel al inventario
-                    bool added = inventario.TryAddItem(coctel);
-                    if (added)
+                    // Si se activa la actualización doble, se intenta añadir dos cócteles
+                    if (UpgradeData.coctelesDobles)
                     {
-                        Debug.Log("Cóctel añadido al inventario.");
+                        bool addedPrimer = inventario.TryAddItem(coctel);
+                        bool addedSegundo = inventario.TryAddItem(coctel);
+
+                        if (addedPrimer && addedSegundo)
+                        {
+                            Debug.Log("Dos cócteles añadidos al inventario.");
+                        }
+                        else if (addedPrimer && !addedSegundo)
+                        {
+                            Debug.Log("Primer cóctel añadido, pero el inventario estaba lleno para el segundo cóctel.");
+                            // Se muestra el segundo cóctel en la barra de salida
+                            SpriteRenderer sr = barraSalida.GetComponent<SpriteRenderer>();
+                            sr.sprite = coctel.sprite;
+                            Debug.Log("Segundo cóctel depositado en la barra.");
+                        }
+                        else if (!addedPrimer)
+                        {
+                            // Si ni el primero ni el segundo se pueden agregar, se deposita al menos uno en la barra de salida
+                            SpriteRenderer sr = barraSalida.GetComponent<SpriteRenderer>();
+                            sr.sprite = coctel.sprite;
+                            Debug.Log("Inventario lleno. Cócteles depositados en la barra.");
+                        }
                     }
                     else
                     {
-                        // Si el inventario está lleno, se muestra el cóctel en la barra de salida
-                        SpriteRenderer sr = barraSalida.GetComponent<SpriteRenderer>();
-                        sr.sprite = coctel.sprite;
-                        Debug.Log("Inventario lleno. Cóctel depositado en la barra.");
+                        // Flujo original: se añade un solo cóctel
+                        bool added = inventario.TryAddItem(coctel);
+                        if (added)
+                        {
+                            Debug.Log("Cóctel añadido al inventario.");
+                        }
+                        else
+                        {
+                            SpriteRenderer sr = barraSalida.GetComponent<SpriteRenderer>();
+                            sr.sprite = coctel.sprite;
+                            Debug.Log("Inventario lleno. Cóctel depositado en la barra.");
+                        }
                     }
                 }
                 else
@@ -112,6 +140,7 @@ public class Mezclador : MonoBehaviour
                 }
                 mezclando = false; // Finaliza el proceso de mezcla
             });
+
 
             mezclando = true; // Marca que se inició la mezcla
         }

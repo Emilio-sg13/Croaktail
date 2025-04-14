@@ -4,8 +4,8 @@ public static class UpgradeData
 {
     // Declaración de los cinco booleanos para las mejoras.
     public static bool masClientes = false;
-    public static bool mejora2 = false;
-    public static bool mejora3 = false;
+    public static bool dineroTriple = false;
+    public static bool coctelesDobles = false;
     public static bool mejora4 = false;
     public static bool mejora5 = false;
 }

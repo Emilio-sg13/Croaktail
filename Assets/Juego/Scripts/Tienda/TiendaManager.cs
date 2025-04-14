@@ -36,8 +36,8 @@ public class TiendaManager : MonoBehaviour
         List<int> mejorasNoCompradas = new List<int>();
 
         if (!UpgradeData.masClientes) mejorasNoCompradas.Add(0); // índice 0 -> mejora1
-        if (!UpgradeData.mejora2) mejorasNoCompradas.Add(1); // índice 1 -> mejora2
-        if (!UpgradeData.mejora3) mejorasNoCompradas.Add(2); // índice 2 -> mejora3
+        if (!UpgradeData.dineroTriple) mejorasNoCompradas.Add(1); // índice 1 -> mejora2
+        if (!UpgradeData.coctelesDobles) mejorasNoCompradas.Add(2); // índice 2 -> mejora3
         if (!UpgradeData.mejora4) mejorasNoCompradas.Add(3); // índice 3 -> mejora4
         if (!UpgradeData.mejora5) mejorasNoCompradas.Add(4); // índice 4 -> mejora5
 
@@ -100,8 +100,8 @@ public class TiendaManager : MonoBehaviour
             switch (mejoraMostradaSlot1)
             {
                 case 0: UpgradeData.masClientes = true; break;
-                case 1: UpgradeData.mejora2 = true; break;
-                case 2: UpgradeData.mejora3 = true; break;
+                case 1: UpgradeData.dineroTriple = true; break;
+                case 2: UpgradeData.coctelesDobles = true; break;
                 case 3: UpgradeData.mejora4 = true; break;
                 case 4: UpgradeData.mejora5 = true; break;
             }
@@ -133,8 +133,8 @@ public class TiendaManager : MonoBehaviour
             switch (mejoraMostradaSlot2)
             {
                 case 0: UpgradeData.masClientes = true; break;
-                case 1: UpgradeData.mejora2 = true; break;
-                case 2: UpgradeData.mejora3 = true; break;
+                case 1: UpgradeData.dineroTriple = true; break;
+                case 2: UpgradeData.coctelesDobles = true; break;
                 case 3: UpgradeData.mejora4 = true; break;
                 case 4: UpgradeData.mejora5 = true; break;
             }

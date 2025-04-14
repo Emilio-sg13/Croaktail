@@ -1481,11 +1481,11 @@ MonoBehaviour:
   mejoraSlot1: {fileID: 553096241}
   mejoraSlot2: {fileID: 2029862904}
   mejorasSprites:
-  - {fileID: 21300000, guid: 0efae03bfdbe3da42812a04ea498580e, type: 3}
-  - {fileID: 21300000, guid: 933a78e76fc6c814a9793112a3f9a9f2, type: 3}
-  - {fileID: 21300000, guid: 391a5d838a6163445941375966ac8de4, type: 3}
-  - {fileID: 21300000, guid: fe3cbd16123ee1441b0a5b1ba246a45a, type: 3}
-  - {fileID: 21300000, guid: 04c78afee887e6f4caf1d9e7b7762d6c, type: 3}
+  - {fileID: 21300000, guid: e8101636902efba418c4065963d6ed2a, type: 3}
+  - {fileID: 21300000, guid: 3cc9a5987ba552342b138e1406976f14, type: 3}
+  - {fileID: 21300000, guid: ff1cb00deca8bbc40aa8c9172c56924b, type: 3}
+  - {fileID: 21300000, guid: 69f86fa0362823d44b61dc29216f3bfe, type: 3}
+  - {fileID: 21300000, guid: 692cddb85b77f8543a302b5b3ec8d10f, type: 3}
   textoBotonSlot1: {fileID: 1304449263}
   textoBotonSlot2: {fileID: 1565375838}
   precioMejora: 10
