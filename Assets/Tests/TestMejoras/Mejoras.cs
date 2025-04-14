@@ -8,13 +8,13 @@ public class Mejoras : MonoBehaviour
     // Llama a la función de mejora solo si UpgradeData.mejora1 es true.
     public void AplicarMejoraDeSpawnInterval()
     {
-        if (UpgradeData.mejora1)
+        if (UpgradeData.masClientes)
         {
             clientGenerator.DoblarSpawnInterval();
         }
         else
         {
-            Debug.Log("UpgradeData.mejora1 es false. No se aplica la mejora.");
+            Debug.Log("UpgradeData.masClientes es false. No se aplica la mejora.");
         }
     }
 }

@@ -35,7 +35,7 @@ public class TiendaManager : MonoBehaviour
         // 1. Crear una lista de índices de mejoras que el jugador aún no ha comprado
         List<int> mejorasNoCompradas = new List<int>();
 
-        if (!UpgradeData.mejora1) mejorasNoCompradas.Add(0); // índice 0 -> mejora1
+        if (!UpgradeData.masClientes) mejorasNoCompradas.Add(0); // índice 0 -> mejora1
         if (!UpgradeData.mejora2) mejorasNoCompradas.Add(1); // índice 1 -> mejora2
         if (!UpgradeData.mejora3) mejorasNoCompradas.Add(2); // índice 2 -> mejora3
         if (!UpgradeData.mejora4) mejorasNoCompradas.Add(3); // índice 3 -> mejora4
@@ -99,7 +99,7 @@ public class TiendaManager : MonoBehaviour
             // Marcar la mejora como comprada en UpgradeData
             switch (mejoraMostradaSlot1)
             {
-                case 0: UpgradeData.mejora1 = true; break;
+                case 0: UpgradeData.masClientes = true; break;
                 case 1: UpgradeData.mejora2 = true; break;
                 case 2: UpgradeData.mejora3 = true; break;
                 case 3: UpgradeData.mejora4 = true; break;
@@ -132,7 +132,7 @@ public class TiendaManager : MonoBehaviour
 
             switch (mejoraMostradaSlot2)
             {
-                case 0: UpgradeData.mejora1 = true; break;
+                case 0: UpgradeData.masClientes = true; break;
                 case 1: UpgradeData.mejora2 = true; break;
                 case 2: UpgradeData.mejora3 = true; break;
                 case 3: UpgradeData.mejora4 = true; break;
