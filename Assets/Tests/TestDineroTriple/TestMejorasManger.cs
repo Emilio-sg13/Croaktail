@@ -30,7 +30,7 @@ public class TestMejorasManger : MonoBehaviour
     /// <returns>El valor final, multiplicado por 3 si la mejora está activa, o el valor original.</returns>
     public int AplicarDineroTriple(int valorOriginal)
     {
-        return dineroTripleActivado ? valorOriginal * 3 : valorOriginal;
+        return UpgradeData.dineroTriple ? valorOriginal * 3 : valorOriginal;
     }
 
 }
