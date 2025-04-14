@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Tests/TestPantallaMenuPausa/MenuPrincipal.unity
+    path: Assets/Tests/TestPantallaMenuPausa/TestMenuPrincipal.unity
     guid: a2196099446bde3439ea86c664bcbaa4
   - enabled: 1
     path: Assets/Juego/Scene/Noche.unity
