@@ -89,4 +89,10 @@ public class BarraCobroUI : MonoBehaviour
         if (texto != null)
             texto.text = $"{totalActual}€ / {cuotaTotal}€";
     }
+
+    public int GetTotalActual()
+    {
+        return totalActual;
+    }
+
 }

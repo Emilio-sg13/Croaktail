@@ -3857,6 +3857,52 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1088005128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1088005130}
+  - component: {fileID: 1088005129}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1088005129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088005128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae700fcbbc1b82f49b6d1ebf0a85011b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nightCounter: 1
+  initialTargetMoney: 100
+--- !u!4 &1088005130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088005128}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1118885409
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5506,6 +5552,18 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6586826548997187040, guid: 753cb3263c6fe6b4b80d54ae86bf5d66, type: 3}
   m_PrefabInstance: {fileID: 1690221191}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1491484313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491484303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11327c9f0c93c2c45be9f5b36a2cc429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1501159639
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5870,6 +5928,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1677880280}
+  - component: {fileID: 1677880281}
   m_Layer: 5
   m_Name: Contador
   m_TagString: Untagged
@@ -5898,6 +5957,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 239.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1677880281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677880279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c523ad28fee71a2439d31f98b9cb5d95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contadorTexto: {fileID: 502666561}
+  tiempoRestante: 60
+  barraCobroUI: {fileID: 1491484308}
+  gameManager: {fileID: 1088005129}
 --- !u!1001 &1690221191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6018,6 +6093,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8676028405691970374, guid: 753cb3263c6fe6b4b80d54ae86bf5d66, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1491484308}
+    - targetCorrespondingSourceObject: {fileID: 8676028405691970374, guid: 753cb3263c6fe6b4b80d54ae86bf5d66, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1491484313}
   m_SourcePrefab: {fileID: 100100000, guid: 753cb3263c6fe6b4b80d54ae86bf5d66, type: 3}
 --- !u!1 &1735329869
 GameObject:
@@ -7419,3 +7497,4 @@ SceneRoots:
   - {fileID: 2146420109}
   - {fileID: 940911459}
   - {fileID: 1738264627}
+  - {fileID: 1088005130}
