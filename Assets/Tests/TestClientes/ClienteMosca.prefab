@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2331768587073054922}
   - component: {fileID: 3819576470782669386}
   - component: {fileID: 7361361267565492049}
-  - component: {fileID: 5470287069805806024}
   m_Layer: 0
   m_Name: ClienteMosca
   m_TagString: cliente
@@ -84,21 +83,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65a9a90d4dfb2644681d2ae12b03fab0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventario: {fileID: 0}
-  player: {fileID: 0}
-  distanciaMaxima: 3
---- !u!114 &5470287069805806024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5084268321471389291}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0e6cd7d16034404bbe21ac81fcd077a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inventario: {fileID: 0}

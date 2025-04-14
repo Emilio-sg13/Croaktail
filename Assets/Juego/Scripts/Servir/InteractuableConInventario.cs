@@ -63,6 +63,14 @@ public class InteractuableConInventario : MonoBehaviour
                         // Eliminar el cóctel del inventario.
                         inventario.BorrarItem(selectedIndex, selectedSprite);
 
+                        int valorOriginal = coctelSeleccionado.precio;
+
+                        if (UpgradeData.dineroTriple)
+                        {
+                            valorOriginal = valorOriginal * 3;
+                        }
+
+
                         // Sumar dinero a la barra de cobro.
                         GameObject barraUIObj = GameObject.Find("UI");
                         if (barraUIObj != null)
@@ -70,7 +78,7 @@ public class InteractuableConInventario : MonoBehaviour
                             BarraCobroUI barra = barraUIObj.GetComponent<BarraCobroUI>();
                             if (barra != null)
                             {
-                                barra.AñadirDinero(coctelSeleccionado.precio);
+                                barra.AñadirDinero(valorOriginal);
                             }
                         }
 
@@ -146,5 +154,7 @@ public class InteractuableConInventario : MonoBehaviour
                 break;
         }
     }
+
+
 
 }
