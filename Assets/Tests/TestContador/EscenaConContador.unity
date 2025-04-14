@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contadorTexto: {fileID: 515126461}
-  tiempoRestante: 63
+  tiempoRestante: 420
 --- !u!114 &1450355709
 MonoBehaviour:
   m_ObjectHideFlags: 0
