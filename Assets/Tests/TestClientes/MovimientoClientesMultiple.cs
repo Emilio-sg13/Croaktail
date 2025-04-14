@@ -137,6 +137,25 @@ public class MovimientoClientesMultiple : MonoBehaviour
         }
     }
 
+    // Agregamos OnMouseEnter y OnMouseExit para que el render se muestre mientras el cursor esté encima.
+    void OnMouseEnter()
+    {
+        if (coctelRenderer != null)
+        {
+            // Cancelamos el Invoke si está programado para ocultar el sprite.
+            CancelInvoke("HideCoctelRenderer");
+            coctelRenderer.enabled = true;
+        }
+    }
+
+    void OnMouseExit()
+    {
+        if (coctelRenderer != null)
+        {
+            coctelRenderer.enabled = false;
+        }
+    }
+
     // Método que desactiva el SpriteRenderer
     private void HideCoctelRenderer()
     {
