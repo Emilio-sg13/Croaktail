@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Juego/Scene/Tienda.unity
     guid: e50114080f9e6ce4e98cb72e7b18878f
+  - enabled: 1
+    path: Assets/Tests/TestPantallaMenuPausa/MenuPausa.unity
+    guid: 30ef8c2b99d8a044893a0618a82ad038
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

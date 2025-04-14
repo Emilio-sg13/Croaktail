@@ -3,18 +3,20 @@ using UnityEngine.SceneManagement;
 
 public class MenuPausa : MonoBehaviour
 {
-
-    public GameObject menuPausa;
+    //public GameObject menuPausa;
+    [SerializeField] private GameObject botonPausa;
     public bool pausado;
- 
-    void Start()   
+
+    private string escenaOriginal;
+
+    void Start()
     {
-        menuPausa.SetActive(false);
+        //menuPausa.SetActive(false);
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (pausado)
             {
@@ -29,17 +31,19 @@ public class MenuPausa : MonoBehaviour
 
     public void PausarJuego()
     {
-        menuPausa.SetActive(true);
+        escenaOriginal = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene("MenuPausa", LoadSceneMode.Additive);
         Time.timeScale = 0f;
         pausado = true;
     }
 
-    public void ReanudarJuego() 
+    public void ReanudarJuego()
     {
-        menuPausa.SetActive(false);
         Time.timeScale = 1f;
+        SceneManager.UnloadSceneAsync("MenuPausa");
         pausado = false;
     }
+
 
     public void IrAlMenu()
     {
