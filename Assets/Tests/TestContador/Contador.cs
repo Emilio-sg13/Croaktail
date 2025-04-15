@@ -35,7 +35,8 @@ public class Contador : MonoBehaviour
             {
                 Debug.Log("¡Objetivo cumplido! Dinero conseguido: " + dineroConseguido);
                 // Procedemos a la tienda si se cumplió el objetivo
-                barraCobroUI.OnIrtiendaButtonClick();
+                SceneManager.LoadScene("PantallaVictoria");
+
             }
         }
         else
