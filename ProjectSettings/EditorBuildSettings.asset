@@ -8,24 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Tests/TestPantallaMenuPausa/TestMenuPrincipal.unity
     guid: a2196099446bde3439ea86c664bcbaa4
   - enabled: 1
+    path: Assets/Juego/Scene/MenuPrincipal.unity
+    guid: b6d719695b69dab4b9cdc5e58d8fbbb5
+  - enabled: 1
     path: Assets/Juego/Scene/Noche.unity
     guid: 7b1996a4ee68b9a45ba9e84a19056009
-  - enabled: 1
-    path: Assets/Tests/TestManagers/MainMenu.unity
-    guid: c32c138785fe24d449371d4fdbd4e426
-  - enabled: 1
-    path: Assets/Tests/TestManagers/TestNoche.unity
-    guid: f96f5c36838d9244f92df3c270c145e0
-  - enabled: 1
-    path: Assets/Tests/TestManagers/TestTienda.unity
-    guid: a3a377da155a807458e58680d61b71ae
-  - enabled: 1
-    path: Assets/Juego/Scene/Tienda.unity
-    guid: e50114080f9e6ce4e98cb72e7b18878f
   - enabled: 1
     path: Assets/Tests/TestPantallaMenuPausa/MenuPausa.unity
     guid: 30ef8c2b99d8a044893a0618a82ad038
@@ -35,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Tests/TestPantallaMenuPausa/PantallaVictoria.unity
     guid: 1608521476fd1794792c97f9c278fc25
+  - enabled: 1
+    path: Assets/Juego/Scene/Tienda.unity
+    guid: e50114080f9e6ce4e98cb72e7b18878f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
