@@ -92,32 +92,19 @@ public class Mezclador : MonoBehaviour
                 item coctel = ObtenerCoctel(ingredientes);
                 if (coctel != null)
                 {
-                    // Si se activa la actualización doble, se intenta añadir dos cócteles
-                    if (UpgradeData.coctelesDobles)
+                    // dentro del callback de mezcla, tras Instantiate o asignar al inventario:
+                    if (MejorasManager.Instance.coctelesDoblesActivado)
                     {
-                        bool addedPrimer = inventario.TryAddItem(coctel);
-                        bool addedSegundo = inventario.TryAddItem(coctel);
-
-                        if (addedPrimer && addedSegundo)
+                        // Vuelves a añadir el mismo coctel
+                        bool added2 = inventario.TryAddItem(coctel);
+                        if (!added2)
                         {
-                            Debug.Log("Dos cócteles añadidos al inventario.");
+                            // Si no entra en inventario, igual lo depositas en barra
+                            barraSalida.GetComponent<SpriteRenderer>().sprite = coctel.sprite;
                         }
-                        else if (addedPrimer && !addedSegundo)
-                        {
-                            Debug.Log("Primer cóctel añadido, pero el inventario estaba lleno para el segundo cóctel.");
-                            // Se muestra el segundo cóctel en la barra de salida
-                            SpriteRenderer sr = barraSalida.GetComponent<SpriteRenderer>();
-                            sr.sprite = coctel.sprite;
-                            Debug.Log("Segundo cóctel depositado en la barra.");
-                        }
-                        else if (!addedPrimer)
-                        {
-                            // Si ni el primero ni el segundo se pueden agregar, se deposita al menos uno en la barra de salida
-                            SpriteRenderer sr = barraSalida.GetComponent<SpriteRenderer>();
-                            sr.sprite = coctel.sprite;
-                            Debug.Log("Inventario lleno. Cócteles depositados en la barra.");
-                        }
+                        Debug.Log("Cóctel doble activo: añadido uno extra.");
                     }
+
                     else
                     {
                         // Flujo original: se añade un solo cóctel

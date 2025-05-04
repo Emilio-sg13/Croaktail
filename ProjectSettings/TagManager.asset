@@ -13,6 +13,7 @@ TagManager:
   - inicio
   - finalizar
   - siguiente
+  - MostrarMejora
   layers:
   - Default
   - TransparentFX
