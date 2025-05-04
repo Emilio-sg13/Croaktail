@@ -15,10 +15,10 @@ EditorBuildSettings:
     path: Assets/Juego/Scene/Noche.unity
     guid: 7b1996a4ee68b9a45ba9e84a19056009
   - enabled: 1
-    path: Assets/Tests/TestPantallaMenuPausa/MenuPausa.unity
+    path: Assets/Juego/Scene/MenuPausa.unity
     guid: 30ef8c2b99d8a044893a0618a82ad038
   - enabled: 1
-    path: Assets/Tests/TestPantallaMenuPausa/PantallaDerrota.unity
+    path: Assets/Juego/Scene/PantallaDerrota.unity
     guid: 0c929102a9f68a3409c5ef460564feb3
   - enabled: 1
     path: Assets/Tests/TestPantallaMenuPausa/PantallaVictoria.unity

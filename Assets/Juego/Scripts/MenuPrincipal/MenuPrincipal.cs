@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,12 @@ public class MenuPrincipal : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+       // Application.Quit();
+        EditorApplication.isPlaying = false;
+    }
+
+    public void reStart()
+    {
+        GameManager.Instance.StartGame();
     }
 }
