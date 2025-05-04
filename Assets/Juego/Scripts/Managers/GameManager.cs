@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     public void FinalizeGame()
     {
         // Puedes realizar otras acciones aquí, como guardar el progreso o mostrar una pantalla final.
-        // Por ejemplo, SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MenuPrincipal");
         Destroy(gameObject);
     }
 

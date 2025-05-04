@@ -48,7 +48,7 @@ public class MenuPausa : MonoBehaviour
     public void IrAlMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        GameManager.Instance.FinalizeGame();
         pausado = false;
     }
 }

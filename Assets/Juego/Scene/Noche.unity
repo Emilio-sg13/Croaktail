@@ -5926,7 +5926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contadorTexto: {fileID: 502666561}
-  tiempoRestante: 420
+  tiempoRestante: 20
   barraCobroUI: {fileID: 1491484308}
   gameManager: {fileID: 0}
 --- !u!1001 &1690221191
