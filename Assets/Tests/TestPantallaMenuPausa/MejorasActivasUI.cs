@@ -26,7 +26,7 @@ public class MejorasActivasUI : MonoBehaviour
         if (UpgradeData.dineroTriple) mejorasActivas.Add("Dinero Triple activado");
         if (UpgradeData.coctelesDobles) mejorasActivas.Add("Cócteles Dobles activado");
         if (UpgradeData.mejora4) mejorasActivas.Add("Mejora 4 activada");
-        if (UpgradeData.mejora5) mejorasActivas.Add("Mejora 5 activada");
+        if (UpgradeData.inventorySlotExtraActivado) mejorasActivas.Add("Mejora 5 activada");
 
         slot1Texto.text = mejorasActivas.Count > 0 ? mejorasActivas[0] : " ";
         slot2Texto.text = mejorasActivas.Count > 1 ? mejorasActivas[1] : " ";
