@@ -107,7 +107,7 @@ public class Colocar : MonoBehaviour
         {
             inventario.slots[selectedIndex - 1].sprite = null;
         }
-        else if (selectedIndex < inventario.slots.Length - 1 && inventario.slots[selectedIndex + 1].sprite == selectedSprite)
+        else if (selectedIndex < inventario.slots.Count - 1 && inventario.slots[selectedIndex + 1].sprite == selectedSprite)
         {
             inventario.slots[selectedIndex + 1].sprite = null;
         }

@@ -95,4 +95,10 @@ public class BarraCobroUI : MonoBehaviour
         return totalActual;
     }
 
+    public int GetGanancias()
+    {
+        int ganancias = totalActual - cuotaTotal;
+        return ganancias;
+    }
+
 }
