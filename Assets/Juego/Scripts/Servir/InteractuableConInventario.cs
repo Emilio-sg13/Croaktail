@@ -65,12 +65,11 @@ public class InteractuableConInventario : MonoBehaviour
 
                         int valorOriginal = coctelSeleccionado.precio;
 
-                        if (MejorasManager.Instance.dineroTripleActivado)
+                        if (UpgradeData.dineroTriple)
                         {
-                            valorOriginal = MejorasManager.Instance.AplicarDineroTriple(coctelSeleccionado.precio);
+                            valorOriginal = valorOriginal * 3;
                         }
 
-                       
 
                         // Sumar dinero a la barra de cobro.
                         GameObject barraUIObj = GameObject.Find("UI");

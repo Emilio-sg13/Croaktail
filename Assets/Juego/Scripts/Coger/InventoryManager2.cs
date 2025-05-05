@@ -4,130 +4,129 @@ using UnityEngine.UI;
 
 public class InventoryManager2 : MonoBehaviour
 {
-    // Asigna en el Inspector las imágenes correspondientes a los 3 slots.
-    public List<Image> slots = new List<Image>();
 
-    // Índice del slot actualmente seleccionado
+    public List<Image> slots;
+
     public int selectedSlot = 0;
 
-    public item[] todosLosItems;
+    public item[] todosLosItems;     // Array con todos los ScriptableObjects item
 
-    // Prefab de un slot (Image + Button), arrástralo desde Assets/Prefabs
-    [SerializeField] private GameObject slotPrefab;
-    // EL CONTENEDOR donde están tus slots (p. ej. un GameObject con GridLayoutGroup)
-    [SerializeField] private RectTransform slotsParentTransform;
+    // Número real de slots activos en el inventario
+    private int activeSlotsCount;
 
     void Start()
     {
+        // Comprueba si la mejora de slot extra está activa
+        bool extra = UpgradeData.inventorySlotExtraActivado;
 
-        // Si la mejora de slot extra está activa, añade un slot extra
-        if (UpgradeData.inventorySlotExtraActivado)
+        // Slot extra está en la posición 3 del List (0-based).
+        if (slots.Count < 4)
         {
-            AñadirSlotExtra();
+            Debug.LogError("Debes tener 4 elementos en la lista 'slots': 3 base + slot extra.");
+            activeSlotsCount = Mathf.Min(slots.Count, 3);
         }
+        else
+        {
+            // Habilita o deshabilita el slot extra visualmente
+            slots[3].enabled = extra;
+            activeSlotsCount = extra ? 4 : 3;
+        }
+
+        // Ajusta selectedSlot dentro de los slots activos
+        selectedSlot = Mathf.Clamp(selectedSlot, 0, activeSlotsCount - 1);
 
         ActualizarSeleccionSlot();
     }
 
     void Update()
     {
-        // Selección mediante la rueda del ratón
+        // Selección con rueda del ratón, solo sobre los slots activos
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if (scroll > 0)
+        if (scroll > 0f)
         {
-            selectedSlot = (selectedSlot + 1) % slots.Count;
+            selectedSlot = (selectedSlot + 1) % activeSlotsCount;
             ActualizarSeleccionSlot();
         }
-        else if (scroll < 0)
+        else if (scroll < 0f)
         {
-            selectedSlot = (selectedSlot - 1 + slots.Count) % slots.Count;
+            selectedSlot = (selectedSlot - 1 + activeSlotsCount) % activeSlotsCount;
             ActualizarSeleccionSlot();
         }
     }
 
-    // Método para seleccionar un slot haciendo clic en el mismo (enlázalo al OnClick del botón o imagen)
+    /// <summary>
+    /// Llamar desde OnClick de cada slot (configura en el Inspector un Button que pase su índice).
+    /// Solo permite seleccionar dentro de [0..activeSlotsCount-1].
+    /// </summary>
     public void SeleccionarSlot(int index)
     {
-        if (index >= 0 && index < slots.Count)
+        if (index >= 0 && index < activeSlotsCount)
         {
             selectedSlot = index;
             ActualizarSeleccionSlot();
         }
     }
 
-    // Actualiza visualmente la selección de slots (por ejemplo, cambiando el color)
-    void ActualizarSeleccionSlot()
+    /// <summary>
+    /// Refresca el color de los slots para indicar cuál está seleccionado.
+    /// </summary>
+    private void ActualizarSeleccionSlot()
     {
-        for (int i = 0; i < slots.Count; i++)
-        {
+        for (int i = 0; i < activeSlotsCount; i++)
             slots[i].color = (i == selectedSlot) ? Color.green : Color.white;
-        }
     }
 
-    // Intenta añadir un item al inventario buscando espacios contiguos libres.
+    /// <summary>
+    /// Intenta añadir un ítem al primer espacio contiguo libre dentro de los slots activos.
+    /// </summary>
     public bool TryAddItem(item newItem)
     {
-        int requiredSlots = newItem.slotsNeeded;
+        int needed = newItem.slotsNeeded;
 
-        // Recorre los slots hasta el último índice que permita ubicar los requiredSlots contiguos.
-        for (int i = 0; i <= slots.Count - requiredSlots; i++)
+        // Recorre hasta el último índice donde cupiesen needed slots
+        for (int i = 0; i <= activeSlotsCount - needed; i++)
         {
-            bool canPlace = true;
-            // Verifica que cada uno de los slots contiguos esté libre.
-            for (int j = 0; j < requiredSlots; j++)
+            bool free = true;
+            for (int j = 0; j < needed; j++)
             {
                 if (slots[i + j].sprite != null)
                 {
-                    canPlace = false;
+                    free = false;
                     break;
                 }
             }
-            if (canPlace)
-            {
-                // Asigna el sprite del item a todos los slots requeridos.
-                for (int j = 0; j < requiredSlots; j++)
-                {
-                    slots[i + j].sprite = newItem.sprite;
-                }
-                return true;
-            }
+            if (!free) continue;
+
+            // Coloca el sprite en los slots libres encontrados
+            for (int j = 0; j < needed; j++)
+                slots[i + j].sprite = newItem.sprite;
+            return true;
         }
-        return false; // No se encontró espacio suficiente.
+        return false;
     }
 
+    /// <summary>
+    /// Obtiene el objeto item asociado a un sprite, o null si no existe.
+    /// </summary>
     public item GetItemBySprite(Sprite sprite)
     {
-        foreach (item item in todosLosItems) // Crea un array público con todos tus Items
-        {
-            if (item.sprite == sprite)
-                return item;
-        }
+        foreach (var it in todosLosItems)
+            if (it.sprite == sprite)
+                return it;
         return null;
     }
 
-    public void BorrarItem(int selectedIndex, Sprite selectedSprite)
+    /// <summary>
+    /// Borra un ítem del slot dado y limpia adyacentes que coincidan (para items de slotsNeeded=2).
+    /// </summary>
+    public void BorrarItem(int index, Sprite selectedSprite)
     {
-        slots[selectedIndex].sprite = null;
+        if (index < 0 || index >= activeSlotsCount) return;
 
-        // Limpia slot adyacente si el objeto ocupa dos
-        if (selectedIndex > 0 && slots[selectedIndex - 1].sprite == selectedSprite)
-            slots[selectedIndex - 1].sprite = null;
-
-        if (selectedIndex < slots.Count - 1 && slots[selectedIndex + 1].sprite == selectedSprite)
-            slots[selectedIndex + 1].sprite = null;
+        slots[index].sprite = null;
+        if (index > 0 && slots[index - 1].sprite == selectedSprite)
+            slots[index - 1].sprite = null;
+        if (index < activeSlotsCount - 1 && slots[index + 1].sprite == selectedSprite)
+            slots[index + 1].sprite = null;
     }
-
-    void AñadirSlotExtra()
-    {
-        // Instancia un nuevo UI Slot
-        GameObject newSlot = Instantiate(slotPrefab, slotsParentTransform);
-        Image img = newSlot.GetComponent<Image>();
-        slots.Add(img);
-
-        // Opcional: Ajusta selectedSlot si era out-of-range
-        if (selectedSlot >= slots.Count)
-            selectedSlot = slots.Count - 1;
-    }
-
-
 }
