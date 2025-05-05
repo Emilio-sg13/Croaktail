@@ -399,8 +399,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00079346, y: -0.000023729}
-  m_SizeDelta: {x: 1150.4, y: 600}
+  m_AnchoredPosition: {x: 0.0063019, y: -0.000023729}
+  m_SizeDelta: {x: 1222.8, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &769886065
 MonoBehaviour:
@@ -645,7 +645,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 449341857}
         m_TargetAssemblyTypeName: MenuPrincipal, Assembly-CSharp
-        m_MethodName: PlayGame
+        m_MethodName: reStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

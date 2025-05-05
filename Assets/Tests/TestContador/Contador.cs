@@ -34,6 +34,7 @@ public class Contador : MonoBehaviour
             else
             {
                 Debug.Log("¡Objetivo cumplido! Dinero conseguido: " + dineroConseguido);
+                MoneyManager.Instance.IrTienda(dineroConseguido, dineroObjetivo);
                 // Procedemos a la tienda si se cumplió el objetivo
                 SceneManager.LoadScene("PantallaVictoria");
 
