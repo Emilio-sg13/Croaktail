@@ -7,5 +7,5 @@ public static class UpgradeData
     public static bool dineroTriple = false;
     public static bool coctelesDobles = false;
     public static bool mejora4 = false;
-    public bool inventorySlotExtraActivado = false;
+    public static bool inventorySlotExtraActivado = false;
 }

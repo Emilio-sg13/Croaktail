@@ -12,14 +12,16 @@ public class InventoryManager2 : MonoBehaviour
 
     public item[] todosLosItems;
 
-    public GameObject slotPrefab;    // un prefab con una Image
-
+    // Prefab de un slot (Image + Button), arrástralo desde Assets/Prefabs
+    [SerializeField] private GameObject slotPrefab;
+    // EL CONTENEDOR donde están tus slots (p. ej. un GameObject con GridLayoutGroup)
+    [SerializeField] private RectTransform slotsParentTransform;
 
     void Start()
     {
 
         // Si la mejora de slot extra está activa, añade un slot extra
-        if (MejorasManager.Instance != null && MejorasManager.Instance.inventorySlotExtraActivado)
+        if (UpgradeData.inventorySlotExtraActivado)
         {
             AñadirSlotExtra();
         }
@@ -118,8 +120,8 @@ public class InventoryManager2 : MonoBehaviour
     void AñadirSlotExtra()
     {
         // Instancia un nuevo UI Slot
-        GameObject go = Instantiate(slotPrefab, slotsParentTransform);
-        Image img = go.GetComponent<Image>();
+        GameObject newSlot = Instantiate(slotPrefab, slotsParentTransform);
+        Image img = newSlot.GetComponent<Image>();
         slots.Add(img);
 
         // Opcional: Ajusta selectedSlot si era out-of-range
