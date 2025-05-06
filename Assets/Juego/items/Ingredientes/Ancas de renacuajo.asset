@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ancas de renacuajo
   m_EditorClassIdentifier: 
   itemName: Ancas de Renacuajo
-  sprite: {fileID: 21300000, guid: 9addf5a1474948a42b3931af864aa418, type: 3}
+  sprite: {fileID: 21300000, guid: e8e210df902f2cf46af4c0de2c7b02b7, type: 3}
   slotsNeeded: 1
   precio: 0
   tipo: 0

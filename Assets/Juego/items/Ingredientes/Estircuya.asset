@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Estircuya
   m_EditorClassIdentifier: 
   itemName: Estiercuya
-  sprite: {fileID: 21300000, guid: 0f021905c9eaf474c8c7e07621f6bc49, type: 3}
+  sprite: {fileID: 21300000, guid: a82ac0e69e9af154ea95931da30382d9, type: 3}
   slotsNeeded: 1
   precio: 0
   tipo: 0
