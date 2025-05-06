@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Especias organicas
   m_EditorClassIdentifier: 
   itemName: Especias organicas
-  sprite: {fileID: 21300000, guid: b42bb676e3cf9b542aa331325d6f581b, type: 3}
+  sprite: {fileID: 21300000, guid: 26bb424c2fa508245bc20158b76f60a3, type: 3}
   slotsNeeded: 1
   precio: 0
   tipo: 0

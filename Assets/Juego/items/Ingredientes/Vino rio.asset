@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Vino rio
   m_EditorClassIdentifier: 
   itemName: Vino rio
-  sprite: {fileID: 21300000, guid: 7b0caa75f199b4444986e0a70750c0e2, type: 3}
+  sprite: {fileID: 21300000, guid: 17b1b71040b68d8459c20b48d099edf2, type: 3}
   slotsNeeded: 2
   precio: 0
   tipo: 0

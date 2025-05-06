@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bloody Rani
   m_EditorClassIdentifier: 
   itemName: Bloody Rani
-  sprite: {fileID: 21300000, guid: b05fa553cf46ef74fbb6dc8b6e5e7fd3, type: 3}
+  sprite: {fileID: 21300000, guid: b63fcfece4186bc4c8b21438a5218d95, type: 3}
   slotsNeeded: 1
   precio: 10
   tipo: 1

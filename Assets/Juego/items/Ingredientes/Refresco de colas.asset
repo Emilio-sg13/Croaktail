@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Refresco de colas
   m_EditorClassIdentifier: 
   itemName: Refresco de colas
-  sprite: {fileID: 21300000, guid: 0e60fbf825c2f9d4fa5d6219ad3e2a23, type: 3}
+  sprite: {fileID: 21300000, guid: 7d96c0177c96ffa4085bb64ca4ff9284, type: 3}
   slotsNeeded: 1
   precio: 0
   tipo: 0
