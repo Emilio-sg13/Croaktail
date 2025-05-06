@@ -6,6 +6,7 @@ public class ClientGenerator : MonoBehaviour
     [SerializeField]
     private ClientType[] clientTypes;
 
+    [SerializeField]
     private float spawnInterval = 3.0f;
 
     [SerializeField]

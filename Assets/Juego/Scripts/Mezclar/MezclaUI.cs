@@ -43,6 +43,11 @@ public class MezclaUI : MonoBehaviour
         // Si la UI de mezcla no está activa, no se realiza nada
         if (!gameObject.activeSelf) return;
 
+        if (UpgradeData.mezcladoRapido)
+        {
+            clicsNecesarios = 2;
+        }
+
         clicsActuales++;    // Incrementa el contador de clics
         // Calcula el progreso en forma de valor entre 0 y 1
         float progreso = (float)clicsActuales / clicsNecesarios;
