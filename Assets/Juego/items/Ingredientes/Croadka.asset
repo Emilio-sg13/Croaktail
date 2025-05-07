@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Croadka
   m_EditorClassIdentifier: 
   itemName: Croadka
-  sprite: {fileID: 21300000, guid: de66d86cba08c2f4e992c48b01e675b6, type: 3}
+  sprite: {fileID: 21300000, guid: 60e17652b54215044ba9e1e9cb8377cc, type: 3}
   slotsNeeded: 2
   precio: 0
   tipo: 0

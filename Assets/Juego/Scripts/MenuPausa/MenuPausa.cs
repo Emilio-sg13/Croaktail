@@ -49,7 +49,6 @@ public class MenuPausa : MonoBehaviour
     {
         Time.timeScale = 1f;
         GameManager.Instance.FinalizeGame();
-        MoneyManager.Instance.FinalizeMoney();
         pausado = false;
     }
 }
