@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MoneyManager : MonoBehaviour
 {
@@ -49,11 +48,5 @@ public class MoneyManager : MonoBehaviour
     {
         Ganancias = Mathf.Max(0, Ganancias - cost);
         Debug.Log("Comprar: Cost=" + cost + ", Ganancias ahora=" + Ganancias);
-    }
-
-    public void FinalizeMoney()
-    {
-       
-        Destroy(gameObject);
     }
 }

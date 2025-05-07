@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Azucar
   m_EditorClassIdentifier: 
   itemName: Azucar
-  sprite: {fileID: 21300000, guid: 85817ae715dc6534e9eeb3020df8919b, type: 3}
+  sprite: {fileID: 21300000, guid: 54a9268a65905e74da81b1f7b408cafd, type: 3}
   slotsNeeded: 1
   precio: 0
   tipo: 0
