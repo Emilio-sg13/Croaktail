@@ -25,6 +25,9 @@ public class MovimientoClientesMultiple : MonoBehaviour
     // Datos del cliente, incluidos los cócteles que puede pedir
     private ClientType clientType;
 
+    public GameObject standingModel;
+    public GameObject sittingModel;
+
     [SerializeField]
     private SpriteRenderer coctelRenderer; // Renderer para mostrar el sprite del cóctel pedido
 
@@ -60,6 +63,9 @@ public class MovimientoClientesMultiple : MonoBehaviour
 
     void Start()
     {
+        if (sittingModel != null) sittingModel.SetActive(false);
+        if (standingModel != null) standingModel.SetActive(true);
+
         // Validar que exista un PathManager en la escena
         if (PathManager.Instance == null)
         {
@@ -199,14 +205,21 @@ public class MovimientoClientesMultiple : MonoBehaviour
     /// </summary>
     private void PlayIdleSentado()
     {
+        // Disparamos la animación idle sentado
         animator?.SetTrigger("IdleSentado");
+
+        // Ahora intercambiamos las mallas
+        if (standingModel != null) standingModel.SetActive(false);
+        if (sittingModel != null) sittingModel.SetActive(true);
     }
+
 
     /// <summary>
     /// Dispara la animación de negación desde InteractuableConInventario.
     /// </summary>
     public void PlayNegacion()
     {
+        Debug.Log("aaaaaaaa");
         animator?.SetTrigger("Negacion");
     }
 
