@@ -89,6 +89,7 @@ public class InteractuableConInventario : MonoBehaviour
                     else
                     {
                         Debug.Log("Pedido incorrecto.");
+                        cliente.PlayNegacion();
                     }
                 }
                 break;

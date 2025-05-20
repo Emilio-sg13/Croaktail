@@ -11,15 +11,15 @@ public class Contador : MonoBehaviour
 
     void Update()
     {
+        // Formatear y mostrar minutos:segundos
         int minutos = Mathf.FloorToInt(tiempoRestante / 60);
         int segundos = Mathf.FloorToInt(tiempoRestante % 60);
         contadorTexto.text = string.Format("{0:00}:{1:00}", minutos, segundos);
 
-        if (tiempoRestante <= 0)
+        if (tiempoRestante <= 0f)
         {
-            minutos = 0;
-            segundos = 0;
-            contadorTexto.text = string.Format("{0:00}:{1:00}", minutos, segundos);
+            // Aseguramos 00:00
+            contadorTexto.text = "00:00";
 
             // Comprobamos si se ha alcanzado el objetivo al finalizar el contador
             int dineroConseguido = barraCobroUI.GetTotalActual();
@@ -28,21 +28,28 @@ public class Contador : MonoBehaviour
             if (dineroConseguido < dineroObjetivo)
             {
                 Debug.Log("No se cumplió el objetivo. Dinero conseguido: " + dineroConseguido);
-                // Redirigir a la pantalla de derrota
                 SceneManager.LoadScene("PantallaDerrota");
             }
             else
             {
                 Debug.Log("¡Objetivo cumplido! Dinero conseguido: " + dineroConseguido);
                 MoneyManager.Instance.IrTienda(dineroConseguido, dineroObjetivo);
-                // Procedemos a la tienda si se cumplió el objetivo
                 SceneManager.LoadScene("PantallaVictoria");
-
             }
         }
         else
         {
+            // Reducir el tiempo restante
             tiempoRestante -= Time.deltaTime;
         }
+    }
+
+    /// <summary>
+    /// Llama a este método desde el OnClick de un botón para reiniciar el tiempo a 20s.
+    /// </summary>
+    public void ResetearTiempo()
+    {
+        tiempoRestante = 20f;
+        Debug.Log("Tiempo restablecido a 20 segundos.");
     }
 }

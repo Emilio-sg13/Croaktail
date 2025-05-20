@@ -59,7 +59,7 @@ public class BarraCobroUI : MonoBehaviour
     /// </summary>
     public void SetTotalActualTo120()
     {
-        totalActual = 120;
+        totalActual += 120;
         texto.text = $"{totalActual}€ / {cuotaTotal}€";
         Debug.Log("totalActual establecido a 120.");
     }
