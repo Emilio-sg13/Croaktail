@@ -14,7 +14,7 @@ public class ClientGenerator : MonoBehaviour
 
     private float nextSpawnTime;
 
-    Quaternion rot = Quaternion.Euler(0, 90, 0);
+    Quaternion rot = Quaternion.Euler(0, 0, 0);
 
     void Start()
     {
