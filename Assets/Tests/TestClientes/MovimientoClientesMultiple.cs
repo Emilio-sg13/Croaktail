@@ -1,51 +1,66 @@
 using UnityEngine;
 
+/// <summary>
+/// Controla el movimiento de clientes a lo largo de varios puntos,
+/// así como la animación y visualización de pedidos de cócteles.
+/// </summary>
 public class MovimientoClientesMultiple : MonoBehaviour
 {
+    // Índices de los caminos por los que se desplaza el cliente
     private int[] pathIndices;
+    // Ancho en número de rutas que ocupa el cliente
     private int clientWidth = 1;
+    // Punto actual en el camino
     private int currentPoint = 0;
+    // Velocidad de movimiento
     private float speed = 2.0f;
+    // Distancia para considerar que se ha llegado a un punto
     private float reachDistance = 0.1f;
+    // Indica si el cliente ha llegado al final del trayecto
     private bool hasReachedEnd = false;
+    // Indica si el cliente ya se ha sentado
+    private bool hasSeated = false;
+    // Transform del punto objetivo actual
     private Transform targetPoint;
-    private ClientType clientType; // Referencia al tipo de cliente para obtener la lista de cócteles
+    // Datos del cliente, incluidos los cócteles que puede pedir
+    private ClientType clientType;
 
     [SerializeField]
-    public SpriteRenderer coctelRenderer; // Asigna este componente desde el Inspector
+    private SpriteRenderer coctelRenderer; // Renderer para mostrar el sprite del cóctel pedido
 
-    public item requestedCoctel;  // Nuevo campo para guardar el cóctel pedido
+    public item requestedCoctel;  // Guarda el cóctel que se ha pedido
 
+    // Referencia al Animator para controlar las animaciones
+    private Animator animator;
 
-    public int GetCurrentWidth()
-    {
-        return clientWidth;
-    }
+    /// <summary>
+    /// Devuelve el ancho del cliente en número de rutas.
+    /// </summary>
+    public int GetCurrentWidth() => clientWidth;
 
-    // Métodos para configurar el cliente externamente
-    public void SetPathIndices(int[] indices)
-    {
-        pathIndices = indices;
-    }
+    /// <summary>
+    /// Configura los índices de los caminos disponibles.
+    /// </summary>
+    public void SetPathIndices(int[] indices) => pathIndices = indices;
 
-    public void SetClientWidth(int width)
-    {
-        clientWidth = width;
-    }
+    /// <summary>
+    /// Ajusta el ancho del cliente (número de rutas que ocupa).
+    /// </summary>
+    public void SetClientWidth(int width) => clientWidth = width;
 
-    public void SetSpeed(float newSpeed)
-    {
-        speed = newSpeed;
-    }
+    /// <summary>
+    /// Establece la velocidad de movimiento del cliente.
+    /// </summary>
+    public void SetSpeed(float newSpeed) => speed = newSpeed;
 
-    public void SetClientType(ClientType type)
-    {
-        clientType = type;
-    }
+    /// <summary>
+    /// Asigna el tipo de cliente para determinar sus cócteles posibles.
+    /// </summary>
+    public void SetClientType(ClientType type) => clientType = type;
 
     void Start()
     {
-        // Asegurarse de que el PathManager existe
+        // Validar que exista un PathManager en la escena
         if (PathManager.Instance == null)
         {
             Debug.LogError("No hay PathManager en la escena");
@@ -53,120 +68,169 @@ public class MovimientoClientesMultiple : MonoBehaviour
             return;
         }
 
-        // Verificar que tenemos caminos asignados
-        if (pathIndices == null || pathIndices.Length == 0)
+        // Validar que se hayan asignado suficientes caminos
+        if (pathIndices == null || pathIndices.Length < clientWidth)
         {
-            Debug.LogError("No hay caminos asignados para este cliente");
+            Debug.LogError("Caminos no válidos para el cliente");
             enabled = false;
             return;
         }
 
-        // Verificar que tenemos suficientes caminos definidos para nuestro ancho
-        if (pathIndices.Length < clientWidth)
-        {
-            Debug.LogError("No hay suficientes caminos definidos para el ancho del cliente");
-            enabled = false;
-            return;
-        }
+        // Obtener el Animator del hijo que contiene el modelo 3D
+        animator = GetComponentInChildren<Animator>();
+        if (animator == null)
+            Debug.LogWarning("Animator no encontrado en el cliente o sus hijos.");
+        else
+            // Empezar en estado Idle (Walking = false)
+            animator.SetBool("Caminar", false);
 
-        // Ocultar el sprite del cóctel al inicio
+        // Ocultar al inicio el sprite del cóctel
         if (coctelRenderer != null)
-        {
             coctelRenderer.enabled = false;
-        }
 
-        // Inicializar el punto objetivo y ocupar el primer punto
+        // Iniciar la ocupación del primer punto
         UpdateTargetPoint();
         PathManager.Instance.OccupyMultipleHorizontal(pathIndices, currentPoint, clientWidth, gameObject);
     }
 
     void Update()
     {
+        // Si ya terminó o no hay punto objetivo, no hacer nada
         if (hasReachedEnd || targetPoint == null)
             return;
 
-        // Verificar si se ha llegado al punto actual
-        if (Vector3.Distance(transform.position, targetPoint.position) < reachDistance)
+        // Calcular distancia al punto objetivo
+        float dist = Vector3.Distance(transform.position, targetPoint.position);
+
+        // Animación de caminar: activo mientras no haya llegado al final
+        animator?.SetBool("Caminar", !hasReachedEnd);
+
+        // Si llegamos lo suficientemente cerca
+        if (dist < reachDistance)
         {
-            // Verificar si se llegó al final del camino
-            if (currentPoint + 1 >= PathManager.Instance.GetPathLength(pathIndices[0]))
+            int pathLength = PathManager.Instance.GetPathLength(pathIndices[0]);
+
+            /*// Sentarse si estamos en el penúltimo punto
+            if (!hasSeated && currentPoint == pathLength - 2)
+            {
+                hasSeated = true;
+                animator?.SetTrigger("Sentarse"); // Dispara animación Sentarse
+                // Tras la duración de Sentarse, cambiar a IdleSentado
+                Invoke(nameof(PlayIdleSentado), 1.5f); // Ajustar tiempo al clip real
+            }*/
+
+            // Si llegamos al final del camino
+            if (currentPoint + 1 >= pathLength)
             {
                 hasReachedEnd = true;
-                ShowRandomCoctel(); // Mostrar el cóctel al llegar al final
+                animator?.SetBool("Caminar", false);
+                ShowRandomCoctel(); // Mostrar sprite de cóctel
                 return;
             }
 
-            // Verificar si se puede avanzar al siguiente punto
-            if (!PathManager.Instance.CanOccupyMultipleHorizontal(pathIndices, currentPoint + 1, clientWidth, gameObject))
+            // Avanzar al siguiente punto si está libre
+            if (PathManager.Instance.CanOccupyMultipleHorizontal(pathIndices, currentPoint + 1, clientWidth, gameObject))
             {
-                return;
+                // Sentarse si estamos en el penúltimo punto
+                if (!hasSeated && currentPoint == pathLength - 2)
+                {
+                    hasSeated = true;
+                    animator?.SetTrigger("Sentarse"); // Dispara animación Sentarse
+                                                      // Tras la duración de Sentarse, cambiar a IdleSentado
+                    Invoke(nameof(PlayIdleSentado), 1.5f); // Ajustar tiempo al clip real
+                }
+                PathManager.Instance.ReleaseMultipleHorizontal(pathIndices, currentPoint, clientWidth);
+                currentPoint++;
+                PathManager.Instance.OccupyMultipleHorizontal(pathIndices, currentPoint, clientWidth, gameObject);
+                UpdateTargetPoint();
             }
-
-            // Liberar el punto actual, avanzar y ocupar el nuevo punto
-            PathManager.Instance.ReleaseMultipleHorizontal(pathIndices, currentPoint, clientWidth);
-            currentPoint++;
-            PathManager.Instance.OccupyMultipleHorizontal(pathIndices, currentPoint, clientWidth, gameObject);
-            UpdateTargetPoint();
+            else
+            {
+                animator?.SetBool("Caminar", false);
+            }
+            return;
         }
 
         // Moverse hacia el punto objetivo
-        Vector3 dir = targetPoint.position - transform.position;
-        transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+        Vector3 dir = (targetPoint.position - transform.position).normalized;
+        transform.Translate(dir * speed * Time.deltaTime, Space.World);
     }
 
+    /// <summary>
+    /// Actualiza el punto objetivo según el índice central del ancho.
+    /// </summary>
     private void UpdateTargetPoint()
     {
-        int centralPathIndex = pathIndices[clientWidth / 2];
-        targetPoint = PathManager.Instance.GetPathPoint(centralPathIndex, currentPoint);
+        int central = pathIndices[clientWidth / 2];
+        targetPoint = PathManager.Instance.GetPathPoint(central, currentPoint);
     }
 
-    // Método que se llama al llegar al final del camino para mostrar un cóctel aleatorio
+    /// <summary>
+    /// Elige al azar un cóctel pedido y lo muestra temporalmente.
+    /// </summary>
     public void ShowRandomCoctel()
     {
-        if (clientType != null && clientType.Cocteles != null && clientType.Cocteles.Count > 0)
+        if (clientType?.Cocteles == null || clientType.Cocteles.Count == 0)
+            return;
+
+        // Selección aleatoria de cóctel
+        item coctel = clientType.Cocteles[Random.Range(0, clientType.Cocteles.Count)];
+        requestedCoctel = coctel;
+
+        if (coctelRenderer != null)
         {
-            int randomIndex = Random.Range(0, clientType.Cocteles.Count);
-            item randomCoctel = clientType.Cocteles[randomIndex];
-            requestedCoctel = randomCoctel;
-            if (coctelRenderer != null)
-            {
-                coctelRenderer.sprite = randomCoctel.sprite;
-                coctelRenderer.enabled = true; // Activar el SpriteRenderer para mostrar el sprite
-                Invoke("HideCoctelRenderer", 5f); // Invoca el método para desactivar después de 5 segundos
-            }
+            coctelRenderer.sprite = coctel.sprite;
+            coctelRenderer.enabled = true;
+            Invoke(nameof(HideCoctelRenderer), 5f); // Ocultar tras 5s
         }
     }
 
-    // Agregamos OnMouseEnter y OnMouseExit para que el render se muestre mientras el cursor esté encima.
+    /// <summary>
+    /// Oculta el SpriteRenderer del cóctel.
+    /// </summary>
+    private void HideCoctelRenderer()
+    {
+        if (coctelRenderer != null)
+            coctelRenderer.enabled = false;
+    }
+
+    /// <summary>
+    /// Dispara el trigger IdleSentado en el Animator.
+    /// </summary>
+    private void PlayIdleSentado()
+    {
+        animator?.SetTrigger("IdleSentado");
+    }
+
+    /// <summary>
+    /// Dispara la animación de negación desde InteractuableConInventario.
+    /// </summary>
+    public void PlayNegacion()
+    {
+        animator?.SetTrigger("Negacion");
+    }
+
+    // Mostrar cóctel mientras el cursor esté encima
     void OnMouseEnter()
     {
         if (coctelRenderer != null)
         {
-            // Cancelamos el Invoke si está programado para ocultar el sprite.
-            CancelInvoke("HideCoctelRenderer");
+            CancelInvoke(nameof(HideCoctelRenderer));
             coctelRenderer.enabled = true;
         }
     }
 
+    // Ocultar cóctel cuando el cursor sale
     void OnMouseExit()
     {
         if (coctelRenderer != null)
-        {
             coctelRenderer.enabled = false;
-        }
     }
 
-    // Método que desactiva el SpriteRenderer
-    private void HideCoctelRenderer()
-    {
-        coctelRenderer.enabled = false;
-    }
-
+    // Liberar puntos al destruir el objeto
     void OnDestroy()
     {
         if (PathManager.Instance != null && !hasReachedEnd)
-        {
             PathManager.Instance.ReleaseMultipleHorizontal(pathIndices, currentPoint, clientWidth);
-        }
     }
 }
