@@ -14,6 +14,7 @@ public class MenuPausa : MonoBehaviour
         //menuPausa.SetActive(false);
     }
 
+    /*
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -27,7 +28,7 @@ public class MenuPausa : MonoBehaviour
                 PausarJuego();
             }
         }
-    }
+    }*/
 
     public void PausarJuego()
     {
