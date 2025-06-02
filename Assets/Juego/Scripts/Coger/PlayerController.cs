@@ -3,8 +3,11 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    //[Tooltip("Velocidad de desplazamiento en unidades por segundo")]
     public float velocidad = 5f;
-    public float reachThreshold = 0.1f; // Distancia para detenerse
+    //[Tooltip("Distancia mínima al destino para detenerse")]
+    public float distanciaDetencion = 0.1f;
+
     private Vector3 destino;
     private bool moviendo = false;
     private CharacterController controller;
@@ -13,40 +16,35 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         if (controller == null)
-        {
             Debug.LogError("El jugador no tiene un CharacterController asignado.");
-        }
     }
 
     void Update()
     {
-        if (moviendo)
+        if (!moviendo)
+            return;
+
+        // Calcula la dirección y la distancia al destino
+        Vector3 offset = destino - transform.position;
+        float distance = offset.magnitude;
+
+        // Si estamos suficientemente cerca, dejamos de movernos
+        if (distance < distanciaDetencion)
         {
-            // Calcula la dirección hacia el destino
-            Vector3 direction = destino - transform.position;
-            float distance = direction.magnitude;
-            if (distance < reachThreshold)
-            {
-                moviendo = false;
-                return;
-            }
-
-            direction.Normalize();
-            // Movimiento a realizar este frame
-            Vector3 movimiento = direction * velocidad * Time.deltaTime;
-
-            // Evitar sobrepasar el destino
-            if (movimiento.magnitude > distance)
-            {
-                movimiento = direction * distance;
-            }
-
-            // Mueve el personaje; CharacterController gestiona las colisiones
-            controller.Move(movimiento);
+            moviendo = false;
+            return;
         }
+
+        // Dirección normalizada hacia el destino
+        Vector3 direction = offset.normalized;
+
+        // SimpleMove aplica la gravedad internamente y mueve con velocidad (m/s)
+        controller.SimpleMove(direction * velocidad);
     }
 
-    // Establece el destino y activa el movimiento
+    /// <summary>
+    /// Establece un nuevo destino y activa el movimiento.
+    /// </summary>
     public void MoverHacia(Vector3 posicionDestino)
     {
         destino = posicionDestino;
