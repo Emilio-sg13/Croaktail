@@ -14,6 +14,7 @@ TagManager:
   - finalizar
   - siguiente
   - MostrarMejora
+  - PauseButton
   layers:
   - Default
   - TransparentFX

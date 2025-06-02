@@ -1366,7 +1366,7 @@ GameObject:
   - component: {fileID: 200276006}
   m_Layer: 5
   m_Name: BotonPausa
-  m_TagString: Untagged
+  m_TagString: PauseButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4076,8 +4076,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deaee1a792238264fbb97507bfbb1b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botonPausa: {fileID: 200276005}
-  pausado: 0
 --- !u!1001 &882522074
 PrefabInstance:
   m_ObjectHideFlags: 0
