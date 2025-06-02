@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Juego/prefabs/Mezclador.fbx.meta
 guid: 0aa939d4373c8b94f91d0f4b111d5925
+========
+guid: b1f2a4fe4ae2ac44a97c391e9a2a1eff
+>>>>>>>> Stashed changes:Assets/Juego/prefabs/糖.fbx.meta
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []

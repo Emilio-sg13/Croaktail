@@ -1,12 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
-
 public class InteractableItem : MonoBehaviour
 {
-    // Referencia al gestor del inventario y al jugador (cápsula)
+    public ParticleSystem efectoChispas;  // æ‹–å…¥ç«èŠ±ç²’å­é¢„åˆ¶ä½“
+
+
+    // Referencia al gestor del inventario y al jugador (cé†¦sula)
     public InventoryManager2 inventario;
     public PlayerController jugador;
-    // Distancia mínima para considerar que el jugador "ha llegado" al objeto
+    // Distancia méŸ“ima para considerar que el jugador "ha llegado" al objeto
     public float distanciaRecogida = 0.5f;
 
     // Referencia al ScriptableObject que define este item (configurable para cada objeto)
@@ -14,7 +16,7 @@ public class InteractableItem : MonoBehaviour
 
 
 
-    // Al hacer clic sobre el objeto (asegúrate de que el collider esté configurado y que haya un Physics Raycaster en la cámara)
+    // Al hacer clic sobre el objeto (asegé·•ate de que el collider est?configurado y que haya un Physics Raycaster en la cé†¡ara)
     void OnMouseDown()
     {
 
@@ -26,17 +28,19 @@ public class InteractableItem : MonoBehaviour
 
     IEnumerator ComprobarRecogida()
     {
-        // Espera hasta que el jugador esté lo suficientemente cerca
+        // Espera hasta que el jugador est?lo suficientemente cerca
         while (Vector3.Distance(jugador.transform.position, transform.position) > distanciaRecogida)
         {
             yield return null;
         }
-        // Intenta añadir el objeto al inventario usando la información del ScriptableObject
-        bool añadido = inventario.TryAddItem(itemData);
-        if (añadido)
+        // Intenta aÃ±adido el objeto al inventario usando la informacié«‡ del ScriptableObject
+        bool aÃ±adido = inventario.TryAddItem(itemData);
+        if (aÃ±adido)
         {
-            // Aquí se puede agregar una animación o efecto extra al recoger el objeto.
             Debug.Log("Ingrediente recogido.");
+            Instantiate(efectoChispas, transform.position, Quaternion.identity);
+
         }
+
     }
 }
