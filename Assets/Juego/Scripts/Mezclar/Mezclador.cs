@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -9,44 +9,49 @@ public class Mezclador : MonoBehaviour
     public List<HuecoBarra> huecosIngredientes;
     // Transform del jugador para moverlo hacia el mezclador
     public Transform player;
-    // Distancia máxima para iniciar la acción de mezcla
+    // Distancia mÃ¡xima para iniciar la acciÃ³n de mezcla
     public float distanciaMaxima = 2f;
     // Referencia al inventario (por ejemplo, InventoryManager2)
     public InventoryManager2 inventario;
     // Referencia a la UI de mezcla que contiene el slider y el texto
     public MezclaUI mezclaUI;
-    // Objeto donde se mostrará el cóctel si el inventario está lleno (por ejemplo, barra de salida)
+    // Objeto donde se mostrarÃ¡ el cÃ³ctel si el inventario estÃ¡ lleno (por ejemplo, barra de salida)
     public GameObject barraSalida;
-    // Lista de recetas para determinar el cóctel resultante
+    // Lista de recetas para determinar el cÃ³ctel resultante
     public List<CoctelReceta> recetas;
 
-    // Bandera para controlar que el proceso de mezcla no se dispare varias veces simultáneamente
+    // ðŸ”¥ NUEVO: Referencia al efecto de chispas (drag desde el inspector)
+    public ParticleSystem efectoChispas;
+
+    // ðŸ”¥ NUEVO: PosiciÃ³n en la UI donde deben aparecer las chispas
+    public Transform puntoChispaUI;
+    // Bandera para controlar que el proceso de mezcla no se dispare varias veces simulté†¤eamente
     private bool mezclando = false;
 
     /// <summary>
-    /// Al hacer clic (botón izquierdo) en el mezclador, se ordena que el jugador se mueva hacia él y se inicia la rutina.
+    /// Al hacer clic (botton izquierdo) en el mezclador, se ordena que el jugador se mueva hacia é–˜ y se inicia la rutina.
     /// </summary>
     void OnMouseDown()
     {
-        // Evita la acción si faltan referencias o ya se está mezclando
+        // Evita la accion si faltan referencias o ya se est?mezclando
         if (player == null || inventario == null || mezclando)
             return;
 
-        // Ordena al PlayerController mover al jugador hacia la posición del mezclador
+        // Ordena al PlayerController mover al jugador hacia la posicié«‡ del mezclador
         PlayerController pc = player.GetComponent<PlayerController>();
         if (pc != null)
         {
             pc.MoverHacia(transform.position);
         }
 
-        // Inicia la coroutine que espera a que el jugador esté en rango para proceder
+        // Inicia la coroutine que espera a que el jugador est?en rango para proceder
         StartCoroutine(EsperarYMezclar());
     }
 
     /// <summary>
-    /// Coroutine que espera hasta que el jugador esté dentro de la distancia permitida.
-    /// Si la UI de mezcla (slider) no está activa, inicia el proceso de mezcla.
-    /// Si ya está activa, no hace nada (ahora se capturarán clics con el botón derecho en Update).
+    /// Coroutine que espera hasta que el jugador est?dentro de la distancia permitida.
+    /// Si la UI de mezcla (slider) no est?activa, inicia el proceso de mezcla.
+    /// Si ya est?activa, no hace nada (ahora se capturaré†¤ clics con el botton derecho en Update).
     /// </summary>
     IEnumerator EsperarYMezclar()
     {
@@ -56,7 +61,7 @@ public class Mezclador : MonoBehaviour
             yield return null;
         }
 
-        // Si la UI de mezcla NO está activa, inicia el proceso de mezcla
+        // Si la UI de mezcla NO est?activa, inicia el proceso de mezcla
         if (!mezclaUI.gameObject.activeSelf)
         {
             // Recopila los ingredientes depositados en los huecos
@@ -88,11 +93,11 @@ public class Mezclador : MonoBehaviour
             // Inicia el slider de mezcla e indica el callback a ejecutar al completarse
             mezclaUI.IniciarProgreso(() =>
             {
-                // Al completarse la mezcla, se obtiene el cóctel resultante a partir de los ingredientes
+                // Al completarse la mezcla, se obtiene el cÃ³cteles resultante a partir de los ingredientes
                 item coctel = ObtenerCoctel(ingredientes);
                 if (coctel != null)
                 {
-                    // Si se activa la actualización doble, se intenta añadir dos cócteles
+                    // Si se activa la actualizacion doble, se intenta anadir dos cÃ³cteles
                     if (UpgradeData.coctelesDobles)
                     {
                         bool addedPrimer = inventario.TryAddItem(coctel);
@@ -100,73 +105,87 @@ public class Mezclador : MonoBehaviour
 
                         if (addedPrimer && addedSegundo)
                         {
-                            Debug.Log("Dos cócteles añadidos al inventario.");
+                            Debug.Log("Dos cÃ³cteles aÃ±adidos al inventario.");
                         }
                         else if (addedPrimer && !addedSegundo)
                         {
-                            Debug.Log("Primer cóctel añadido, pero el inventario estaba lleno para el segundo cóctel.");
-                            // Se muestra el segundo cóctel en la barra de salida
+                            Debug.Log("Primer cÃ³ctel aÃ±adido, pero el inventario estaba lleno para el segundo cÃ³ctel.");
+                            // Se muestra el segundo cÃ³cteles en la barra de salida
                             SpriteRenderer sr = barraSalida.GetComponent<SpriteRenderer>();
                             sr.sprite = coctel.sprite;
-                            Debug.Log("Segundo cóctel depositado en la barra.");
+                            Debug.Log("Segundo cÃ³ctel depositado en la barra.");
                         }
                         else if (!addedPrimer)
                         {
                             // Si ni el primero ni el segundo se pueden agregar, se deposita al menos uno en la barra de salida
                             SpriteRenderer sr = barraSalida.GetComponent<SpriteRenderer>();
                             sr.sprite = coctel.sprite;
-                            Debug.Log("Inventario lleno. Cócteles depositados en la barra.");
+                            Debug.Log("Inventario lleno. Céª³teles depositados en la barra.");
                         }
                     }
                     else
                     {
-                        // Flujo original: se añade un solo cóctel
+                        // Flujo original: se anade un solo cÃ³cteles
                         bool added = inventario.TryAddItem(coctel);
                         if (added)
                         {
-                            Debug.Log("Cóctel añadido al inventario.");
+                            Debug.Log("cÃ³ctele anadido al inventario.");
                         }
                         else
                         {
                             SpriteRenderer sr = barraSalida.GetComponent<SpriteRenderer>();
                             sr.sprite = coctel.sprite;
-                            Debug.Log("Inventario lleno. Cóctel depositado en la barra.");
+                            Debug.Log("Inventario lleno. cÃ³cteles depositado en la barra.");
                         }
+                    }
+
+                    // âœ… NUEVOï¼šReproducir efecto de chispas en la UI
+                    if (efectoChispas != null && puntoChispaUI != null)
+                    {
+                        Instantiate(efectoChispas, puntoChispaUI.position, Quaternion.identity);
                     }
                 }
                 else
                 {
-                    Debug.Log("No se ha creado ningún cóctel.");
+                    Debug.Log("No se ha creado ningÃºn cÃ³ctel.");
                 }
                 mezclando = false; // Finaliza el proceso de mezcla
             });
 
-
-            mezclando = true; // Marca que se inició la mezcla
+            mezclando = true; // Marca que se inici?la mezcla
         }
-        // Si la UI de mezcla ya está activa, se deja que el Update capture el clic derecho
+        // Si la UI de mezcla ya est?activa, se deja que el Update capture el clic derecho
         yield break;
     }
 
+
     /// <summary>
     /// En Update se captura el clic derecho para incrementar el slider de mezcla
-    /// siempre que el proceso de mezcla esté activo y la UI de mezcla se encuentre visible.
+    /// siempre que el proceso de mezcla est?activo y la UI de mezcla se encuentre visible.
     /// </summary>
     void Update()
     {
         if (mezclando && mezclaUI.gameObject.activeSelf && Input.GetMouseButtonDown(1))
         {
-            // El botón derecho (Input.GetMouseButtonDown(1)) incrementa el progreso de la mezcla
             mezclaUI.ClicMezclar();
+
+            if (efectoChispas != null)
+            {
+                efectoChispas.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                efectoChispas.Play();
+                Debug.Log("ðŸ”¥ Chispa reproducida al hacer clic derecho");
+            }
         }
     }
 
+
+
     /// <summary>
-    /// Recorre la lista de recetas y devuelve el cóctel resultante que coincida con la combinación de ingredientes.
+    /// Recorre la lista de recetas y devuelve el céª³tel resultante que coincida con la combinacié«‡ de ingredientes.
     /// Si no se encuentra ninguna coincidencia, devuelve null.
     /// </summary>
     /// <param name="ingredientes">Lista de ingredientes depositados.</param>
-    /// <returns>El cóctel resultante o null.</returns>
+    /// <returns>El cÃ³ctele resultante o null.</returns>
     item ObtenerCoctel(List<item> ingredientes)
     {
         foreach (CoctelReceta receta in recetas)
