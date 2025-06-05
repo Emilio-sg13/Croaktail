@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 549bd1fe595695d4a9f7f535e8e46cd7
+guid: 591774b28c9d8e74090f6943e617e513
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: MezclarRana
+      name: Take 001
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 0
-      lastFrame: 30
+      firstFrame: 159
+      lastFrame: 180
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
