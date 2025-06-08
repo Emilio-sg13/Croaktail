@@ -270,8 +270,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deaee1a792238264fbb97507bfbb1b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botonPausa: {fileID: 0}
-  pausado: 0
 --- !u!114 &420260160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,8 +443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deaee1a792238264fbb97507bfbb1b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botonPausa: {fileID: 0}
-  pausado: 0
 --- !u!1 &1066984647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,8 +1365,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deaee1a792238264fbb97507bfbb1b67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botonPausa: {fileID: 0}
-  pausado: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
