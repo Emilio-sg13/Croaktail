@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 4064233068124968305}
   - component: {fileID: 2650451492243629943}
   - component: {fileID: 5915720845611153435}
+  - component: {fileID: 3909784734487294749}
   m_Layer: 0
   m_Name: ClienteTortuga
   m_TagString: cliente
@@ -114,14 +115,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6773783403117849110}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1787095116713137128}
   - {fileID: 7844120108297021362}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &4064233068124968305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,10 +136,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52992c5660a4273429d5f0a1d33cec2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  standingModel: {fileID: 0}
-  sittingModel: {fileID: 0}
   coctelRenderer: {fileID: 1688756085773918192}
   requestedCoctel: {fileID: 0}
+  modeloDePie: {fileID: 0}
+  modeloSentado: {fileID: 0}
 --- !u!114 &2650451492243629943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,3 +178,109 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &3909784734487294749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6773783403117849110}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0851b83e3b83e8d409d6e9f8a84e3d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coctelRenderer: {fileID: 1688756085773918192}
+  requestedCoctel: {fileID: 0}
+--- !u!1001 &2253964714318558211
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1559216459772734018}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: aab6bf7dd95dfb145989d69845908490, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.000017499999
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aab6bf7dd95dfb145989d69845908490, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.9524384
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aab6bf7dd95dfb145989d69845908490, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.071297966
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aab6bf7dd95dfb145989d69845908490, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aab6bf7dd95dfb145989d69845908490, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aab6bf7dd95dfb145989d69845908490, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aab6bf7dd95dfb145989d69845908490, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aab6bf7dd95dfb145989d69845908490, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aab6bf7dd95dfb145989d69845908490, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: aab6bf7dd95dfb145989d69845908490, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aab6bf7dd95dfb145989d69845908490, type: 3}
+      propertyPath: m_Name
+      value: "Todo Animaci\xF3n de tortuga"
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aab6bf7dd95dfb145989d69845908490, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7714187415986181272}
+  m_SourcePrefab: {fileID: 100100000, guid: aab6bf7dd95dfb145989d69845908490, type: 3}
+--- !u!1 &1407050694341806418 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: aab6bf7dd95dfb145989d69845908490, type: 3}
+  m_PrefabInstance: {fileID: 2253964714318558211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7714187415986181272
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407050694341806418}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e7422a9cec90f0f47a84394b6c9a0213, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &1787095116713137128 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: aab6bf7dd95dfb145989d69845908490, type: 3}
+  m_PrefabInstance: {fileID: 2253964714318558211}
+  m_PrefabAsset: {fileID: 0}

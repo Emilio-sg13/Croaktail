@@ -15,7 +15,7 @@ public class ClientGenerator : MonoBehaviour
     private float nextSpawnTime;
 
 
-    Quaternion rot = Quaternion.Euler(0, 90, 0);
+    //Quaternion rot = Quaternion.Euler(0, 0, 0);
 
     void Start()
     {
@@ -47,7 +47,7 @@ public class ClientGenerator : MonoBehaviour
             return; // No hay caminos disponibles
 
         // Crear el cliente
-        GameObject client = Instantiate(selectedType.clientPrefab, spawnPoint.position, rot); //Instantiate(selectedType.clientPrefab, spawnPoint.position, spawnPoint.rotation);  //Instantiate(selectedType.clientPrefab, spawnPoint.position, Quaternion.identity);
+        GameObject client = Instantiate(selectedType.clientPrefab, spawnPoint.position, spawnPoint.rotation); //Instantiate(selectedType.clientPrefab, spawnPoint.position, spawnPoint.rotation);  //Instantiate(selectedType.clientPrefab, spawnPoint.position, Quaternion.identity);
 
         // Configurar el componente de movimiento
         MovimientoClientesMultiple movement = client.GetComponent<MovimientoClientesMultiple>();

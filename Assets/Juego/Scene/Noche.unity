@@ -4211,6 +4211,14 @@ PrefabInstance:
       value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 8644479944350369584, guid: 7ea9d4b3b3602e9498808cd28ea024a6, type: 3}
+      propertyPath: clientTypes.Array.data[1].spawnWeight
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644479944350369584, guid: 7ea9d4b3b3602e9498808cd28ea024a6, type: 3}
+      propertyPath: clientTypes.Array.data[2].spawnWeight
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644479944350369584, guid: 7ea9d4b3b3602e9498808cd28ea024a6, type: 3}
       propertyPath: clientTypes.Array.data[3].spawnWeight
       value: 0.1
       objectReference: {fileID: 0}
