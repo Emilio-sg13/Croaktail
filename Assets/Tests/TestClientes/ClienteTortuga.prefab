@@ -99,7 +99,6 @@ GameObject:
   - component: {fileID: 4064233068124968305}
   - component: {fileID: 2650451492243629943}
   - component: {fileID: 5915720845611153435}
-  - component: {fileID: 3909784734487294749}
   m_Layer: 0
   m_Name: ClienteTortuga
   m_TagString: cliente
@@ -138,8 +137,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coctelRenderer: {fileID: 1688756085773918192}
   requestedCoctel: {fileID: 0}
-  modeloDePie: {fileID: 0}
-  modeloSentado: {fileID: 0}
 --- !u!114 &2650451492243629943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,20 +175,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &3909784734487294749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6773783403117849110}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0851b83e3b83e8d409d6e9f8a84e3d04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coctelRenderer: {fileID: 1688756085773918192}
-  requestedCoctel: {fileID: 0}
 --- !u!1001 &2253964714318558211
 PrefabInstance:
   m_ObjectHideFlags: 0
