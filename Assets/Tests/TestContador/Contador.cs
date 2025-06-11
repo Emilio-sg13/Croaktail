@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement; // Para cambiar de escena
 
@@ -27,12 +27,12 @@ public class Contador : MonoBehaviour
 
             if (dineroConseguido < dineroObjetivo)
             {
-                Debug.Log("No se cumpli� el objetivo. Dinero conseguido: " + dineroConseguido);
+                Debug.Log("No se cumpli?el objetivo. Dinero conseguido: " + dineroConseguido);
                 SceneManager.LoadScene("PantallaDerrota");
             }
             else
             {
-                Debug.Log("�Objetivo cumplido! Dinero conseguido: " + dineroConseguido);
+                Debug.Log("bjetivo cumplido! Dinero conseguido: " + dineroConseguido);
                 MoneyManager.Instance.IrTienda(dineroConseguido, dineroObjetivo);
                 SceneManager.LoadScene("PantallaVictoria");
             }
@@ -45,11 +45,14 @@ public class Contador : MonoBehaviour
     }
 
     /// <summary>
-    /// Llama a este m�todo desde el OnClick de un bot�n para reiniciar el tiempo a 20s.
+    /// Llama a este m閠odo desde el OnClick de un bot髇 para reiniciar el tiempo a 20s.
     /// </summary>
     public void ResetearTiempo()
     {
         tiempoRestante = 20f;
         Debug.Log("Tiempo restablecido a 20 segundos.");
+
+        // 🔥 切换到快节奏 BGM
+        FindFirstObjectByType<BGMController>()?.SaltarUltimos20Segundos();
     }
 }

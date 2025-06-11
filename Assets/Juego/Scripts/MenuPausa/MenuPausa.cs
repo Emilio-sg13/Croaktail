@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -8,11 +8,14 @@ public class MenuPausa : MonoBehaviour
     private string escenaOriginal;
 
     /// <summary>
-    /// Llamar desde el botón de pausa (Scene principal).  
+    /// Llamar desde el boté«‡ de pausa (Scene principal).  
     /// </summary>
     public void PausarJuego()
     {
-        // 1) Deshabilita el botón de pausa usando su Tag
+
+        FindFirstObjectByType<BGMController>()?.PausarMusica(); // ğŸµ æš‚åœéŸ³ä¹
+
+        // 1) Deshabilita el boté«‡ de pausa usando su Tag
         GameObject btn = GameObject.FindWithTag("PauseButton");
         if (btn != null)
         {
@@ -20,7 +23,7 @@ public class MenuPausa : MonoBehaviour
             if (b != null) b.interactable = false;
         }
 
-        // 2) Guarda la escena actual y carga el menú de pausa de forma aditiva
+        // 2) Guarda la escena actual y carga el men?de pausa de forma aditiva
         escenaOriginal = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene("MenuPausa", LoadSceneMode.Additive);
 
@@ -30,11 +33,14 @@ public class MenuPausa : MonoBehaviour
     }
 
     /// <summary>
-    /// Llamar desde el botón “Reanudar” en la escena MenuPausa.  
+    /// Llamar desde el boté«‡ æœeanudar?en la escena MenuPausa.  
     /// </summary>
     public void ReanudarJuego()
     {
-        // 1) Reactiva el botón de pausa en la escena principal usando su Tag
+
+        FindFirstObjectByType<BGMController>()?.ReanudarMusica(); // ğŸµ ç»§ç»­éŸ³ä¹
+
+        // 1) Reactiva el boté«‡ de pausa en la escena principal usando su Tag
         GameObject btn = GameObject.FindWithTag("PauseButton");
         if (btn != null)
         {
@@ -49,11 +55,11 @@ public class MenuPausa : MonoBehaviour
     }
 
     /// <summary>
-    /// Llamar desde el botón “Ir al menú” en la escena MenuPausa.  
+    /// Llamar desde el boté«‡ æ‘r al mené·¶ en la escena MenuPausa.  
     /// </summary>
     public void IrAlMenu()
     {
-        // Asegura que el juego esté reanudado antes de cambiar de escena
+        // Asegura que el juego est?reanudado antes de cambiar de escena
         Time.timeScale = 1f;
         GameManager.Instance.FinalizeGame();
         MoneyManager.Instance.FinalizeMoney();
