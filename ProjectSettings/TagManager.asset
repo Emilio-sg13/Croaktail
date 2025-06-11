@@ -15,6 +15,7 @@ TagManager:
   - siguiente
   - MostrarMejora
   - PauseButton
+  - Audio
   layers:
   - Default
   - TransparentFX

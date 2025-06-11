@@ -14,6 +14,13 @@ public class ClientGenerator : MonoBehaviour
 
     private float nextSpawnTime;
 
+//Activación del AudioManager para poder utilizar el SFX del cliente cuando entra el bar
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+	audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     //Quaternion rot = Quaternion.Euler(0, 0, 0);
 
@@ -48,6 +55,12 @@ public class ClientGenerator : MonoBehaviour
 
         // Crear el cliente
         GameObject client = Instantiate(selectedType.clientPrefab, spawnPoint.position, spawnPoint.rotation); //Instantiate(selectedType.clientPrefab, spawnPoint.position, spawnPoint.rotation);  //Instantiate(selectedType.clientPrefab, spawnPoint.position, Quaternion.identity);
+
+        //REPRODUCIR SFX CUANDO APARECE UN NUEVO CLIENTE
+        if (audioManager != null)
+        {
+            audioManager.PlaySFX(audioManager.entraCliente);
+        }
 
         // Configurar el componente de movimiento
         MovimientoClientesMultiple movement = client.GetComponent<MovimientoClientesMultiple>();
