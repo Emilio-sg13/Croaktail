@@ -26,35 +26,53 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            // Permite que el GameManager persista a través de las escenas.
             DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
-
-
     }
 
     /// <summary>
     /// Llamado cuando se pulsa el botón de tag "inicio" en el MainMenu.
     /// Reinicia el contador de noches y carga la escena "Noche".
     /// </summary>
+    /// <summary>
+    /// Llamado cuando se pulsa el botón de tag "inicio" en el MainMenu.
+    /// Reinicia el contador de noches y carga la escena "Tutorial".
+    /// </summary>
     public void StartGame()
     {
         nightCounter = 1;
+        // Cargar escena de tutorial antes de la primera noche
+        SceneManager.LoadScene("Tutorial");
+    }
+
+    /// <summary>
+    /// Llamar al finalizar la escena de Tutorial para iniciar la primera noche.
+    /// </summary>
+    public void CompleteTutorial()
+    {
+        // Carga la primera noche tras el tutorial
         SceneManager.LoadScene("Noche");
     }
 
     /// <summary>
-    /// Llamado cuando se pulsa el botón de tag "finalizar" (disponible en varias escenas).
-    /// Puede, por ejemplo, llevar al MainMenu o cerrar el juego.
-    /// En este ejemplo se destruye el GameManager.
+    /// Reinicia el juego completamente: resetea noches y vuelve a Noche sin destruir el GameManager.
+    /// </summary>
+    public void RestartGame()
+    {
+        nightCounter = 1;                  // Volver a nivel 1
+        SceneManager.LoadScene("Noche"); // Recargar la escena Noche
+    }
+
+    /// <summary>
+    /// Llamado cuando se pulsa el botón de tag "finalizar".
+    /// Carga el menú principal y destruye el GameManager para permitir un inicio limpio.
     /// </summary>
     public void FinalizeGame()
     {
-        // Puedes realizar otras acciones aquí, como guardar el progreso o mostrar una pantalla final.
         SceneManager.LoadScene("MenuPrincipal");
         Destroy(gameObject);
     }

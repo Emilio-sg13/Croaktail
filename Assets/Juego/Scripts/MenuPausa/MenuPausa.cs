@@ -8,14 +8,14 @@ public class MenuPausa : MonoBehaviour
     private string escenaOriginal;
 
     /// <summary>
-    /// Llamar desde el bot髇 de pausa (Scene principal).  
+    /// Llamar desde el boton de pausa (Scene principal).  
     /// </summary>
     public void PausarJuego()
     {
 
-        FindFirstObjectByType<BGMController>()?.PausarMusica(); // 🎵 暂停音乐
+        FindFirstObjectByType<BGMController>()?.PausarMusica(); 
 
-        // 1) Deshabilita el bot髇 de pausa usando su Tag
+        // 1) Deshabilita el boton de pausa usando su Tag
         GameObject btn = GameObject.FindWithTag("PauseButton");
         if (btn != null)
         {
@@ -23,7 +23,7 @@ public class MenuPausa : MonoBehaviour
             if (b != null) b.interactable = false;
         }
 
-        // 2) Guarda la escena actual y carga el men?de pausa de forma aditiva
+        // 2) Guarda la escena actual y carga el menu de pausa de forma aditiva
         escenaOriginal = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene("MenuPausa", LoadSceneMode.Additive);
 
@@ -33,14 +33,14 @@ public class MenuPausa : MonoBehaviour
     }
 
     /// <summary>
-    /// Llamar desde el bot髇 揜eanudar?en la escena MenuPausa.  
+    /// Llamar desde el boton reanudar en la escena MenuPausa.  
     /// </summary>
     public void ReanudarJuego()
     {
 
-        FindFirstObjectByType<BGMController>()?.ReanudarMusica(); // 🎵 继续音乐
+        FindFirstObjectByType<BGMController>()?.ReanudarMusica(); 
 
-        // 1) Reactiva el bot髇 de pausa en la escena principal usando su Tag
+        // 1) Reactiva el boton de pausa en la escena principal usando su Tag
         GameObject btn = GameObject.FindWithTag("PauseButton");
         if (btn != null)
         {
@@ -55,7 +55,7 @@ public class MenuPausa : MonoBehaviour
     }
 
     /// <summary>
-    /// Llamar desde el bot髇 揑r al men鷶 en la escena MenuPausa.  
+    /// Llamar desde el boton al menu en la escena MenuPausa.  
     /// </summary>
     public void IrAlMenu()
     {
