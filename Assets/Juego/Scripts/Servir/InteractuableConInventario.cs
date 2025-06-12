@@ -81,7 +81,7 @@ public class InteractuableConInventario : MonoBehaviour
                             BarraCobroUI barra = barraUIObj.GetComponent<BarraCobroUI>();
                             if (barra != null)
                             {
-                                barra.A馻dirDinero(valorOriginal);
+                                barra.AñadirDinero(valorOriginal);
                             }
                         }
 
