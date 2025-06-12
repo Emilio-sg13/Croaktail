@@ -7,14 +7,14 @@ public class MovimientoClientesMultiple : MonoBehaviour
     private int currentPoint = 0;
     private float speed = 2.0f;
     private float reachDistance = 0.1f;
-    private bool hasReachedEnd = false;
+    public bool hasReachedEnd = false;
     private Transform targetPoint;
-    private ClientType clientType; // Referencia al tipo de cliente para obtener la lista de cócteles
+    private ClientType clientType; // Referencia al tipo de cliente para obtener la lista de cï¿½cteles
 
     [SerializeField]
     public SpriteRenderer coctelRenderer; // Asigna este componente desde el Inspector
 
-    public item requestedCoctel;  // Nuevo campo para guardar el cóctel pedido
+    public item requestedCoctel;  // Nuevo campo para guardar el cï¿½ctel pedido
 
     // Animator para controlar las animaciones
     private Animator animator;
@@ -33,7 +33,7 @@ public class MovimientoClientesMultiple : MonoBehaviour
         return clientWidth;
     }
 
-    // Métodos para configurar el cliente externamente
+    // Mï¿½todos para configurar el cliente externamente
     public void SetPathIndices(int[] indices)
     {
         pathIndices = indices;
@@ -86,7 +86,7 @@ public class MovimientoClientesMultiple : MonoBehaviour
             return;
         }
 
-        // Ocultar el sprite del cóctel al inicio
+        // Ocultar el sprite del cï¿½ctel al inicio
         if (coctelRenderer != null)
         {
             coctelRenderer.enabled = false;
@@ -99,7 +99,7 @@ public class MovimientoClientesMultiple : MonoBehaviour
 
     void Update()
     {
-        // Verificar si el juego está en pausa
+        // Verificar si el juego estï¿½ en pausa
         CheckPauseState();
         
         if (hasReachedEnd || targetPoint == null)
@@ -111,15 +111,15 @@ public class MovimientoClientesMultiple : MonoBehaviour
         // Verificar si se ha llegado al punto actual
         if (Vector3.Distance(transform.position, targetPoint.position) < reachDistance)
         {
-            // Verificar si se llegó al final del camino
+            // Verificar si se llegï¿½ al final del camino
             if (currentPoint + 1 >= PathManager.Instance.GetPathLength(pathIndices[0]))
             {
                 hasReachedEnd = true;
                 HandleMovementAudio(false);
                 animator?.SetTrigger("Sentarse");
-                Invoke(nameof(PlayIdleSentado), 15f); // Ajusta este tiempo a la duración real de Sentarse
+                Invoke(nameof(PlayIdleSentado), 15f); // Ajusta este tiempo a la duraciï¿½n real de Sentarse
 
-                ShowRandomCoctel(); // Mostrar el cóctel al llegar al final
+                ShowRandomCoctel(); // Mostrar el cï¿½ctel al llegar al final
                 return;
             }
 
@@ -142,7 +142,7 @@ public class MovimientoClientesMultiple : MonoBehaviour
         Vector3 dir = targetPoint.position - transform.position;
         transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
         
-        // Disparar animación Caminar mientras se mueve
+        // Disparar animaciï¿½n Caminar mientras se mueve
         animator?.SetBool("Caminar", true);
         
         // Manejar el audio de movimiento
@@ -192,7 +192,7 @@ public class MovimientoClientesMultiple : MonoBehaviour
 
     private void SetupAudioSource()
     {
-        // Obtener o añadir el componente AudioSource
+        // Obtener o aï¿½adir el componente AudioSource
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
@@ -210,13 +210,13 @@ public class MovimientoClientesMultiple : MonoBehaviour
 
     private void HandleMovementAudio(bool shouldBeMoving)
     {
-        // No reproducir sonidos si el juego está en pausa
+        // No reproducir sonidos si el juego estï¿½ en pausa
         if (isPaused)
             return;
             
         isMoving = shouldBeMoving;
 
-        // Verificar si el estado de movimiento cambió
+        // Verificar si el estado de movimiento cambiï¿½
         if (isMoving != wasMovingLastFrame)
         {
             if (isMoving)
@@ -255,7 +255,7 @@ public class MovimientoClientesMultiple : MonoBehaviour
         targetPoint = PathManager.Instance.GetPathPoint(centralPathIndex, currentPoint);
     }
 
-    // Método que se llama al llegar al final del camino para mostrar un cóctel aleatorio
+    // Mï¿½todo que se llama al llegar al final del camino para mostrar un cï¿½ctel aleatorio
     public void ShowRandomCoctel()
     {
         if (clientType != null && clientType.Cocteles != null && clientType.Cocteles.Count > 0)
@@ -267,7 +267,7 @@ public class MovimientoClientesMultiple : MonoBehaviour
             {
                 coctelRenderer.sprite = randomCoctel.sprite;
                 coctelRenderer.enabled = true; // Activar el SpriteRenderer para mostrar el sprite
-                Invoke("HideCoctelRenderer", 5f); // Invoca el método para desactivar después de 5 segundos
+                Invoke("HideCoctelRenderer", 5f); // Invoca el mï¿½todo para desactivar despuï¿½s de 5 segundos
             }
         }
     }
@@ -281,19 +281,19 @@ public class MovimientoClientesMultiple : MonoBehaviour
     }
 
     
-    // Dispara la animación de negación.
+    // Dispara la animaciï¿½n de negaciï¿½n.
     
     public void PlayNegacion()
     {
         animator?.SetTrigger("Negacion");
     }
 
-    // Agregamos OnMouseEnter y OnMouseExit para que el render se muestre mientras el cursor esté encima.
+    // Agregamos OnMouseEnter y OnMouseExit para que el render se muestre mientras el cursor estï¿½ encima.
     void OnMouseEnter()
     {
         if (coctelRenderer != null)
         {
-            // Cancelamos el Invoke si está programado para ocultar el sprite.
+            // Cancelamos el Invoke si estï¿½ programado para ocultar el sprite.
             CancelInvoke("HideCoctelRenderer");
             coctelRenderer.enabled = true;
         }
@@ -307,7 +307,7 @@ public class MovimientoClientesMultiple : MonoBehaviour
         }
     }
 
-    // Método que desactiva el SpriteRenderer
+    // Mï¿½todo que desactiva el SpriteRenderer
     private void HideCoctelRenderer()
     {
         coctelRenderer.enabled = false;
@@ -315,7 +315,7 @@ public class MovimientoClientesMultiple : MonoBehaviour
 
     void OnDestroy()
     {
-        // Detener cualquier sonido que esté reproduciéndose
+        // Detener cualquier sonido que estï¿½ reproduciï¿½ndose
         StopMovementSound();
         
         if (PathManager.Instance != null && !hasReachedEnd)
@@ -323,4 +323,22 @@ public class MovimientoClientesMultiple : MonoBehaviour
             PathManager.Instance.ReleaseMultipleHorizontal(pathIndices, currentPoint, clientWidth);
         }
     }
+
+
+    //Funcion solo para el Tutorial
+    /// <summary>
+    /// Muestra un cï¿½ctel especï¿½fico, sin elegirlo aleatoriamente.
+    /// </summary>
+    public void ShowSpecificCoctel(item specificCoctel)
+    {
+        requestedCoctel = specificCoctel;
+        if (coctelRenderer != null)
+        {
+            coctelRenderer.sprite = specificCoctel.sprite;
+            coctelRenderer.enabled = true;
+            // Si quieres ocultarlo despuï¿½s de X segundos:
+            // Invoke(nameof(HideCoctelRenderer), 5f);
+        }
+    }
+
 }

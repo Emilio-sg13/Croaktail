@@ -60,10 +60,10 @@ public class InteractuableConInventario : MonoBehaviour
                     {
                         Debug.Log("Pedido correcto. Cliente servido.");
 
-                        // 🔥 新增：触发火花效果
+                        
                         cliente.GetComponent<Cliente>().RecibirCoctel();
 
-                        // Eliminar el c骳tel del inventario.
+                        // Eliminar el cotel del inventario.
                         inventario.BorrarItem(selectedIndex, selectedSprite);
 
                         int valorOriginal = coctelSeleccionado.precio;

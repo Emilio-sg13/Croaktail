@@ -20,10 +20,10 @@ public class Mezclador : MonoBehaviour
     // Lista de recetas para determinar el cóctel resultante
     public List<CoctelReceta> recetas;
 
-    // 🔥 NUEVO: Referencia al efecto de chispas (drag desde el inspector)
+    //Referencia al efecto de chispas (drag desde el inspector)
     public ParticleSystem efectoChispas;
 
-    // 🔥 NUEVO: Posición en la UI donde deben aparecer las chispas
+    // Posición en la UI donde deben aparecer las chispas
     public Transform puntoChispaUI;
     // Bandera para controlar que el proceso de mezcla no se dispare varias veces simult醤eamente
     private bool mezclando = false;

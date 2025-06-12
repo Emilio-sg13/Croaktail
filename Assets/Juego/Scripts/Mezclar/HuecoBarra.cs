@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class HuecoBarra : MonoBehaviour
 {
@@ -15,10 +16,26 @@ public class HuecoBarra : MonoBehaviour
 
     void OnMouseDown()
     {
-        // Si el jugador está lejos, no hacer nada.
-        if (Vector3.Distance(player.position, transform.position) > distanciaMaxima)
-            return;
 
+        if (player == null || inventario == null) return;
+
+        PlayerController pc = player.GetComponent<PlayerController>();
+        if (pc != null)
+        {
+            pc.MoverHacia(transform.position);
+        }
+
+        StartCoroutine(EsperarYActuar());
+    }
+
+    IEnumerator EsperarYActuar()
+    {
+        // Espera hasta que el jugador est?lo suficientemente cerca
+        while (Vector3.Distance(player.position, transform.position) > distanciaMaxima)
+        {
+            yield return null;
+        }
+        int selected = inventario.selectedSlot;
         // Caso 1: Si el hueco ya tiene un ingrediente depositado, se intenta recogerlo
         if (spriteRenderer.sprite != null)
         {
@@ -46,25 +63,17 @@ public class HuecoBarra : MonoBehaviour
         }
         else // Caso 2: Hueco vacío intentar depositar el item seleccionado del inventario
         {
-            int selected = inventario.selectedSlot;
+
             Sprite selectedSprite = inventario.slots[selected].sprite;
-            if (selectedSprite == null)
+            if (selectedSprite != null)
             {
-                Debug.Log("No hay objeto seleccionado en el inventario para depositar en el HuecoBarra.");
-                return;
+                spriteRenderer.sprite = selectedSprite;
+                inventario.BorrarItem(selected, selectedSprite);
             }
-
-            item itemToDeposit = inventario.GetItemBySprite(selectedSprite);
-            if (itemToDeposit == null || itemToDeposit.tipo != TipoItem.Ingrediente)
+            else
             {
-                Debug.Log("Solo puedes depositar ingredientes aquí.");
-                return;
+                Debug.Log("No hay objeto en el inventario para depositar en la barra.");
             }
-
-            // Depositar el ingrediente: se muestra el sprite en el hueco...
-            spriteRenderer.sprite = selectedSprite;
-            // ...y se quita del inventario
-            inventario.BorrarItem(selected, selectedSprite);
         }
     }
 
