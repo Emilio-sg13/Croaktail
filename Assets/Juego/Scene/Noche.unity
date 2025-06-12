@@ -4497,6 +4497,22 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8644479944350369584, guid: 7ea9d4b3b3602e9498808cd28ea024a6, type: 3}
+      propertyPath: clientTypes.Array.data[0].movementSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f7ae343ef9625e44aac93770b2c915a7, type: 3}
+    - target: {fileID: 8644479944350369584, guid: 7ea9d4b3b3602e9498808cd28ea024a6, type: 3}
+      propertyPath: clientTypes.Array.data[1].movementSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 83b0b1b95f754704ab3a709b4cfbb9df, type: 3}
+    - target: {fileID: 8644479944350369584, guid: 7ea9d4b3b3602e9498808cd28ea024a6, type: 3}
+      propertyPath: clientTypes.Array.data[2].movementSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b7d50b7e19be15c48b6b484364313874, type: 3}
+    - target: {fileID: 8644479944350369584, guid: 7ea9d4b3b3602e9498808cd28ea024a6, type: 3}
+      propertyPath: clientTypes.Array.data[3].movementSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 95fb55c30c283a549bea5835d503e735, type: 3}
+    - target: {fileID: 8644479944350369584, guid: 7ea9d4b3b3602e9498808cd28ea024a6, type: 3}
       propertyPath: clientTypes.Array.data[0].Cocteles.Array.size
       value: 2
       objectReference: {fileID: 0}

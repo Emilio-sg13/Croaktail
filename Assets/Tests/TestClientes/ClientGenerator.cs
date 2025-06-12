@@ -14,12 +14,26 @@ public class ClientGenerator : MonoBehaviour
 
     private float nextSpawnTime;
 
-//Activación del AudioManager para poder utilizar el SFX del cliente cuando entra el bar
+    //Activación del AudioManager para poder utilizar el SFX del cliente cuando entra el bar
     AudioManager audioManager;
+
+    [Header("Audio Settings")]
+    [SerializeField]
+    [Range(0f, 1f)]
+    private float movementSoundVolume = 0.5f;
+    
+    [SerializeField]
+    private bool enableMovementSounds = true;
 
     private void Awake()
     {
-	audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        
+        // Validate client types have movement sounds if audio is enabled
+        if (enableMovementSounds)
+        {
+            ValidateClientAudioSetup();
+        }
     }
 
     //Quaternion rot = Quaternion.Euler(0, 0, 0);
@@ -54,7 +68,7 @@ public class ClientGenerator : MonoBehaviour
             return; // No hay caminos disponibles
 
         // Crear el cliente
-        GameObject client = Instantiate(selectedType.clientPrefab, spawnPoint.position, spawnPoint.rotation); //Instantiate(selectedType.clientPrefab, spawnPoint.position, spawnPoint.rotation);  //Instantiate(selectedType.clientPrefab, spawnPoint.position, Quaternion.identity);
+        GameObject client = Instantiate(selectedType.clientPrefab, spawnPoint.position, spawnPoint.rotation);
 
         //REPRODUCIR SFX CUANDO APARECE UN NUEVO CLIENTE
         if (audioManager != null)
@@ -72,9 +86,11 @@ public class ClientGenerator : MonoBehaviour
 
             // Aquí pasamos la referencia al tipo de cliente
             movement.SetClientType(selectedType);
+            
+            // Configure audio settings for this client
+            ConfigureClientAudio(client, selectedType);
         }
 
-        
         //Asignar referencias al script InteractuableConInventario del cliente
         InteractuableConInventario interact = client.GetComponent<InteractuableConInventario>();
         if (interact != null)
@@ -85,7 +101,64 @@ public class ClientGenerator : MonoBehaviour
         }
     }
 
+    private void ConfigureClientAudio(GameObject client, ClientType clientType)
+    {
+        if (!enableMovementSounds)
+            return;
 
+        // Get or add AudioSource for movement sounds
+        AudioSource audioSource = client.GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = client.AddComponent<AudioSource>();
+        }
+
+        // Configure AudioSource settings
+        audioSource.volume = movementSoundVolume;
+        audioSource.playOnAwake = false;
+        audioSource.loop = true;
+        
+        // 3D spatial audio settings
+        audioSource.spatialBlend = 0.7f; // Mix between 2D (0) and 3D (1)
+        audioSource.rolloffMode = AudioRolloffMode.Linear;
+        audioSource.minDistance = 1f;
+        audioSource.maxDistance = 10f;
+        
+        // Optional: Add audio pitch variation based on client speed
+        if (clientType.speed != 0)
+        {
+            float pitchVariation = Mathf.Clamp(clientType.speed / 2f, 0.8f, 1.2f);
+            audioSource.pitch = pitchVariation;
+        }
+
+        // Warn if no movement sound is assigned
+        if (clientType.movementSound == null)
+        {
+            Debug.LogWarning($"ClientType '{clientType.typeName}' doesn't have a movement sound assigned!");
+        }
+    }
+
+    private void ValidateClientAudioSetup()
+    {
+        if (clientTypes == null || clientTypes.Length == 0)
+            return;
+
+        int clientsWithoutSound = 0;
+        foreach (var clientType in clientTypes)
+        {
+            if (clientType.movementSound == null)
+            {
+                clientsWithoutSound++;
+                Debug.LogWarning($"ClientType '{clientType.typeName}' is missing movement sound assignment.");
+            }
+        }
+
+        if (clientsWithoutSound > 0)
+        {
+            Debug.LogWarning($"{clientsWithoutSound} client type(s) are missing movement sound assignments. " +
+                           "Consider assigning AudioClips or disabling movement sounds.");
+        }
+    }
 
     private bool IsClientOfWidthPresent(int width)
     {
@@ -102,7 +175,6 @@ public class ClientGenerator : MonoBehaviour
         }
         return false;
     }
-
 
     private ClientType GetRandomClientType()
     {
@@ -160,4 +232,39 @@ public class ClientGenerator : MonoBehaviour
         spawnInterval = 1.0f;
     }
 
+    // Public methods for runtime audio control
+    public void SetMovementSoundVolume(float volume)
+    {
+        movementSoundVolume = Mathf.Clamp01(volume);
+        
+        // Update all existing clients
+        MovimientoClientesMultiple[] allClients = FindObjectsByType<MovimientoClientesMultiple>(FindObjectsSortMode.None);
+        foreach (var client in allClients)
+        {
+            AudioSource audioSource = client.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.volume = movementSoundVolume;
+            }
+        }
+    }
+
+    public void ToggleMovementSounds(bool enable)
+    {
+        enableMovementSounds = enable;
+        
+        // If disabling, stop all current movement sounds
+        if (!enable)
+        {
+            MovimientoClientesMultiple[] allClients = FindObjectsByType<MovimientoClientesMultiple>(FindObjectsSortMode.None);
+            foreach (var client in allClients)
+            {
+                AudioSource audioSource = client.GetComponent<AudioSource>();
+                if (audioSource != null && audioSource.isPlaying)
+                {
+                    audioSource.Stop();
+                }
+            }
+        }
+    }
 }

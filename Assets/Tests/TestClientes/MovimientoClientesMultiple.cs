@@ -19,6 +19,11 @@ public class MovimientoClientesMultiple : MonoBehaviour
     // Animator para controlar las animaciones
     private Animator animator;
 
+    // Audio components
+    private AudioSource audioSource;
+    private bool isMoving = false;
+    private bool wasMovingLastFrame = false;
+
     public int GetCurrentWidth()
     {
         return clientWidth;
@@ -47,7 +52,8 @@ public class MovimientoClientesMultiple : MonoBehaviour
 
     void Start()
     {
-
+        // Configurar AudioSource
+        SetupAudioSource();
 
         // Asegurarse de que el PathManager existe
         if (PathManager.Instance == null)
@@ -90,10 +96,10 @@ public class MovimientoClientesMultiple : MonoBehaviour
     void Update()
     {
         if (hasReachedEnd || targetPoint == null)
+        {
+            HandleMovementAudio(false);
             return;
-
-        // Disparar animación Caminar mientras se mueve
-        animator?.SetBool("Caminar", !hasReachedEnd);
+        }
 
         // Verificar si se ha llegado al punto actual
         if (Vector3.Distance(transform.position, targetPoint.position) < reachDistance)
@@ -102,7 +108,7 @@ public class MovimientoClientesMultiple : MonoBehaviour
             if (currentPoint + 1 >= PathManager.Instance.GetPathLength(pathIndices[0]))
             {
                 hasReachedEnd = true;
-                //animator?.SetBool("Caminar", false);
+                HandleMovementAudio(false);
                 animator?.SetTrigger("Sentarse");
                 Invoke(nameof(PlayIdleSentado), 15f); // Ajusta este tiempo a la duración real de Sentarse
 
@@ -110,12 +116,11 @@ public class MovimientoClientesMultiple : MonoBehaviour
                 return;
             }
 
-
-
             // Verificar si se puede avanzar al siguiente punto
             if (!PathManager.Instance.CanOccupyMultipleHorizontal(pathIndices, currentPoint + 1, clientWidth, gameObject))
             {
                 animator.SetBool("Caminar", false);
+                HandleMovementAudio(false);
                 return;
             }
 
@@ -129,6 +134,67 @@ public class MovimientoClientesMultiple : MonoBehaviour
         // Moverse hacia el punto objetivo
         Vector3 dir = targetPoint.position - transform.position;
         transform.Translate(dir.normalized * speed * Time.deltaTime, Space.World);
+        
+        // Disparar animación Caminar mientras se mueve
+        animator?.SetBool("Caminar", true);
+        
+        // Handle movement audio
+        HandleMovementAudio(true);
+    }
+
+    private void SetupAudioSource()
+    {
+        // Get or add AudioSource component
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        // Configure AudioSource for movement sounds
+        audioSource.playOnAwake = false;
+        audioSource.loop = true;
+        audioSource.volume = 0.5f;
+        audioSource.spatialBlend = 0.7f; // 3D spatial audio
+        audioSource.rolloffMode = AudioRolloffMode.Linear;
+        audioSource.maxDistance = 10f;
+    }
+
+    private void HandleMovementAudio(bool shouldBeMoving)
+    {
+        isMoving = shouldBeMoving;
+
+        // Check if movement state changed
+        if (isMoving != wasMovingLastFrame)
+        {
+            if (isMoving)
+            {
+                PlayMovementSound();
+            }
+            else
+            {
+                StopMovementSound();
+            }
+        }
+
+        wasMovingLastFrame = isMoving;
+    }
+
+    private void PlayMovementSound()
+    {
+        if (clientType != null && clientType.movementSound != null && audioSource != null)
+        {
+            audioSource.clip = clientType.movementSound;
+            audioSource.Play();
+        }
+    }
+
+    private void StopMovementSound()
+    {
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
     }
 
     private void UpdateTargetPoint()
@@ -197,6 +263,9 @@ public class MovimientoClientesMultiple : MonoBehaviour
 
     void OnDestroy()
     {
+        // Stop any playing audio
+        StopMovementSound();
+        
         if (PathManager.Instance != null && !hasReachedEnd)
         {
             PathManager.Instance.ReleaseMultipleHorizontal(pathIndices, currentPoint, clientWidth);

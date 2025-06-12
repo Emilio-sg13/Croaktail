@@ -12,4 +12,7 @@ public class ClientType
     public int width = 1;
     public float speed = 2.0f;
     public float spawnWeight = 1.0f; // Probabilidad relativa de generar este tipo
+    
+    [Header("Audio")]
+    public AudioClip movementSound; // Sonido que se reproduce cuando el cliente se mueve
 }
