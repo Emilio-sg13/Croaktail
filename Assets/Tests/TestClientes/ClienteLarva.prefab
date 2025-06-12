@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4685476829171539491}
   - component: {fileID: 625362378245858179}
   - component: {fileID: 4531867076350858745}
+  - component: {fileID: 8418135633564208483}
   m_Layer: 0
   m_Name: ClienteLarva
   m_TagString: cliente
@@ -34,6 +35,7 @@ Transform:
   m_Children:
   - {fileID: 8009251604692990758}
   - {fileID: 4549750921394944122}
+  - {fileID: 6000783750026263810}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4685476829171539491
@@ -88,6 +90,52 @@ MonoBehaviour:
   inventario: {fileID: 0}
   player: {fileID: 0}
   distanciaMaxima: 3
+--- !u!114 &8418135633564208483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3036929054640326658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6b4ec2534410f0438a01fd760cfe752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pedidoSprite: {fileID: 0}
+  sparkEffectPrefab: {fileID: 7157717820086402071, guid: 1d4c4c947b151bf4785fff8b51a16bc6, type: 3}
+  sparkPoint: {fileID: 6000783750026263810}
+--- !u!1 &4206297874102199027
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6000783750026263810}
+  m_Layer: 0
+  m_Name: SparkPointLarva
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6000783750026263810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4206297874102199027}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.35, y: 0.26, z: 0.0034666662}
+  m_LocalScale: {x: 1, y: 1, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 916621074464302303}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8173079599338537090
 GameObject:
   m_ObjectHideFlags: 0

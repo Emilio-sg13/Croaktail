@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &344514914031052648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8728643502867736836}
+  m_Layer: 0
+  m_Name: SparkPointTortuga
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8728643502867736836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344514914031052648}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1.59, z: 0}
+  m_LocalScale: {x: 0.99999976, y: 1, z: 0.99999976}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1559216459772734018}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6136698616188588802
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,6 +130,7 @@ GameObject:
   - component: {fileID: 4064233068124968305}
   - component: {fileID: 2650451492243629943}
   - component: {fileID: 5915720845611153435}
+  - component: {fileID: 4366759312562795741}
   m_Layer: 0
   m_Name: ClienteTortuga
   m_TagString: cliente
@@ -121,6 +153,7 @@ Transform:
   m_Children:
   - {fileID: 1787095116713137128}
   - {fileID: 7844120108297021362}
+  - {fileID: 8728643502867736836}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &4064233068124968305
@@ -175,6 +208,21 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &4366759312562795741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6773783403117849110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6b4ec2534410f0438a01fd760cfe752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pedidoSprite: {fileID: 0}
+  sparkEffectPrefab: {fileID: 7157717820086402071, guid: 1d4c4c947b151bf4785fff8b51a16bc6, type: 3}
+  sparkPoint: {fileID: 8728643502867736836}
 --- !u!1001 &2253964714318558211
 PrefabInstance:
   m_ObjectHideFlags: 0

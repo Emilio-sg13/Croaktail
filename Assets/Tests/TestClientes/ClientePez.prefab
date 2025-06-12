@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5018195709853280593}
   - component: {fileID: -3027403956797758696}
   - component: {fileID: -5794070948526882095}
+  - component: {fileID: 1862281182942761682}
   m_Layer: 0
   m_Name: ClientePez
   m_TagString: cliente
@@ -34,6 +35,7 @@ Transform:
   m_Children:
   - {fileID: 8500167637083301150}
   - {fileID: 5926890627877170067}
+  - {fileID: 5449312740182500690}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5018195709853280593
@@ -88,6 +90,52 @@ CapsuleCollider:
   m_Height: 2.5
   m_Direction: 0
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &1862281182942761682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2381046587610221632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6b4ec2534410f0438a01fd760cfe752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pedidoSprite: {fileID: 0}
+  sparkEffectPrefab: {fileID: 7157717820086402071, guid: 1d4c4c947b151bf4785fff8b51a16bc6, type: 3}
+  sparkPoint: {fileID: 5449312740182500690}
+--- !u!1 &4310701777154792546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5449312740182500690}
+  m_Layer: 0
+  m_Name: SparkPointPEZ
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5449312740182500690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4310701777154792546}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.704, y: 0.62, z: 1}
+  m_LocalScale: {x: 0.6666667, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8615771821355918778}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7186929348922942144
 GameObject:
   m_ObjectHideFlags: 0

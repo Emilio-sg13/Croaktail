@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections;
 
 
@@ -32,7 +32,7 @@ public class InteractuableConInventario : MonoBehaviour
 
     IEnumerator EsperarYActuar()
     {
-        // Espera hasta que el jugador esté lo suficientemente cerca
+        // Espera hasta que el jugador est?lo suficientemente cerca
         while (Vector3.Distance(player.position, transform.position) > distanciaMaxima)
         {
             yield return null;
@@ -60,7 +60,10 @@ public class InteractuableConInventario : MonoBehaviour
                     {
                         Debug.Log("Pedido correcto. Cliente servido.");
 
-                        // Eliminar el cóctel del inventario.
+                        // ğŸ”¥ æ–°å¢ï¼šè§¦å‘ç«èŠ±æ•ˆæœ
+                        cliente.GetComponent<Cliente>().RecibirCoctel();
+
+                        // Eliminar el céª³tel del inventario.
                         inventario.BorrarItem(selectedIndex, selectedSprite);
 
                         int valorOriginal = coctelSeleccionado.precio;
@@ -78,7 +81,7 @@ public class InteractuableConInventario : MonoBehaviour
                             BarraCobroUI barra = barraUIObj.GetComponent<BarraCobroUI>();
                             if (barra != null)
                             {
-                                barra.AñadirDinero(valorOriginal);
+                                barra.Aé¦»dirDinero(valorOriginal);
                             }
                         }
 
@@ -96,7 +99,7 @@ public class InteractuableConInventario : MonoBehaviour
 
             case "barra":
                 {
-                    // Caso "barra": se puede recoger o depositar, según si hay un item depositado.
+                    // Caso "barra": se puede recoger o depositar, segé·‘ si hay un item depositado.
                     // Primero, comprobamos si la barra ya tiene un objeto (pickup).
                     if (spriteRenderer.sprite != null)
                     {
@@ -104,12 +107,12 @@ public class InteractuableConInventario : MonoBehaviour
                         item pickedItem = inventario.GetItemBySprite(spriteRenderer.sprite);
                         if (pickedItem != null)
                         {
-                            // Se intenta añadir el item al inventario sin depender del slot seleccionado.
+                            // Se intenta aé¦»dir el item al inventario sin depender del slot seleccionado.
                             bool added = inventario.TryAddItem(pickedItem);
                             if (added)
                             {
-                                Debug.Log("Item recogido desde la barra y añadido al inventario.");
-                                // Vaciar la barra para permitir nuevos depósitos.
+                                Debug.Log("Item recogido desde la barra y aé¦»dido al inventario.");
+                                // Vaciar la barra para permitir nuevos depé«itos.
                                 spriteRenderer.sprite = null;
                             }
                             else
@@ -124,7 +127,7 @@ public class InteractuableConInventario : MonoBehaviour
                     }
                     else
                     {
-                        // Si la barra está vacía, depositar el item seleccionado, solo si existe.
+                        // Si la barra est?vacéŸ†, depositar el item seleccionado, solo si existe.
                         Sprite selectedSprite = inventario.slots[selectedIndex].sprite;
                         if (selectedSprite != null)
                         {
@@ -141,7 +144,7 @@ public class InteractuableConInventario : MonoBehaviour
 
             case "basura":
                 {
-                    // En basura sí se requiere tener un objeto seleccionado en el inventario.
+                    // En basura s?se requiere tener un objeto seleccionado en el inventario.
                     Sprite selectedSprite = inventario.slots[selectedIndex].sprite;
                     if (selectedSprite == null)
                     {
