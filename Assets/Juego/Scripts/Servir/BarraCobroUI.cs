@@ -31,7 +31,7 @@ public class BarraCobroUI : MonoBehaviour
     {
 
         // Se muestra el estado inicial, por ejemplo "0€ / 100€".
-        texto.text = $"0€ / {cuotaTotal}€";
+        texto.text = $"0€  {cuotaTotal}€";
         ActualizarUI();
     }
 
@@ -48,7 +48,7 @@ public class BarraCobroUI : MonoBehaviour
         totalActual = Mathf.Min(totalActual, cuotaTotal);
 
         // Actualiza el texto, mostrando el total y la cuota.
-        texto.text = $"{totalActual}€ / {cuotaTotal}€";
+        texto.text = $"{totalActual}€  {cuotaTotal}€";
 
         ActualizarUI();
     }
@@ -60,7 +60,7 @@ public class BarraCobroUI : MonoBehaviour
     public void SetTotalActualTo120()
     {
         totalActual += 120;
-        texto.text = $"{totalActual}€ / {cuotaTotal}€";
+        texto.text = $"{totalActual}€  {cuotaTotal}€";
         Debug.Log("totalActual establecido a 120.");
     }
 
@@ -87,7 +87,7 @@ public class BarraCobroUI : MonoBehaviour
     {
         // Actualiza el texto con el formato deseado.
         if (texto != null)
-            texto.text = $"{totalActual}€ / {cuotaTotal}€";
+            texto.text = $"{totalActual}€  {cuotaTotal}€";
     }
 
     public int GetTotalActual()
