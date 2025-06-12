@@ -6090,6 +6090,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 87c4ec20003cae2488c454c6a724c2bf, type: 2}
+    - target: {fileID: 5900245268928504321, guid: 682f57f9a7694c74192790f19a4a32a5, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1492163723}
+    - target: {fileID: 5900245268928504321, guid: 682f57f9a7694c74192790f19a4a32a5, type: 3}
+      propertyPath: victorySoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f5a0e68d4e4cde94cb22e8037016e1ce, type: 3}
     - target: {fileID: 7296026342586385407, guid: 682f57f9a7694c74192790f19a4a32a5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.22
@@ -8665,13 +8673,13 @@ MonoBehaviour:
   slot2Texto: {fileID: 1995532129}
   fadeDuration: 1
   textoVisibleTime: 3
-  spriteMasClientes: {fileID: 21300000, guid: e8101636902efba418c4065963d6ed2a, type: 3}
-  spriteDineroTriple: {fileID: 21300000, guid: 3cc9a5987ba552342b138e1406976f14, type: 3}
-  spriteCoctelesDobles: {fileID: 21300000, guid: ff1cb00deca8bbc40aa8c9172c56924b, type: 3}
-  spriteMezcladoRapido: {fileID: 21300000, guid: 69f86fa0362823d44b61dc29216f3bfe, type: 3}
-  spriteInventorySlotExtra: {fileID: 21300000, guid: 692cddb85b77f8543a302b5b3ec8d10f, type: 3}
-  CasillaMejora1: {fileID: 444438683}
-  CasillaMejora2: {fileID: 880477661}
+  spriteMasClientes: {fileID: 0}
+  spriteDineroTriple: {fileID: 0}
+  spriteCoctelesDobles: {fileID: 0}
+  spriteMezcladoRapido: {fileID: 0}
+  spriteInventorySlotExtra: {fileID: 0}
+  CasillaMejora1: {fileID: 0}
+  CasillaMejora2: {fileID: 0}
 --- !u!1 &1492163722
 GameObject:
   m_ObjectHideFlags: 0
