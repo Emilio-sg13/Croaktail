@@ -555,23 +555,23 @@ PrefabInstance:
     - target: {fileID: 7628870808044847517, guid: 0592a97c993ced3478702fd5a20a8f3b, type: 3}
       propertyPath: 'huecosIngredientes.Array.data[0]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1466727858}
     - target: {fileID: 7628870808044847517, guid: 0592a97c993ced3478702fd5a20a8f3b, type: 3}
       propertyPath: 'huecosIngredientes.Array.data[1]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 916143723}
     - target: {fileID: 7628870808044847517, guid: 0592a97c993ced3478702fd5a20a8f3b, type: 3}
       propertyPath: 'huecosIngredientes.Array.data[2]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 654521135}
     - target: {fileID: 7628870808044847517, guid: 0592a97c993ced3478702fd5a20a8f3b, type: 3}
       propertyPath: 'huecosIngredientes.Array.data[3]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1901772347}
     - target: {fileID: 7628870808044847517, guid: 0592a97c993ced3478702fd5a20a8f3b, type: 3}
       propertyPath: 'huecosIngredientes.Array.data[4]'
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1219581005}
     - target: {fileID: 7628870808044847517, guid: 0592a97c993ced3478702fd5a20a8f3b, type: 3}
       propertyPath: recetas.Array.data[1].ingredientes.Array.size
       value: 3
@@ -3008,10 +3008,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3546126273401036987, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
-      propertyPath: m_Name
-      value: HuecoMezclador Variant (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 4153222785497506819, guid: 2680cad07914d1c409211609f0d16b15, type: 3}
       propertyPath: player
       value: 
@@ -3027,6 +3023,10 @@ PrefabInstance:
     - target: {fileID: 4153222785497506819, guid: 2680cad07914d1c409211609f0d16b15, type: 3}
       propertyPath: distanciaMaxima
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546126273401036987, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
+      propertyPath: m_Name
+      value: HuecoMezclador Variant (2)
       objectReference: {fileID: 0}
     - target: {fileID: 5690531741687228317, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
       propertyPath: m_LocalScale.x
@@ -3098,6 +3098,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5690531741687228317, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
   m_PrefabInstance: {fileID: 654521133}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &654521135 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6684318251377984126, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
+  m_PrefabInstance: {fileID: 654521133}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1875fb0c19f82c64fb72a2ae0391b074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &693735012
 GameObject:
   m_ObjectHideFlags: 0
@@ -3920,10 +3931,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3546126273401036987, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
-      propertyPath: m_Name
-      value: HuecoMezclador Variant (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 4153222785497506819, guid: 2680cad07914d1c409211609f0d16b15, type: 3}
       propertyPath: player
       value: 
@@ -3939,6 +3946,10 @@ PrefabInstance:
     - target: {fileID: 4153222785497506819, guid: 2680cad07914d1c409211609f0d16b15, type: 3}
       propertyPath: distanciaMaxima
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546126273401036987, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
+      propertyPath: m_Name
+      value: HuecoMezclador Variant (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5690531741687228317, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
       propertyPath: m_LocalScale.x
@@ -4010,6 +4021,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5690531741687228317, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
   m_PrefabInstance: {fileID: 916143721}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &916143723 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6684318251377984126, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
+  m_PrefabInstance: {fileID: 916143721}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1875fb0c19f82c64fb72a2ae0391b074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &943676185
 GameObject:
   m_ObjectHideFlags: 0
@@ -4674,10 +4696,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3546126273401036987, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
-      propertyPath: m_Name
-      value: HuecoMezclador Variant (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 4153222785497506819, guid: 2680cad07914d1c409211609f0d16b15, type: 3}
       propertyPath: player
       value: 
@@ -4693,6 +4711,10 @@ PrefabInstance:
     - target: {fileID: 4153222785497506819, guid: 2680cad07914d1c409211609f0d16b15, type: 3}
       propertyPath: distanciaMaxima
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546126273401036987, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
+      propertyPath: m_Name
+      value: HuecoMezclador Variant (4)
       objectReference: {fileID: 0}
     - target: {fileID: 5690531741687228317, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
       propertyPath: m_LocalScale.x
@@ -5377,6 +5399,17 @@ Transform:
   - {fileID: 348881775}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1219581005 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6684318251377984126, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
+  m_PrefabInstance: {fileID: 1036267349}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1875fb0c19f82c64fb72a2ae0391b074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1230921809
 GameObject:
   m_ObjectHideFlags: 0
@@ -7192,6 +7225,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 391925271}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &1466727858 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6684318251377984126, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
+  m_PrefabInstance: {fileID: 424403251}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1875fb0c19f82c64fb72a2ae0391b074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1471026537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10621,10 +10665,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3546126273401036987, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
-      propertyPath: m_Name
-      value: HuecoMezclador Variant (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 4153222785497506819, guid: 2680cad07914d1c409211609f0d16b15, type: 3}
       propertyPath: player
       value: 
@@ -10640,6 +10680,10 @@ PrefabInstance:
     - target: {fileID: 4153222785497506819, guid: 2680cad07914d1c409211609f0d16b15, type: 3}
       propertyPath: distanciaMaxima
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3546126273401036987, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
+      propertyPath: m_Name
+      value: HuecoMezclador Variant (3)
       objectReference: {fileID: 0}
     - target: {fileID: 5690531741687228317, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
       propertyPath: m_LocalScale.x
@@ -10711,6 +10755,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5690531741687228317, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
   m_PrefabInstance: {fileID: 1901772345}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1901772347 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6684318251377984126, guid: 7f2b033a2a7aa1d428f4ece8fdaa4692, type: 3}
+  m_PrefabInstance: {fileID: 1901772345}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1875fb0c19f82c64fb72a2ae0391b074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1908068509
 GameObject:
   m_ObjectHideFlags: 0

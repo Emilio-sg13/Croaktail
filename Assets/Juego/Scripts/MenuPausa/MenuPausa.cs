@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class MenuPausa : MonoBehaviour
 {
-    private bool pausado = false;
-    private string escenaOriginal;
+    //private bool pausado = false;
+    //private string escenaOriginal;
 
     /// <summary>
     /// Llamar desde el boton de pausa (Scene principal).  
@@ -24,12 +24,12 @@ public class MenuPausa : MonoBehaviour
         }
 
         // 2) Guarda la escena actual y carga el menu de pausa de forma aditiva
-        escenaOriginal = SceneManager.GetActiveScene().name;
+        string escenaOriginal = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene("MenuPausa", LoadSceneMode.Additive);
 
         // 3) Detiene el tiempo
         Time.timeScale = 0f;
-        pausado = true;
+        //bool pausado = true;
     }
 
     /// <summary>
@@ -51,7 +51,7 @@ public class MenuPausa : MonoBehaviour
         // 2) Reactiva el tiempo y cierra la escena de pausa
         Time.timeScale = 1f;
         SceneManager.UnloadSceneAsync("MenuPausa");
-        pausado = false;
+        //pausado = false;
     }
 
     /// <summary>
@@ -63,6 +63,6 @@ public class MenuPausa : MonoBehaviour
         Time.timeScale = 1f;
         GameManager.Instance.FinalizeGame();
         MoneyManager.Instance.FinalizeMoney();
-        pausado = false;
+        //pausado = false;
     }
 }
