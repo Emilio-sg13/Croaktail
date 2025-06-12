@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Zumo de moscon
   m_EditorClassIdentifier: 
   itemName: Zumo de moscon
-  sprite: {fileID: 21300000, guid: 3aab591c3877c9e4d8f8ad9ee6f5ee13, type: 3}
+  sprite: {fileID: 21300000, guid: 142aa812c8174fb4fb43ab8642e6f982, type: 3}
   slotsNeeded: 2
   precio: 0
   tipo: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Croaquiri
   m_EditorClassIdentifier: 
   itemName: Croaquiri
-  sprite: {fileID: 21300000, guid: 333e70b7306090f43ad55d97bf0d1fbc, type: 3}
+  sprite: {fileID: 21300000, guid: 7835bddf03520414ebd4355f4fef4671, type: 3}
   slotsNeeded: 1
   precio: 20
   tipo: 1

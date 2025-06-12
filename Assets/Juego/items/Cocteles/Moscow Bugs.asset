@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Moscow Bugs
   m_EditorClassIdentifier: 
   itemName: Moscow
-  sprite: {fileID: 21300000, guid: 5f88103f8ed557a4e9a783d7aa275f91, type: 3}
+  sprite: {fileID: 21300000, guid: 1a07de04a01073c47b01964bb4138434, type: 3}
   slotsNeeded: 1
   precio: 15
   tipo: 1
