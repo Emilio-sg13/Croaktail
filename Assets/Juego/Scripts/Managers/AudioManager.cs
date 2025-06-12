@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
 
     [Header ("------------ Audio Clip ------------")]
     public AudioClip entraCliente;
+    public AudioClip ranaCelebra;
 
     public void PlaySFX(AudioClip clip)
     {
