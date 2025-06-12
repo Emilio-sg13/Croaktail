@@ -19,10 +19,14 @@ public class MovimientoClientesMultiple : MonoBehaviour
     // Animator para controlar las animaciones
     private Animator animator;
 
-    // Audio components
+    // Componentes de audio
     private AudioSource audioSource;
     private bool isMoving = false;
     private bool wasMovingLastFrame = false;
+    
+    // Variables de control de pausa
+    private bool wasPlayingBeforePause = false;
+    private bool isPaused = false;
 
     public int GetCurrentWidth()
     {
@@ -52,7 +56,7 @@ public class MovimientoClientesMultiple : MonoBehaviour
 
     void Start()
     {
-        // Configurar AudioSource
+        // Configurar el componente AudioSource
         SetupAudioSource();
 
         // Asegurarse de que el PathManager existe
@@ -95,6 +99,9 @@ public class MovimientoClientesMultiple : MonoBehaviour
 
     void Update()
     {
+        // Verificar si el juego está en pausa
+        CheckPauseState();
+        
         if (hasReachedEnd || targetPoint == null)
         {
             HandleMovementAudio(false);
@@ -138,33 +145,78 @@ public class MovimientoClientesMultiple : MonoBehaviour
         // Disparar animación Caminar mientras se mueve
         animator?.SetBool("Caminar", true);
         
-        // Handle movement audio
+        // Manejar el audio de movimiento
         HandleMovementAudio(true);
+    }
+
+    private void CheckPauseState()
+    {
+        bool currentlyPaused = Time.timeScale == 0f;
+        
+        if (currentlyPaused != isPaused)
+        {
+            isPaused = currentlyPaused;
+            
+            if (isPaused)
+            {
+                // El juego acaba de pausarse
+                OnGamePaused();
+            }
+            else
+            {
+                // El juego acaba de reanudarse
+                OnGameUnpaused();
+            }
+        }
+    }
+
+    private void OnGamePaused()
+    {
+        if (audioSource != null)
+        {
+            wasPlayingBeforePause = audioSource.isPlaying;
+            if (wasPlayingBeforePause)
+            {
+                audioSource.Pause();
+            }
+        }
+    }
+
+    private void OnGameUnpaused()
+    {
+        if (audioSource != null && wasPlayingBeforePause)
+        {
+            audioSource.UnPause();
+        }
     }
 
     private void SetupAudioSource()
     {
-        // Get or add AudioSource component
+        // Obtener o añadir el componente AudioSource
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
 
-        // Configure AudioSource for movement sounds
+        // Configurar el AudioSource para sonidos de movimiento
         audioSource.playOnAwake = false;
         audioSource.loop = true;
         audioSource.volume = 0.5f;
-        audioSource.spatialBlend = 0.7f; // 3D spatial audio
+        audioSource.spatialBlend = 0.7f; // Audio espacial 3D
         audioSource.rolloffMode = AudioRolloffMode.Linear;
         audioSource.maxDistance = 10f;
     }
 
     private void HandleMovementAudio(bool shouldBeMoving)
     {
+        // No reproducir sonidos si el juego está en pausa
+        if (isPaused)
+            return;
+            
         isMoving = shouldBeMoving;
 
-        // Check if movement state changed
+        // Verificar si el estado de movimiento cambió
         if (isMoving != wasMovingLastFrame)
         {
             if (isMoving)
@@ -182,7 +234,7 @@ public class MovimientoClientesMultiple : MonoBehaviour
 
     private void PlayMovementSound()
     {
-        if (clientType != null && clientType.movementSound != null && audioSource != null)
+        if (clientType != null && clientType.movementSound != null && audioSource != null && !isPaused)
         {
             audioSource.clip = clientType.movementSound;
             audioSource.Play();
@@ -220,17 +272,17 @@ public class MovimientoClientesMultiple : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Tras Sentarse, cambia el modelo y dispara IdleSentado.
-    /// </summary>
+
+    // Tras Sentarse, cambia el modelo y dispara IdleSentado.
+    
     private void PlayIdleSentado()
     {
         animator?.SetTrigger("Sentado");
     }
 
-    /// <summary>
-    /// Dispara la animación de negación.
-    /// </summary>
+    
+    // Dispara la animación de negación.
+    
     public void PlayNegacion()
     {
         animator?.SetTrigger("Negacion");
@@ -263,7 +315,7 @@ public class MovimientoClientesMultiple : MonoBehaviour
 
     void OnDestroy()
     {
-        // Stop any playing audio
+        // Detener cualquier sonido que esté reproduciéndose
         StopMovementSound();
         
         if (PathManager.Instance != null && !hasReachedEnd)
