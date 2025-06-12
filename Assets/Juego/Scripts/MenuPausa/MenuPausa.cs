@@ -1,21 +1,27 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class MenuPausa : MonoBehaviour
 {
     //private bool pausado = false;
     //private string escenaOriginal;
 
+    // Nuevo: Animator de la imagen que hace la animación
+    public Animator menuPausaImagenAnimacion;
+
+    // Nuevo: Nombre de la escena a cargar después de la animación
+    public string escenaParaCargar = "MenuPausa";
+
     /// <summary>
-    /// Llamar desde el boton de pausa (Scene principal).  
+    /// Llamar desde el botón de pausa (Scene principal).  
     /// </summary>
     public void PausarJuego()
     {
+        FindFirstObjectByType<BGMController>()?.PausarMusica();
 
-        FindFirstObjectByType<BGMController>()?.PausarMusica(); 
-
-        // 1) Deshabilita el boton de pausa usando su Tag
+        // Deshabilita el botón de pausa usando su Tag
         GameObject btn = GameObject.FindWithTag("PauseButton");
         if (btn != null)
         {
@@ -27,20 +33,54 @@ public class MenuPausa : MonoBehaviour
         string escenaOriginal = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene("MenuPausa", LoadSceneMode.Additive);
 
-        // 3) Detiene el tiempo
+        // Inicia la animación y al terminar carga la escena de pausa
+        if (menuPausaImagenAnimacion != null)
+        {
+            // Ejecutar la animación de expandir y luego cargar escena
+            menuPausaImagenAnimacion.gameObject.SetActive(true);
+            menuPausaImagenAnimacion.Play("Expand");  // Nombre del estado en Animator
+            // Esperamos la duración de la animación para cargar escena
+            StartCoroutine(EsperarAnimacionYLoad(menuPausaImagenAnimacion, escenaParaCargar));
+        }
+        else
+        {
+            // Si no hay animator asignado, carga la escena inmediatamente
+            SceneManager.LoadScene(escenaParaCargar, LoadSceneMode.Additive);
+            Time.timeScale = 0f;
+            pausado = true;
+        }
+    }
+
+    /// <summary>
+    /// Coroutine para esperar la duración de la animación antes de cargar escena y pausar tiempo.
+    /// </summary>
+    private IEnumerator EsperarAnimacionYLoad(Animator animator, string escena)
+    {
+        // Asume que la animación "Expand" dura 0.5 segundos (ajusta si es necesario)
+        float duracionAnimacion = 0.5f;
+
+        // Si quieres obtener duración real:
+        // AnimatorClipInfo[] clips = animator.GetCurrentAnimatorClipInfo(0);
+        // duracionAnimacion = clips[0].clip.length;
+
+        yield return new WaitForSecondsRealtime(duracionAnimacion);
+
+        // Carga la escena de pausa de forma aditiva
+        SceneManager.LoadScene(escena, LoadSceneMode.Additive);
+
+        // Pausa el tiempo
         Time.timeScale = 0f;
         //bool pausado = true;
     }
 
     /// <summary>
-    /// Llamar desde el boton reanudar en la escena MenuPausa.  
+    /// Llamar desde el botón reanudar en la escena MenuPausa.  
     /// </summary>
     public void ReanudarJuego()
     {
+        FindFirstObjectByType<BGMController>()?.ReanudarMusica();
 
-        FindFirstObjectByType<BGMController>()?.ReanudarMusica(); 
-
-        // 1) Reactiva el boton de pausa en la escena principal usando su Tag
+        // Reactiva el botón de pausa en la escena principal usando su Tag
         GameObject btn = GameObject.FindWithTag("PauseButton");
         if (btn != null)
         {
@@ -48,18 +88,18 @@ public class MenuPausa : MonoBehaviour
             if (b != null) b.interactable = true;
         }
 
-        // 2) Reactiva el tiempo y cierra la escena de pausa
+        // Reactiva el tiempo y cierra la escena de pausa
         Time.timeScale = 1f;
         SceneManager.UnloadSceneAsync("MenuPausa");
         //pausado = false;
     }
 
     /// <summary>
-    /// Llamar desde el boton al menu en la escena MenuPausa.  
+    /// Llamar desde el botón al menú en la escena MenuPausa.  
     /// </summary>
     public void IrAlMenu()
     {
-        // Asegura que el juego est?reanudado antes de cambiar de escena
+        // Asegura que el juego esté reanudado antes de cambiar de escena
         Time.timeScale = 1f;
         GameManager.Instance.FinalizeGame();
         MoneyManager.Instance.FinalizeMoney();
