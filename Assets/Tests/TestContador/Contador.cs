@@ -12,13 +12,18 @@ public class Contador : MonoBehaviour
 
     [Header("Lógica externa")]
     public BarraCobroUI barraCobroUI;
+    public GameManager gameManager;
+    public PlayerController jugador;
 
     [Header("GameObjects de transición")]
-    public GameObject transicionVictoriaGO;   
+    public GameObject transicionVictoriaGO;
     public float duracionVictoria = 0.9f;
 
-    public GameObject transicionDerrotaGO;    
-    public float duracionDerrota =0.9f;
+    public GameObject transicionDerrotaGO;
+    public float duracionDerrota = 0.9f;
+
+    [Header("Animación jugador")]
+    public float duracionAnimacionVictoriaJugador = 1.1f;
 
     /*--------------- ESTADO ----------------*/
     private bool finDisparado = false;
@@ -26,7 +31,6 @@ public class Contador : MonoBehaviour
     /*--------------- INICIO ----------------*/
     void Start()
     {
-        // Desactiva las transiciones al arrancar
         if (transicionVictoriaGO) transicionVictoriaGO.SetActive(false);
         if (transicionDerrotaGO) transicionDerrotaGO.SetActive(false);
     }
@@ -36,7 +40,6 @@ public class Contador : MonoBehaviour
     {
         if (finDisparado) return;
 
-        // Actualiza cronómetro
         int min = Mathf.FloorToInt(tiempoRestante / 60);
         int seg = Mathf.FloorToInt(tiempoRestante % 60);
         contadorTexto.text = $"{min:00}:{seg:00}";
@@ -55,16 +58,17 @@ public class Contador : MonoBehaviour
                     transicionDerrotaGO,
                     duracionDerrota,
                     "PantallaDerrota",
-                    null));                    // sin acción extra
+                    null
+                ));
             }
             else
             {
-                StartCoroutine(TransicionYCarga(
+                StartCoroutine(EsperarAnimacionJugadorYTransicion(
                     transicionVictoriaGO,
                     duracionVictoria,
                     "PantallaVictoria",
-                    () =>                      // acción que se lanza justo antes del cambio
-                        MoneyManager.Instance.IrTienda(dineroConseguido, dineroObjetivo)
+                    dineroConseguido,
+                    dineroObjetivo
                 ));
             }
         }
@@ -74,10 +78,30 @@ public class Contador : MonoBehaviour
         }
     }
 
-    /*--------------- COROUTINE -------------*/
+    /*-- NUEVA COROUTINA: esperar animación jugador y luego transicionar --*/
+    private IEnumerator EsperarAnimacionJugadorYTransicion(GameObject go, float dur, string escena, int dinero, int objetivo)
+    {
+        // 1) Lanza animación del jugador
+        if (jugador != null)
+        {
+            jugador.AnimacionVictoria();
+        }
+
+        // 2) Esperar duración exacta de la animación
+        yield return new WaitForSeconds(duracionAnimacionVictoriaJugador);
+
+        // 3) Iniciar transición de pantalla
+        yield return StartCoroutine(TransicionYCarga(
+            go,
+            dur,
+            escena,
+            () => MoneyManager.Instance.IrTienda(dinero, objetivo)
+        ));
+    }
+
+    /*--------------- COROUTINE TRANSICIÓN -------------*/
     private IEnumerator TransicionYCarga(GameObject go, float dur, string escena, System.Action postAnim)
     {
-        // Pausa lógicamente el juego pero permite que la UI/Animator se actualice
         Time.timeScale = 0f;
 
         if (go != null)
@@ -96,10 +120,7 @@ public class Contador : MonoBehaviour
 
         postAnim?.Invoke();
 
-        // Reactiva el flujo normal del juego
         Time.timeScale = 1f;
-
-        // Carga de escena
         SceneManager.LoadScene(escena, LoadSceneMode.Single);
     }
 

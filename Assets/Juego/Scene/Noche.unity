@@ -10389,6 +10389,8 @@ MonoBehaviour:
   contadorTexto: {fileID: 502666561}
   tiempoRestante: 420
   barraCobroUI: {fileID: 1491484308}
+  gameManager: {fileID: 0}
+  jugador: {fileID: 2134753629}
   transicionVictoriaGO: {fileID: 758545367}
   duracionVictoria: 0.9
   transicionDerrotaGO: {fileID: 2066680303}

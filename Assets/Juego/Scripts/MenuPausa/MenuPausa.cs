@@ -5,7 +5,6 @@ using System.Collections;
 
 public class MenuPausa : MonoBehaviour
 {
-    private bool pausado = false;
     private string escenaOriginal;
 
     // Asignar desde el Inspector
@@ -19,12 +18,10 @@ public class MenuPausa : MonoBehaviour
     {
         FindFirstObjectByType<BGMController>()?.PausarMusica();
 
-        // Desactiva el botón de pausa
-        GameObject btn = GameObject.FindWithTag("PauseButton");
-        if (btn != null)
+        GameObject pauseButton = GameObject.FindWithTag("PauseButton");
+        if (pauseButton != null && pauseButton.TryGetComponent(out Button b))
         {
-            Button b = btn.GetComponent<Button>();
-            if (b != null) b.interactable = false;
+            b.interactable = false;
         }
 
         escenaOriginal = SceneManager.GetActiveScene().name;
@@ -39,7 +36,6 @@ public class MenuPausa : MonoBehaviour
         {
             SceneManager.LoadScene(escenaParaCargar, LoadSceneMode.Additive);
             Time.timeScale = 0f;
-            pausado = true;
         }
     }
 
@@ -51,33 +47,28 @@ public class MenuPausa : MonoBehaviour
 
         SceneManager.LoadScene(escena, LoadSceneMode.Additive);
         Time.timeScale = 0f;
-        pausado = true;
     }
 
     public void ReanudarJuego()
     {
-        pausado = false;
         FindFirstObjectByType<BGMController>()?.ReanudarMusica();
 
-        GameObject btn = GameObject.FindWithTag("PauseButton");
-        if (btn != null)
+        GameObject pauseButton = GameObject.FindWithTag("PauseButton");
+        if (pauseButton != null && pauseButton.TryGetComponent(out Button b))
         {
-            Button b = btn.GetComponent<Button>();
-            if (b != null) b.interactable = true;
+            b.interactable = true;
         }
 
         if (menuPausaImagenAnimacion != null)
         {
             menuPausaImagenAnimacion.updateMode = AnimatorUpdateMode.UnscaledTime;
 
-            // Asegura que la escena principal esté activa primero
             Scene escenaOriginalObj = SceneManager.GetSceneByName(escenaOriginal);
             if (escenaOriginalObj.IsValid() && escenaOriginalObj.isLoaded)
             {
                 SceneManager.SetActiveScene(escenaOriginalObj);
             }
 
-            // Eeproduce la animación y descarga la escena de pausa
             StartCoroutine(AnimarCerrarYCerrarMenuPausa());
         }
         else
@@ -99,18 +90,14 @@ public class MenuPausa : MonoBehaviour
 
     private IEnumerator AnimarCerrarYCerrarMenuPausa()
     {
-        // Reproduce animación de cierre
         if (menuPausaImagenAnimacion != null)
         {
             menuPausaImagenAnimacion.SetTrigger("Cerrar");
             yield return new WaitForSecondsRealtime(1.0f);
         }
 
-        // Reactiva el tiempo antes de descargar la escena de pausa
         Time.timeScale = 1f;
-        pausado = false;
 
-        // Descarga la escena de pausa
         AsyncOperation unloadOp = SceneManager.UnloadSceneAsync("MenuPausa");
         yield return new WaitUntil(() => unloadOp.isDone);
     }
@@ -118,7 +105,6 @@ public class MenuPausa : MonoBehaviour
     private IEnumerator CerrarSinAnimacion()
     {
         Time.timeScale = 1f;
-        pausado = false;
 
         AsyncOperation unloadOp = SceneManager.UnloadSceneAsync("MenuPausa");
         yield return new WaitUntil(() => unloadOp.isDone);
@@ -135,6 +121,5 @@ public class MenuPausa : MonoBehaviour
         Time.timeScale = 1f;
         GameManager.Instance.FinalizeGame();
         MoneyManager.Instance.FinalizeMoney();
-        pausado = false;
     }
 }
