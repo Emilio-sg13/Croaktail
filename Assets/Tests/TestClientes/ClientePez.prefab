@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52992c5660a4273429d5f0a1d33cec2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasReachedEnd: 0
   coctelRenderer: {fileID: 1361794598834765747}
   requestedCoctel: {fileID: 0}
 --- !u!114 &-3027403956797758696
@@ -162,7 +163,7 @@ Transform:
   m_GameObject: {fileID: 7186929348922942144}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.92387956, z: -0.38268343, w: 0}
-  m_LocalPosition: {x: 0, y: 3, z: 0.5}
+  m_LocalPosition: {x: 0, y: 3, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
