@@ -8947,6 +8947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmNormal: {fileID: 8300000, guid: ef5ce620b0f5e1b45a2637d3687c46dc, type: 3}
   bgmRapido: {fileID: 8300000, guid: c86680bcbdfa07244ab8106d4dee7b7d, type: 3}
+  campanaClip: {fileID: 8300000, guid: 05cd027d379e33648af23bc6daf444cf, type: 3}
 --- !u!82 &1441337551
 AudioSource:
   m_ObjectHideFlags: 0

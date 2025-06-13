@@ -4,6 +4,7 @@ public class BGMController : MonoBehaviour
 {
     public AudioClip bgmNormal;
     public AudioClip bgmRapido;
+    public AudioClip campanaClip;
 
     private AudioSource audioSource;
     private float tiempoTotal = 420f; // 7 minutos = 420 segundos
@@ -39,6 +40,7 @@ public class BGMController : MonoBehaviour
     {
         rapidoActivado = true;
         audioSource.Stop();
+        audioSource.PlayOneShot(campanaClip);
         audioSource.clip = bgmRapido;
         audioSource.loop = true;
         audioSource.Play();
