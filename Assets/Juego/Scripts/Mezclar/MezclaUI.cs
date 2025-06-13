@@ -1,82 +1,74 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;      // Para usar el componente Slider
-
+using UnityEngine.UI;      // Para usar el componente Image
 
 public class MezclaUI : MonoBehaviour
 {
-    // Referencia al Slider que representa el progreso de la mezcla
-    public Slider barraProgreso;
+    [Header("UI de progreso")]
+    // Referencia a la Image que representa el progreso (debe estar en modo Filled)
+    public Image imagenProgreso;
 
-    // N鷐ero de clics necesarios para completar la mezcla
+    [Header("Configuración de clics")]
     public int clicsNecesarios = 5;
-    // Contador de clics realizados hasta el momento
     private int clicsActuales = 0;
-    // Acci髇 que se invocar?cuando se complete la mezcla
+
+    // Callback que se invocará cuando se complete la mezcla
     private System.Action onCompletar;
-   
+
+    [Header("Efecto de chispas")]
     public ParticleSystem efectoChispasUI;
     public Transform puntoChispaUI;
 
-    // Se ejecuta al iniciar, desactiva la UI de mezcla por defecto
     void Start()
     {
         gameObject.SetActive(false);
     }
 
     /// <summary>
-    /// Inicializa la barra de progreso y el texto, y activa la UI de mezcla.
+    /// Inicializa la imagen de progreso a 0 y activa la UI.
     /// </summary>
-    /// <param name="onCompletarCallback">Callback que se ejecutar?al completar la mezcla</param>
     public void IniciarProgreso(System.Action onCompletarCallback)
     {
-        clicsActuales = 0;                      // Reinicia el contador de clics
-        barraProgreso.value = 0;                // Reinicia el slider a 0%
+        clicsActuales = 0;
+        if (imagenProgreso != null)
+            imagenProgreso.fillAmount = 0f;
 
-        onCompletar = onCompletarCallback;        // Asigna la acci髇 a ejecutar al terminar
-        gameObject.SetActive(true);             // Activa la UI de mezcla
+        onCompletar = onCompletarCallback;
+        gameObject.SetActive(true);
     }
 
     /// <summary>
-    /// M閠odo que se debe llamar cada vez que el jugador hace clic en el mezclador.
-    /// Incrementa el contador y actualiza el slider y el porcentaje mostrado.
-    /// Si se alcanza el n鷐ero de clics necesarios, se oculta la UI y se invoca el callback.
+    /// Debe llamarse al hacer clic; actualiza el fill de la imagen y dispara chispa.
     /// </summary>
     public void ClicMezclar()
     {
-        // Si la UI de mezcla no est?activa, no se realiza nada
         if (!gameObject.activeSelf) return;
 
         if (UpgradeData.mezcladoRapido)
-        {
             clicsNecesarios = 2;
-        }
 
-        clicsActuales++;    // Incrementa el contador de clics
-        // Calcula el progreso en forma de valor entre 0 y 1
+        clicsActuales++;
         float progreso = (float)clicsActuales / clicsNecesarios;
-        // Actualiza el valor del slider con el progreso calculado
-        barraProgreso.value = progreso;
 
-        // Reproducir chispa
+        // Actualiza la imagen de progreso
+        if (imagenProgreso != null)
+            imagenProgreso.fillAmount = Mathf.Clamp01(progreso);
+        else
+            Debug.LogWarning("⚠️ No se asignó la imagen de progreso.");
+
+        // Reproduce chispa
         if (efectoChispasUI != null && puntoChispaUI != null)
         {
             efectoChispasUI.transform.position = puntoChispaUI.position;
             efectoChispasUI.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             efectoChispasUI.Play();
-
-            Debug.Log("Chispa UI reproducida en: " + puntoChispaUI.position);
-        }
-        else
-        {
-            Debug.LogWarning("No se encontró el efecto de chispas o el punto de aparición.");
+            Debug.Log("💥 Chispa UI reproducida en: " + puntoChispaUI.position);
         }
 
-
-        // Si se han realizado clics suficientes para completar la mezcla:
+        // Completado
         if (clicsActuales >= clicsNecesarios)
         {
-            gameObject.SetActive(false);   // Se oculta la UI de mezcla
-            onCompletar?.Invoke();           // Se invoca el callback asignado (si existe)
+            gameObject.SetActive(false);
+            onCompletar?.Invoke();
         }
     }
 }
