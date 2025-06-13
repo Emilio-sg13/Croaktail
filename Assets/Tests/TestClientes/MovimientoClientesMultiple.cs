@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MovimientoClientesMultiple : MonoBehaviour
@@ -340,5 +342,74 @@ public class MovimientoClientesMultiple : MonoBehaviour
             // Invoke(nameof(HideCoctelRenderer), 5f);
         }
     }
+
+    public void StartFadeOut(float duration = 1.5f)
+    {
+        StartCoroutine(FadeOutAndDestroy(duration));
+    }
+
+    private IEnumerator FadeOutAndDestroy(float duration)
+    {
+        // Buscar todos los Renderers del cliente, incluyendo Skinned y Mesh
+        Renderer[] allRenderers = GetComponentsInChildren<Renderer>(true);
+
+        List<Material> fadeMaterials = new List<Material>();
+
+        foreach (Renderer rend in allRenderers)
+        {
+            // Ignorar el renderer del sprite del cóctel si está definido
+            if (coctelRenderer != null && rend == coctelRenderer)
+                continue;
+
+            // Crear un nuevo material independiente (no afectar otros clientes)
+            Material mat = new Material(rend.material);
+            SetMaterialToFadeMode(mat);
+            rend.material = mat;
+
+            fadeMaterials.Add(mat);
+        }
+
+        // Desactivar colisiones
+        foreach (var col in GetComponentsInChildren<Collider>())
+            col.enabled = false;
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
+
+            foreach (Material mat in fadeMaterials)
+            {
+                if (mat.HasProperty("_Color"))
+                {
+                    Color c = mat.color;
+                    c.a = alpha;
+                    mat.color = c;
+                }
+            }
+
+            yield return null;
+        }
+
+        Destroy(gameObject);
+    }
+
+    private void SetMaterialToFadeMode(Material mat)
+    {
+        if (mat.shader.name != "Standard") return; // Solo si usa el Standard Shader
+
+        mat.SetFloat("_Mode", 2); // Fade
+        mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        mat.SetInt("_ZWrite", 0);
+        mat.DisableKeyword("_ALPHATEST_ON");
+        mat.EnableKeyword("_ALPHABLEND_ON");
+        mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mat.renderQueue = 3000;
+    }
+
+
+
 
 }

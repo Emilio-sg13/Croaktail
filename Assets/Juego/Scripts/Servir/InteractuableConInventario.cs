@@ -86,8 +86,8 @@ public class InteractuableConInventario : MonoBehaviour
                         }
 
 
-                        // Destruir al cliente servido.
-                        Destroy(cliente.gameObject);
+                        // Iniciar fade out visual antes de destruir
+                        cliente.StartFadeOut();
                     }
                     else
                     {

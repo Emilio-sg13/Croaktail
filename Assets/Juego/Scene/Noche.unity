@@ -11526,7 +11526,7 @@ PrefabInstance:
     - target: {fileID: 7628870808044847517, guid: 0592a97c993ced3478702fd5a20a8f3b, type: 3}
       propertyPath: 'recetas.Array.data[4].ingredientes.Array.data[2]'
       value: 
-      objectReference: {fileID: 11400000, guid: 96c7150b2387f0f4981ef4262a3faee1, type: 2}
+      objectReference: {fileID: 11400000, guid: 473e6734b9d7d3045ad402018bd6dc9f, type: 2}
     - target: {fileID: 7628870808044847517, guid: 0592a97c993ced3478702fd5a20a8f3b, type: 3}
       propertyPath: 'recetas.Array.data[4].ingredientes.Array.data[3]'
       value: 
