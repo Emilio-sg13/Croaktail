@@ -5,23 +5,21 @@ using System.Collections;
 
 public class MenuPausa : MonoBehaviour
 {
-    //private bool pausado = false;
-    //private string escenaOriginal;
+    private bool pausado = false;
+    private string escenaOriginal;
 
-    // Nuevo: Animator de la imagen que hace la animación
+    // Asignar desde el Inspector
     public Animator menuPausaImagenAnimacion;
 
-    // Nuevo: Nombre de la escena a cargar después de la animación
+    // Nombre de la escena del menú de pausa
     public string escenaParaCargar = "MenuPausa";
 
-    /// <summary>
-    /// Llamar desde el botón de pausa (Scene principal).  
-    /// </summary>
+    /// Llama desde el botón de pausa en la escena principal
     public void PausarJuego()
     {
         FindFirstObjectByType<BGMController>()?.PausarMusica();
 
-        // Deshabilita el botón de pausa usando su Tag
+        // Desactiva el botón de pausa
         GameObject btn = GameObject.FindWithTag("PauseButton");
         if (btn != null)
         {
@@ -29,58 +27,38 @@ public class MenuPausa : MonoBehaviour
             if (b != null) b.interactable = false;
         }
 
-        // 2) Guarda la escena actual y carga el menu de pausa de forma aditiva
-        string escenaOriginal = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene("MenuPausa", LoadSceneMode.Additive);
+        escenaOriginal = SceneManager.GetActiveScene().name;
 
-        // Inicia la animación y al terminar carga la escena de pausa
         if (menuPausaImagenAnimacion != null)
         {
-            // Ejecutar la animación de expandir y luego cargar escena
             menuPausaImagenAnimacion.gameObject.SetActive(true);
-            menuPausaImagenAnimacion.Play("Expand");  // Nombre del estado en Animator
-            // Esperamos la duración de la animación para cargar escena
+            menuPausaImagenAnimacion.SetTrigger("Abrir"); // Usa Trigger "Abrir"
             StartCoroutine(EsperarAnimacionYLoad(menuPausaImagenAnimacion, escenaParaCargar));
         }
         else
         {
-            // Si no hay animator asignado, carga la escena inmediatamente
             SceneManager.LoadScene(escenaParaCargar, LoadSceneMode.Additive);
             Time.timeScale = 0f;
-            //pausado = true;
+            pausado = true;
         }
     }
 
-    /// <summary>
-    /// Coroutine para esperar la duración de la animación antes de cargar escena y pausar tiempo.
-    /// </summary>
     private IEnumerator EsperarAnimacionYLoad(Animator animator, string escena)
     {
-        // Asume que la animación "Expand" dura 0.5 segundos (ajusta si es necesario)
-        float duracionAnimacion = 0.5f;
-
-        // Si quieres obtener duración real:
-        // AnimatorClipInfo[] clips = animator.GetCurrentAnimatorClipInfo(0);
-        // duracionAnimacion = clips[0].clip.length;
+        float duracionAnimacion = 0.9f;
 
         yield return new WaitForSecondsRealtime(duracionAnimacion);
 
-        // Carga la escena de pausa de forma aditiva
         SceneManager.LoadScene(escena, LoadSceneMode.Additive);
-
-        // Pausa el tiempo
         Time.timeScale = 0f;
-        //bool pausado = true;
+        pausado = true;
     }
 
-    /// <summary>
-    /// Llamar desde el botón reanudar en la escena MenuPausa.  
-    /// </summary>
     public void ReanudarJuego()
     {
+        pausado = false;
         FindFirstObjectByType<BGMController>()?.ReanudarMusica();
 
-        // Reactiva el botón de pausa en la escena principal usando su Tag
         GameObject btn = GameObject.FindWithTag("PauseButton");
         if (btn != null)
         {
@@ -88,21 +66,75 @@ public class MenuPausa : MonoBehaviour
             if (b != null) b.interactable = true;
         }
 
-        // Reactiva el tiempo y cierra la escena de pausa
-        Time.timeScale = 1f;
-        SceneManager.UnloadSceneAsync("MenuPausa");
-        //pausado = false;
+        if (menuPausaImagenAnimacion != null)
+        {
+            menuPausaImagenAnimacion.updateMode = AnimatorUpdateMode.UnscaledTime;
+
+            // Asegura que la escena principal esté activa primero
+            Scene escenaOriginalObj = SceneManager.GetSceneByName(escenaOriginal);
+            if (escenaOriginalObj.IsValid() && escenaOriginalObj.isLoaded)
+            {
+                SceneManager.SetActiveScene(escenaOriginalObj);
+            }
+
+            // Eeproduce la animación y descarga la escena de pausa
+            StartCoroutine(AnimarCerrarYCerrarMenuPausa());
+        }
+        else
+        {
+            StartCoroutine(CerrarSinAnimacion());
+        }
     }
 
-    /// <summary>
-    /// Llamar desde el botón al menú en la escena MenuPausa.  
-    /// </summary>
+    private IEnumerator CargarEscenaOriginalYAnimarCerrar()
+    {
+        AsyncOperation loadOp = SceneManager.LoadSceneAsync(escenaOriginal, LoadSceneMode.Additive);
+        yield return new WaitUntil(() => loadOp.isDone);
+
+        Scene escenaOriginalObj = SceneManager.GetSceneByName(escenaOriginal);
+        SceneManager.SetActiveScene(escenaOriginalObj);
+
+        yield return AnimarCerrarYCerrarMenuPausa();
+    }
+
+    private IEnumerator AnimarCerrarYCerrarMenuPausa()
+    {
+        // Reproduce animación de cierre
+        if (menuPausaImagenAnimacion != null)
+        {
+            menuPausaImagenAnimacion.SetTrigger("Cerrar");
+            yield return new WaitForSecondsRealtime(1.0f);
+        }
+
+        // Reactiva el tiempo antes de descargar la escena de pausa
+        Time.timeScale = 1f;
+        pausado = false;
+
+        // Descarga la escena de pausa
+        AsyncOperation unloadOp = SceneManager.UnloadSceneAsync("MenuPausa");
+        yield return new WaitUntil(() => unloadOp.isDone);
+    }
+
+    private IEnumerator CerrarSinAnimacion()
+    {
+        Time.timeScale = 1f;
+        pausado = false;
+
+        AsyncOperation unloadOp = SceneManager.UnloadSceneAsync("MenuPausa");
+        yield return new WaitUntil(() => unloadOp.isDone);
+
+        Scene escenaOriginalObj = SceneManager.GetSceneByName(escenaOriginal);
+        if (escenaOriginalObj.IsValid() && escenaOriginalObj.isLoaded)
+        {
+            SceneManager.SetActiveScene(escenaOriginalObj);
+        }
+    }
+
     public void IrAlMenu()
     {
-        // Asegura que el juego esté reanudado antes de cambiar de escena
         Time.timeScale = 1f;
         GameManager.Instance.FinalizeGame();
         MoneyManager.Instance.FinalizeMoney();
-        //pausado = false;
+        pausado = false;
     }
 }

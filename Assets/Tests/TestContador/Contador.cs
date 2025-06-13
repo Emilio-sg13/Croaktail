@@ -1,84 +1,112 @@
 ﻿using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement; // Para cambiar de escena
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class Contador : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI contadorTexto;
-    [SerializeField] float tiempoRestante;
+    /*--------------- CONFIG ----------------*/
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI contadorTexto;
+    [SerializeField] private float tiempoRestante = 120f;
+
+    [Header("Lógica externa")]
     public BarraCobroUI barraCobroUI;
-    public GameManager gameManager;
-    public PlayerController jugador;
 
+    [Header("GameObjects de transición")]
+    public GameObject transicionVictoriaGO;   
+    public float duracionVictoria = 0.9f;
 
-     void Update()
+    public GameObject transicionDerrotaGO;    
+    public float duracionDerrota =0.9f;
+
+    /*--------------- ESTADO ----------------*/
+    private bool finDisparado = false;
+
+    /*--------------- INICIO ----------------*/
+    void Start()
     {
-        // Formatear y mostrar minutos:segundos
-        int minutos = Mathf.FloorToInt(tiempoRestante / 60);
-        int segundos = Mathf.FloorToInt(tiempoRestante % 60);
-        contadorTexto.text = string.Format("{0:00}:{1:00}", minutos, segundos);
+        // Desactiva las transiciones al arrancar
+        if (transicionVictoriaGO) transicionVictoriaGO.SetActive(false);
+        if (transicionDerrotaGO) transicionDerrotaGO.SetActive(false);
+    }
+
+    /*--------------- UPDATE ----------------*/
+    void Update()
+    {
+        if (finDisparado) return;
+
+        // Actualiza cronómetro
+        int min = Mathf.FloorToInt(tiempoRestante / 60);
+        int seg = Mathf.FloorToInt(tiempoRestante % 60);
+        contadorTexto.text = $"{min:00}:{seg:00}";
 
         if (tiempoRestante <= 0f)
         {
-            // Aseguramos 00:00
+            finDisparado = true;
             contadorTexto.text = "00:00";
 
-            // Comprobamos si se ha alcanzado el objetivo al finalizar el contador
             int dineroConseguido = barraCobroUI.GetTotalActual();
             int dineroObjetivo = GameManager.Instance.CurrentTargetMoney;
 
             if (dineroConseguido < dineroObjetivo)
             {
-                Debug.Log("No se cumple el objetivo. Dinero conseguido: " + dineroConseguido);
-                SceneManager.LoadScene("PantallaDerrota");
+                StartCoroutine(TransicionYCarga(
+                    transicionDerrotaGO,
+                    duracionDerrota,
+                    "PantallaDerrota",
+                    null));                    // sin acción extra
             }
             else
             {
-                StartCoroutine(VictorySequence());
-
+                StartCoroutine(TransicionYCarga(
+                    transicionVictoriaGO,
+                    duracionVictoria,
+                    "PantallaVictoria",
+                    () =>                      // acción que se lanza justo antes del cambio
+                        MoneyManager.Instance.IrTienda(dineroConseguido, dineroObjetivo)
+                ));
             }
         }
         else
         {
-            // Reducir el tiempo restante
             tiempoRestante -= Time.deltaTime;
         }
     }
 
-
-    IEnumerator VictorySequence()
+    /*--------------- COROUTINE -------------*/
+    private IEnumerator TransicionYCarga(GameObject go, float dur, string escena, System.Action postAnim)
     {
-        // 1) Lanzar animación de victoria
-        if (jugador != null)
+        // Pausa lógicamente el juego pero permite que la UI/Animator se actualice
+        Time.timeScale = 0f;
+
+        if (go != null)
         {
-            
-            jugador.AnimacionVictoria();
+            Animator anim = go.GetComponent<Animator>();
+            go.SetActive(true);
+
+            if (anim)
+            {
+                anim.updateMode = AnimatorUpdateMode.UnscaledTime;
+                anim.Play(0, 0, 0f);
+            }
+
+            yield return new WaitForSecondsRealtime(dur);
         }
 
+        postAnim?.Invoke();
 
-        // 2) Opcional: notificar al MoneyManager
-        int dineroConseguido = barraCobroUI.GetTotalActual();
-        int dineroObjetivo = GameManager.Instance.CurrentTargetMoney;
-        
+        // Reactiva el flujo normal del juego
+        Time.timeScale = 1f;
 
-        // 3) Esperar 5 segundos antes de cambiar de escena
-        yield return new WaitForSeconds(5f);
-
-        // 4) Cargar la escena de victoria
-        MoneyManager.Instance.IrTienda(dineroConseguido, dineroObjetivo);
-        SceneManager.LoadScene("PantallaVictoria");
+        // Carga de escena
+        SceneManager.LoadScene(escena, LoadSceneMode.Single);
     }
 
-    /// <summary>
-    /// Llama a este m閠odo desde el OnClick de un bot髇 para reiniciar el tiempo a 20s.
-    /// </summary>
+    /*--------------- EXTRA -----------------*/
     public void ResetearTiempo()
     {
         tiempoRestante = 20f;
-        Debug.Log("Tiempo restablecido a 20 segundos.");
-
-        
         FindFirstObjectByType<BGMController>()?.SaltarUltimos20Segundos();
     }
 }
