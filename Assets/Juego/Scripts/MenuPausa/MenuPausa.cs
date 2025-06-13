@@ -47,7 +47,7 @@ public class MenuPausa : MonoBehaviour
             // Si no hay animator asignado, carga la escena inmediatamente
             SceneManager.LoadScene(escenaParaCargar, LoadSceneMode.Additive);
             Time.timeScale = 0f;
-            pausado = true;
+            //pausado = true;
         }
     }
 
