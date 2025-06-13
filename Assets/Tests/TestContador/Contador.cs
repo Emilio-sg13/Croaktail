@@ -12,7 +12,7 @@ public class Contador : MonoBehaviour
     public PlayerController jugador;
 
 
-    async void Update()
+     void Update()
     {
         // Formatear y mostrar minutos:segundos
         int minutos = Mathf.FloorToInt(tiempoRestante / 60);
@@ -52,12 +52,10 @@ public class Contador : MonoBehaviour
         // 1) Lanzar animación de victoria
         if (jugador != null)
         {
-            Debug.Log("bbbbbbbbbbbbbbb");
+            
             jugador.AnimacionVictoria();
         }
 
-
-        else { Debug.Log("cccccccccccccccc"); }
 
         // 2) Opcional: notificar al MoneyManager
         int dineroConseguido = barraCobroUI.GetTotalActual();

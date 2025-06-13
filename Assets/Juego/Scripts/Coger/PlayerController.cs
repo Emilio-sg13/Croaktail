@@ -114,8 +114,9 @@ public class PlayerController : MonoBehaviour
 
     public void AnimacionVictoria()
     {
-        Debug.Log("aaaaaaaaaaaaaaaaa");
+        
         animator?.SetTrigger("victoria");
+        ReproducirSonidoVictoria();
 
     }
 

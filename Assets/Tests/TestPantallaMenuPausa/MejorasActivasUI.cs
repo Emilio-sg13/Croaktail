@@ -6,8 +6,6 @@ public class MejorasActivasUI : MonoBehaviour
 {
     public static MejorasActivasUI Instance;
 
-    public TextMeshProUGUI slot1Texto;
-    public TextMeshProUGUI slot2Texto;
 
     // --- Variables de configuración ---
     // Configuracion de efecto fade
@@ -37,45 +35,41 @@ public class MejorasActivasUI : MonoBehaviour
     void Start()
     {
         MostrarMejorasActivas();
-        StartCoroutine(FadeOutTexto(slot1Texto));
-        StartCoroutine(FadeOutTexto(slot2Texto));
     }
 
     public void MostrarMejorasActivas()
     {
-        mejorasActivasTexto.Clear();
+        
         mejorasActivasSprites.Clear();
 
         // Se comprueba cada mejora y se agrega texto y sprite correspondiente si está activada
         if (UpgradeData.masClientes)
         {
-            mejorasActivasTexto.Add("Más Clientes activado");
+            ;
             mejorasActivasSprites.Add(spriteMasClientes);
         }
         if (UpgradeData.dineroTriple)
         {
-            mejorasActivasTexto.Add("Dinero Triple activado");
+            
             mejorasActivasSprites.Add(spriteDineroTriple);
         }
         if (UpgradeData.coctelesDobles)
         {
-            mejorasActivasTexto.Add("Cócteles Dobles activado");
+            
             mejorasActivasSprites.Add(spriteCoctelesDobles);
         }
         if (UpgradeData.mezcladoRapido)
         {
-            mejorasActivasTexto.Add("Mezclado Rápido activado");
+            
             mejorasActivasSprites.Add(spriteMezcladoRapido);
         }
         if (UpgradeData.inventorySlotExtraActivado)
         {
-            mejorasActivasTexto.Add("Mejora Slot Extra activada");
+            
             mejorasActivasSprites.Add(spriteInventorySlotExtra);
         }
 
-        // Actualiza el texto en slots
-        slot1Texto.text = mejorasActivasTexto.Count > 0 ? mejorasActivasTexto[0] : " ";
-        slot2Texto.text = mejorasActivasTexto.Count > 1 ? mejorasActivasTexto[1] : " ";
+        
 
         // Reemplaza las casillas por las mejoras correspondientes
         ReemplazarCasilla(CasillaMejora1, mejorasActivasSprites.Count > 0 ? mejorasActivasSprites[0] : null);

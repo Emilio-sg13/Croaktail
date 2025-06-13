@@ -13,7 +13,7 @@ public class MezclaUI : MonoBehaviour
     private int clicsActuales = 0;
     // Acci髇 que se invocar?cuando se complete la mezcla
     private System.Action onCompletar;
-    // 👇 拖入 UI 粒子预制体和播放位置（RectTransform）
+   
     public ParticleSystem efectoChispasUI;
     public Transform puntoChispaUI;
 
@@ -57,18 +57,18 @@ public class MezclaUI : MonoBehaviour
         // Actualiza el valor del slider con el progreso calculado
         barraProgreso.value = progreso;
 
-        // 💥 Reproducir chispa
+        // Reproducir chispa
         if (efectoChispasUI != null && puntoChispaUI != null)
         {
             efectoChispasUI.transform.position = puntoChispaUI.position;
             efectoChispasUI.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             efectoChispasUI.Play();
 
-            Debug.Log("💥 Chispa UI reproducida en: " + puntoChispaUI.position);
+            Debug.Log("Chispa UI reproducida en: " + puntoChispaUI.position);
         }
         else
         {
-            Debug.LogWarning("⚠️ No se encontró el efecto de chispas o el punto de aparición.");
+            Debug.LogWarning("No se encontró el efecto de chispas o el punto de aparición.");
         }
 
 
