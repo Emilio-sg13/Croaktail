@@ -2,7 +2,7 @@
 using System.Collections;
 public class InteractableItem : MonoBehaviour
 {
-    public ParticleSystem efectoChispas;  // 拖入火花粒子预制体
+    public ParticleSystem efectoChispas;  
 
 
     // Referencia al gestor del inventario y al jugador (c醦sula)
@@ -37,6 +37,7 @@ public class InteractableItem : MonoBehaviour
         bool añadido = inventario.TryAddItem(itemData);
         if (añadido)
         {
+            jugador.AnimacionCoger();
             Debug.Log("Ingrediente recogido.");
             Instantiate(efectoChispas, transform.position, Quaternion.identity);
 

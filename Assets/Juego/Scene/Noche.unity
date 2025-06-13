@@ -213,7 +213,7 @@ PrefabInstance:
       objectReference: {fileID: 6381602143567238487, guid: 1d4c4c947b151bf4785fff8b51a16bc6, type: 3}
     - target: {fileID: 7261640234823663543, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
       propertyPath: distanciaRecogida
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7591848834494039572, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
       propertyPath: m_Name
@@ -352,7 +352,7 @@ PrefabInstance:
       objectReference: {fileID: 6381602143567238487, guid: 1d4c4c947b151bf4785fff8b51a16bc6, type: 3}
     - target: {fileID: 7261640234823663543, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
       propertyPath: distanciaRecogida
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7591848834494039572, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
       propertyPath: m_Name
@@ -593,7 +593,7 @@ PrefabInstance:
       objectReference: {fileID: 6381602143567238487, guid: 1d4c4c947b151bf4785fff8b51a16bc6, type: 3}
     - target: {fileID: 619377430362122293, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
       propertyPath: distanciaRecogida
-      value: 1.5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3198476433392371516, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
       propertyPath: m_Enabled
@@ -1797,7 +1797,7 @@ PrefabInstance:
       objectReference: {fileID: 6381602143567238487, guid: 1d4c4c947b151bf4785fff8b51a16bc6, type: 3}
     - target: {fileID: 619377430362122293, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
       propertyPath: distanciaRecogida
-      value: 1.5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3198476433392371516, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
       propertyPath: m_Enabled
@@ -3814,7 +3814,7 @@ PrefabInstance:
       objectReference: {fileID: 6381602143567238487, guid: 1d4c4c947b151bf4785fff8b51a16bc6, type: 3}
     - target: {fileID: 619377430362122293, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
       propertyPath: distanciaRecogida
-      value: 1.5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3198476433392371516, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
       propertyPath: m_Enabled
@@ -6452,7 +6452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7296026342586385407, guid: 682f57f9a7694c74192790f19a4a32a5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.95
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7296026342586385407, guid: 682f57f9a7694c74192790f19a4a32a5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6666,7 +6666,7 @@ PrefabInstance:
       objectReference: {fileID: 6381602143567238487, guid: 1d4c4c947b151bf4785fff8b51a16bc6, type: 3}
     - target: {fileID: 619377430362122293, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
       propertyPath: distanciaRecogida
-      value: 1.5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3198476433392371516, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
       propertyPath: m_Enabled
@@ -8217,7 +8217,7 @@ PrefabInstance:
       objectReference: {fileID: 6381602143567238487, guid: 1d4c4c947b151bf4785fff8b51a16bc6, type: 3}
     - target: {fileID: 619377430362122293, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
       propertyPath: distanciaRecogida
-      value: 1.5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3198476433392371516, guid: 57a01234ae5baec4f96bf46aa81f28a9, type: 3}
       propertyPath: m_Enabled
@@ -9270,7 +9270,7 @@ PrefabInstance:
       objectReference: {fileID: 6381602143567238487, guid: 1d4c4c947b151bf4785fff8b51a16bc6, type: 3}
     - target: {fileID: 7261640234823663543, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
       propertyPath: distanciaRecogida
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7591848834494039572, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
       propertyPath: m_Name
@@ -9975,6 +9975,7 @@ MonoBehaviour:
   tiempoRestante: 420
   barraCobroUI: {fileID: 1491484308}
   gameManager: {fileID: 0}
+  jugador: {fileID: 2134753629}
 --- !u!1001 &1690221191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11142,7 +11143,7 @@ PrefabInstance:
       objectReference: {fileID: 6381602143567238487, guid: 1d4c4c947b151bf4785fff8b51a16bc6, type: 3}
     - target: {fileID: 7261640234823663543, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
       propertyPath: distanciaRecogida
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7591848834494039572, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
       propertyPath: m_Name
@@ -11215,7 +11216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6553913261755358355, guid: 0592a97c993ced3478702fd5a20a8f3b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.992
+      value: -1.23
       objectReference: {fileID: 0}
     - target: {fileID: 6553913261755358355, guid: 0592a97c993ced3478702fd5a20a8f3b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11223,7 +11224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6553913261755358355, guid: 0592a97c993ced3478702fd5a20a8f3b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.713
+      value: -9.2
       objectReference: {fileID: 0}
     - target: {fileID: 6553913261755358355, guid: 0592a97c993ced3478702fd5a20a8f3b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12123,7 +12124,7 @@ PrefabInstance:
       objectReference: {fileID: 6381602143567238487, guid: 1d4c4c947b151bf4785fff8b51a16bc6, type: 3}
     - target: {fileID: 7261640234823663543, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
       propertyPath: distanciaRecogida
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7591848834494039572, guid: e865167a8df2ea64c9b91009e8aecd26, type: 3}
       propertyPath: m_Name

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement; // Para cambiar de escena
+using System.Collections;
 
 public class Contador : MonoBehaviour
 {
@@ -8,8 +9,10 @@ public class Contador : MonoBehaviour
     [SerializeField] float tiempoRestante;
     public BarraCobroUI barraCobroUI;
     public GameManager gameManager;
+    public PlayerController jugador;
 
-    void Update()
+
+    async void Update()
     {
         // Formatear y mostrar minutos:segundos
         int minutos = Mathf.FloorToInt(tiempoRestante / 60);
@@ -27,14 +30,13 @@ public class Contador : MonoBehaviour
 
             if (dineroConseguido < dineroObjetivo)
             {
-                Debug.Log("No se cumpli?el objetivo. Dinero conseguido: " + dineroConseguido);
+                Debug.Log("No se cumple el objetivo. Dinero conseguido: " + dineroConseguido);
                 SceneManager.LoadScene("PantallaDerrota");
             }
             else
             {
-                Debug.Log("bjetivo cumplido! Dinero conseguido: " + dineroConseguido);
-                MoneyManager.Instance.IrTienda(dineroConseguido, dineroObjetivo);
-                SceneManager.LoadScene("PantallaVictoria");
+                StartCoroutine(VictorySequence());
+
             }
         }
         else
@@ -42,6 +44,32 @@ public class Contador : MonoBehaviour
             // Reducir el tiempo restante
             tiempoRestante -= Time.deltaTime;
         }
+    }
+
+
+    IEnumerator VictorySequence()
+    {
+        // 1) Lanzar animación de victoria
+        if (jugador != null)
+        {
+            Debug.Log("bbbbbbbbbbbbbbb");
+            jugador.AnimacionVictoria();
+        }
+
+
+        else { Debug.Log("cccccccccccccccc"); }
+
+        // 2) Opcional: notificar al MoneyManager
+        int dineroConseguido = barraCobroUI.GetTotalActual();
+        int dineroObjetivo = GameManager.Instance.CurrentTargetMoney;
+        
+
+        // 3) Esperar 5 segundos antes de cambiar de escena
+        yield return new WaitForSeconds(5f);
+
+        // 4) Cargar la escena de victoria
+        MoneyManager.Instance.IrTienda(dineroConseguido, dineroObjetivo);
+        SceneManager.LoadScene("PantallaVictoria");
     }
 
     /// <summary>
@@ -52,7 +80,7 @@ public class Contador : MonoBehaviour
         tiempoRestante = 20f;
         Debug.Log("Tiempo restablecido a 20 segundos.");
 
-        // 🔥 切换到快节奏 BGM
+        
         FindFirstObjectByType<BGMController>()?.SaltarUltimos20Segundos();
     }
 }
