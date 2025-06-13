@@ -2,8 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
-using UnityEditor.PackageManager;
 using System.Collections.Generic;
 
 /// <summary>

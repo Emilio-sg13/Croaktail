@@ -6694,7 +6694,7 @@ PrefabInstance:
     - target: {fileID: 5900245268928504321, guid: 682f57f9a7694c74192790f19a4a32a5, type: 3}
       propertyPath: victorySoundClip
       value: 
-      objectReference: {fileID: 8300000, guid: f5a0e68d4e4cde94cb22e8037016e1ce, type: 3}
+      objectReference: {fileID: 8300000, guid: a4b75ffcd3d893649afd786e46db9c82, type: 3}
     - target: {fileID: 7296026342586385407, guid: 682f57f9a7694c74192790f19a4a32a5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.22
@@ -8199,7 +8199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SFXSource: {fileID: 1492163723}
   entraCliente: {fileID: 8300000, guid: 82004afd34f7f4b4bb6ea741b7e1eaa7, type: 3}
-  ranaCelebra: {fileID: 0}
+  ranaCelebra: {fileID: 8300000, guid: a4b75ffcd3d893649afd786e46db9c82, type: 3}
 --- !u!4 &1295404163
 Transform:
   m_ObjectHideFlags: 0
@@ -9232,7 +9232,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -10395,6 +10395,7 @@ MonoBehaviour:
   duracionVictoria: 0.9
   transicionDerrotaGO: {fileID: 2066680303}
   duracionDerrota: 0.9
+  duracionAnimacionVictoriaJugador: 1.1
 --- !u!1001 &1690221191
 PrefabInstance:
   m_ObjectHideFlags: 0
