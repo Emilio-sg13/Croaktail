@@ -10387,7 +10387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contadorTexto: {fileID: 502666561}
-  tiempoRestante: 10
+  tiempoRestante: 420
   barraCobroUI: {fileID: 1491484308}
   transicionVictoriaGO: {fileID: 758545367}
   duracionVictoria: 0.9
