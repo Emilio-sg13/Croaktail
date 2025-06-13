@@ -42,6 +42,7 @@ public class Mezclador : MonoBehaviour
         if (pc != null)
         {
             pc.MoverHacia(transform.position);
+            pc.AnimacionMezclar();
         }
 
         // Inicia la coroutine que espera a que el jugador est?en rango para proceder
@@ -139,7 +140,7 @@ public class Mezclador : MonoBehaviour
                         }
                     }
 
-                    // ✅ NUEVO：Reproducir efecto de chispas en la UI
+                    // Reproducir efecto de chispas en la UI
                     if (efectoChispas != null && puntoChispaUI != null)
                     {
                         Instantiate(efectoChispas, puntoChispaUI.position, Quaternion.identity);
@@ -173,7 +174,7 @@ public class Mezclador : MonoBehaviour
             {
                 efectoChispas.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
                 efectoChispas.Play();
-                Debug.Log("🔥 Chispa reproducida al hacer clic derecho");
+                Debug.Log("Chispa reproducida al hacer clic derecho");
             }
         }
     }
